@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Spotless King Detailing | Mobile Optimized</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Square Web Payments SDK -->
+    <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefaf2;
+            color: #1e1b1a;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        /* Mobile First Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 252, 240, 0.98);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid #f0e3cf;
+            padding: 0.8rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #c89d3c, #9c7520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo span {
+            color: #2c2b26;
+            background: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #2f2e2a;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #c89d3c;
+        }
+
+        .btn-ghost {
+            background: #1e1b1a;
+            color: white !important;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+        }
+
+        /* HERO - Mobile Optimized */
+        .hero-full {
+            width: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1815 100%);
+            padding: 2rem 0 2.5rem;
+        }
+
+        .hero-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            padding: 0 1rem;
+        }
+
+        .hero-text {
+            color: white;
+            text-align: center;
+        }
+
+        .hero-badge {
+            background: #c89d3c;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1e1b1a;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .hero-highlight {
+            color: #c89d3c;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .btn-primary {
+            background: #c89d3c;
+            color: #1e1b1a;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .hero-media-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .hero-main-video {
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .hero-main-video video,
+        .hero-main-video img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .hero-img-row {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .hero-img-small {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .hero-img-small img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Packages Section */
+        .packages-tab-section {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-sub {
+            font-size: 0.9rem;
+            color: #6b655b;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        /* Tabs - Scrollable on mobile */
+        .tab-buttons {
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            padding: 0.5rem 1rem 1rem;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: #fefaf2;
+            border: 1.5px solid #e8ddcd;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 40px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .tab-btn i {
+            margin-right: 6px;
+            color: #c89d3c;
+        }
+
+        .tab-btn.active {
+            background: #1e1b1a;
+            border-color: #1e1b1a;
+            color: white;
+        }
+
+        .tab-pane {
+            display: none;
+            padding: 0 0.5rem;
+        }
+
+        .tab-pane.active-pane {
+            display: block;
+        }
+
+        .package-description {
+            background: #f5efe3;
+            padding: 0.8rem 1rem;
+            border-radius: 24px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile Carousel */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 28px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease-out;
+            gap: 1rem;
+        }
+
+        .carousel-slide {
+            flex: 0 0 calc(100% - 0rem);
+            min-width: 0;
+        }
+
+        .inner-package-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.3rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e9decd;
+            width: 100%;
+        }
+
+        .inner-package-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            border-left: 4px solid #c89d3c;
+            padding-left: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .inner-package-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #c89d3c;
+            margin: 0.8rem 0;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .service-list li {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-list li i {
+            color: #c89d3c;
+            width: 18px;
+            font-size: 0.75rem;
+        }
+
+        .price-note {
+            font-size: 0.7rem;
+            background: #faf5ea;
+            padding: 0.5rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+
+        .carousel-btn {
+            background: #1e1b1a;
+            color: white;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd2c0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .dot.active {
+            background: #c89d3c;
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        /* Booking Section Mobile */
+        .booking {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .booking-inner {
+            background: #1e1b1a;
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .booking-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .booking-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .square-booking-box {
+            background: white;
+            border-radius: 28px;
+            padding: 1.3rem;
+            color: #1e1b1a;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2d9cd;
+            border-radius: 60px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background: #fefaf3;
+        }
+
+        .square-payment-element {
+            margin: 1rem 0;
+        }
+
+        #card-container {
+            background: #fefaf3;
+            border: 1px solid #e2d9cd;
+            border-radius: 48px;
+            padding: 0.7rem 1rem;
+            min-height: 50px;
+        }
+
+        .btn-dark {
+            background: #c89d3c;
+            color: #1e1b1a;
+            width: 100%;
+            border: none;
+            font-weight: 700;
+            padding: 0.8rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 3rem 0;
+            background: #fefcf5;
+        }
+
+        .testimonial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0 0.5rem;
+        }
+
+        .testimonial {
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            border: 1px solid #f0e6d8;
+        }
+
+        .stars {
+            color: #f5b042;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1c1917;
+            color: #cdc6bb;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        /* Modal Mobile */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(6px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: white;
+            max-width: 90%;
+            width: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .modal-header {
+            background: #1e1b1a;
+            padding: 1.2rem;
+        }
+
+        .modal-header i {
+            font-size: 2.5rem;
+            color: #c89d3c;
+        }
+
+        .modal-header h2 {
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .discount-badge {
+            background: #c89d3c;
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body p {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0 1.5rem 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            background: #1e1b1a;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-btn-primary {
+            background: #c89d3c;
+            color: #1e1b1a;
+        }
+    </style>
+</head>
+<body>
+    <!-- 5% OFF MODAL -->
+    <div id="promoModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <i class="fas fa-crown"></i>
+                <h2>Welcome to Spotless King</h2>
+            </div>
+            <div class="modal-body">
+                <div class="discount-badge"><i class="fas fa-gift"></i> 5% OFF</div>
+                <p><strong>First Time Clients Receive 5% Off All Packages!</strong></p>
+                <p>Start the year off right and let us make your car spotless!</p>
+                <p style="font-size:0.8rem;">✨ Just mention you're a first-time client when booking ✨</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" id="claimOfferBtn">Claim My 5% Off →</button>
+                <button class="modal-btn" id="closeModalBtn">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">SPOTLESS <span>KING</span> 👑</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#packages">Packages</a>
+                <a href="#square-booking">Book</a>
+                <a href="#contact">Contact</a>
+                <a href="#" class="btn-ghost">(888) 789-1234</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-full">
+            <div class="hero-content-wrapper">
+                <div class="hero-text">
+                    <div class="hero-badge"><i class="fas fa-crown"></i> Royal treatment</div>
+                    <h1>Your car deserves the <span class="hero-highlight">spotless</span> royalty experience.</h1>
+                    <p class="hero-desc">Premium mobile detailing. Secure booking with Square.</p>
+                    <a href="#square-booking" class="btn-primary">Book Now <i class="fab fa-square"></i></a>
+                </div>
+                <div class="hero-media-stack">
+                    <div class="hero-main-video">
+                        <video autoplay loop muted playsinline>
+                            <source src="https://placehold.co/800x450/2c2b26/c89d3c?text=Detailing+in+Action+GIF" type="video/mp4">
+                            <img src="https://placehold.co/800x450/2c2b26/c89d3c?text=Spotless+King" alt="Detailing">
+                        </video>
+                    </div>
+                    <div class="hero-img-row">
+                        <div class="hero-img-small"><img src="https://placehold.co/400x250/2c2b26/c89d3c?text=Interior+Clean" alt="Interior"></div>
+                        <div class="hero-img-small"><img src="https://placehold.co/400x250/2c2b26/c89d3c?text=Ceramic+Gloss" alt="Ceramic"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages with Carousels (Mobile Optimized) -->
+        <section id="packages" class="packages-tab-section">
+            <div class="container">
+                <h2 class="section-title">Our Packages</h2>
+                <p class="section-sub">Choose your perfect detailing plan</p>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="tab1"><i class="fas fa-car-side"></i> Inside+Out</button>
+                    <button class="tab-btn" data-tab="tab2"><i class="fas fa-couch"></i> Interior Only</button>
+                    <button class="tab-btn" data-tab="tab3"><i class="fas fa-water"></i> Exterior Only</button>
+                </div>
+
+                <!-- Tab 1 -->
+                <div id="tab1" class="tab-pane active-pane">
+                    <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
+                    <div class="carousel-container" id="carousel1">
+                        <div class="carousel-track" id="track1">
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Essential Refresh</div><div class="inner-package-price">$95 - $110</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Wash & Vacuum</li><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows</li><li><i class="fas fa-check-circle"></i> Exterior hand wash</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li></ul><div class="price-note">Great for regular maintenance</div></div></div>
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Premium Inside-Out</div><div class="inner-package-price">$165 - $220</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash + wheels detailed</li><li><i class="fas fa-check-circle"></i> Paint sealant (3-4 months)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk detailed</li><li><i class="fas fa-check-circle"></i> Air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior vacuum + vents</li><li><i class="fas fa-check-circle"></i> Door panels conditioned</li></ul><div class="price-note">Showroom finish</div></div></div>
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Supreme Inside-Out</div><div class="inner-package-price">$250 - $350</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Bug removal + foam wash</li><li><i class="fas fa-check-circle"></i> Paint sealant + trim restore</li><li><i class="fas fa-check-circle"></i> Steam cleaned vents</li><li><i class="fas fa-check-circle"></i> Seat shampoo / leather steam</li><li><i class="fas fa-check-circle"></i> Floor mats shampooed</li><li><i class="fas fa-check-circle"></i> Full windows & jambs</li></ul><div class="price-note">Ultimate restoration</div></div></div>
+                        </div>
+                        <div class="carousel-controls"><button class="carousel-btn prev1"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next1"><i class="fas fa-chevron-right"></i></button></div>
+                        <div class="carousel-dots" id="dots1"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 2 -->
+                <div id="tab2" class="tab-pane">
+                    <div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div>
+                    <div class="carousel-container" id="carousel2">
+                        <div class="carousel-track" id="track2">
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Interior Basic</div><div class="inner-package-price">$100 - $130</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel</li><li><i class="fas fa-check-circle"></i> Cupholders & doors</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows</li></ul><div class="price-note">No shampooing — quick refresh</div></div></div>
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Interior Supreme</div><div class="inner-package-price">$200 - $275</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks & crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo floor mats</li><li><i class="fas fa-check-circle"></i> Arm rest & vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="price-note">Deep cleansing & sanitization</div></div></div>
+                        </div>
+                        <div class="carousel-controls"><button class="carousel-btn prev2"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next2"><i class="fas fa-chevron-right"></i></button></div>
+                        <div class="carousel-dots" id="dots2"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 3 -->
+                <div id="tab3" class="tab-pane">
+                    <div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div>
+                    <div class="carousel-container" id="carousel3">
+                        <div class="carousel-track" id="track3">
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Exterior Basic</div><div class="inner-package-price">$60 - $75</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows + gas cap</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="price-note">Quick exterior refresh</div></div></div>
+                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Exterior Premium</div><div class="inner-package-price">$85 - $110</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash + bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels & wheel wells</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine + door jambs</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="price-note">Long-lasting protection</div></div></div>
+                        </div>
+                        <div class="carousel-controls"><button class="carousel-btn prev3"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next3"><i class="fas fa-chevron-right"></i></button></div>
+                        <div class="carousel-dots" id="dots3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="square-booking" class="booking">
+            <div class="container">
+                <div class="booking-inner">
+                    <div class="booking-text">
+                        <h2><i class="fab fa-square"></i> Secure booking</h2>
+                        <p>Pay with credit card via Square. 100% encrypted.</p>
+                        <ul style="margin-top:0.8rem; list-style:none;"><li><i class="fas fa-check-circle"></i> Instant confirmation</li><li><i class="fas fa-shield-alt"></i> PCI compliant</li></ul>
+                        <div style="margin-top:1rem;"><i class="fas fa-phone-alt"></i> (888) 789-1234</div>
+                    </div>
+                    <div class="square-booking-box">
+                        <h3 style="margin-bottom:1rem;">Complete order</h3>
+                        <form id="square-payment-form">
+                            <div class="form-group"><input type="text" id="customerName" placeholder="Full name" required></div>
+                            <div class="form-group"><input type="email" id="customerEmail" placeholder="Email" required></div>
+                            <div class="form-group"><input type="tel" id="customerPhone" placeholder="Phone" required></div>
+                            <div class="form-group"><select id="selectedPackage" required><option value="">Select package</option><option value="Essential Refresh|95">Essential Refresh (Sedan) $95</option><option value="Essential Refresh|110">Essential Refresh (SUV) $110</option><option value="Premium Inside-Out Package|165">Premium Inside-Out (Sedan) $165</option><option value="Premium Inside-Out Package|220">Premium Inside-Out (SUV) $220</option><option value="Supreme Inside-Out Package|250">Supreme Inside-Out (Sedan) $250</option><option value="Supreme Inside-Out Package|350">Supreme Inside-Out (SUV) $350</option><option value="Interior Basic|100">Interior Basic (Sedan) $100</option><option value="Interior Basic|130">Interior Basic (SUV) $130</option><option value="Interior Supreme|200">Interior Supreme (Sedan) $200</option><option value="Interior Supreme|275">Interior Supreme (SUV) $275</option><option value="Exterior Basic|60">Exterior Basic (Sedan) $60</option><option value="Exterior Basic|75">Exterior Basic (SUV) $75</option><option value="Exterior Premium|85">Exterior Premium (Sedan) $85</option><option value="Exterior Premium|110">Exterior Premium (SUV) $110</option></select></div>
+                            <div class="form-group"><input type="text" id="appointmentDate" placeholder="Preferred date" required></div>
+                            <div class="form-group"><textarea rows="2" placeholder="Address / special requests"></textarea></div>
+                            <div class="square-payment-element"><div id="card-container"></div></div>
+                            <button type="submit" id="card-button" class="btn-dark"><i class="fab fa-square"></i> Pay & Book</button>
+                            <div id="payment-status" class="payment-status"></div>
+                        </form>
+                        <p style="font-size:0.65rem; margin-top:10px;">🔐 Test: 4111 1111 1111 1111</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Royal feedback</h2>
+                <div class="testimonial-cards">
+                    <div class="testimonial"><div class="stars">★★★★★</div><p>"Exterior Basic made my car look fresh and clean!"</p><div class="customer">— Sarah M.</div></div>
+                    <div class="testimonial"><div class="stars">★★★★★</div><p>"Interior Supreme is a game changer. My seats look brand new."</p><div class="customer">— David T.</div></div>
+                    <div class="testimonial"><div class="stars">★★★★★</div><p>"Premium Inside-Out worth every penny!"</p><div class="customer">— Marcus W.</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="logo" style="color:#cdc6bb; font-size:1.2rem;">SPOTLESS KING DETAILING 👑</div>
+            <div class="footer-links"><a href="#home">Home</a><a href="#packages">Packages</a><a href="#square-booking">Book</a><a href="#">Privacy</a></div>
+            <p>&copy; 2026 Spotless King — Mobile detailing</p>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel helper
+        function initCarousel(trackId, prevClass, nextClass, dotsId, autoInterval = 5000) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+            const slides = Array.from(track.children);
+            if (slides.length <= 1) return;
+            let current = 0, timer;
+            const update = () => {
+                const width = slides[0].offsetWidth;
+                const gap = 16;
+                track.style.transform = `translateX(-${current * (width + gap)}px)`;
+                const dotsDiv = document.getElementById(dotsId);
+                if (dotsDiv) {
+                    const dots = dotsDiv.querySelectorAll('.dot');
+                    dots.forEach((d, i) => i === current ? d.classList.add('active') : d.classList.remove('active'));
+                }
+            };
+            const goTo = (i) => { current = (i + slides.length) % slides.length; update(); resetTimer(); };
+            const next = () => goTo(current + 1);
+            const prev = () => goTo(current - 1);
+            const resetTimer = () => { if (timer) clearInterval(timer); timer = setInterval(next, autoInterval); };
+            const prevBtn = document.querySelector(prevClass);
+            const nextBtn = document.querySelector(nextClass);
+            if (prevBtn) prevBtn.onclick = prev;
+            if (nextBtn) nextBtn.onclick = next;
+            const dotsContainer = document.getElementById(dotsId);
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < slides.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.onclick = () => goTo(i);
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            window.addEventListener('resize', update);
+            update();
+            resetTimer();
+            const container = track.closest('.carousel-container');
+            if (container) {
+                container.addEventListener('mouseenter', () => clearInterval(timer));
+                container.addEventListener('mouseleave', resetTimer);
+            }
+        }
+        initCarousel('track1', '.prev1', '.next1', 'dots1');
+        initCarousel('track2', '.prev2', '.next2', 'dots2');
+        initCarousel('track3', '.prev3', '.next3', 'dots3');
+
+        // Modal
+        const modal = document.getElementById('promoModal');
+        const claim = document.getElementById('claimOfferBtn');
+        const closeModal = document.getElementById('closeModalBtn');
+        window.addEventListener('load', () => setTimeout(() => modal.classList.add('active'), 400));
+        claim.onclick = () => {
+            modal.classList.remove('active');
+            document.getElementById('square-booking').scrollIntoView({ behavior: 'smooth' });
+            const status = document.getElementById('payment-status');
+            if (status) { status.innerHTML = '🎉 First-time client? Your 5% discount applies! Mention when booking.'; status.style.color = '#c89d3c'; setTimeout(() => status.innerHTML = '', 5000); }
+        };
+        closeModal.onclick = () => modal.classList.remove('active');
+        modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+
+        // Tabs
+        const btns = document.querySelectorAll('.tab-btn');
+        const panes = document.querySelectorAll('.tab-pane');
+        btns.forEach(btn => btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-tab');
+            panes.forEach(p => p.classList.remove('active-pane'));
+            btns.forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active-pane');
+            btn.classList.add('active');
+        }));
+
+        // Square Payment Mock
+        let payments, card, initialized = false;
+        async function initSquare() {
+            if (!window.Square) return;
+            try {
+                payments = window.Square.payments('sandbox-sq0idb-demo', 'LXYZ');
+                card = await payments.card();
+                await card.attach('#card-container');
+                initialized = true;
+                document.getElementById('card-button').disabled = false;
+                document.getElementById('payment-status').innerHTML = '✅ Card ready.';
+            } catch(e) {}
+        }
+        const form = document.getElementById('square-payment-form');
+        const payBtn = document.getElementById('card-button');
+        const statusDiv = document.getElementById('payment-status');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!initialized) { statusDiv.innerHTML = '❌ Not ready.'; return; }
+            const name = document.getElementById('customerName').value.trim();
+            const email = document.getElementById('customerEmail').value.trim();
+            const pkg = document.getElementById('selectedPackage').value;
+            const date = document.getElementById('appointmentDate').value.trim();
+            if (!name || !email || !pkg || !date) { statusDiv.innerHTML = 'Please fill all fields.'; return; }
+            payBtn.disabled = true; payBtn.textContent = 'Processing...';
+            try {
+                const token = await card.tokenize();
+                if (token.status !== 'OK') throw new Error('Token failed');
+                setTimeout(() => {
+                    statusDiv.innerHTML = `🎉 Success! ${pkg.split('|')[0]} booked for ${date}. Confirmation sent.`;
+                    payBtn.disabled = false; payBtn.textContent = 'Pay & Book';
+                    form.reset(); card.clear(); card.attach('#card-container');
+                }, 1500);
+            } catch (err) { statusDiv.innerHTML = `❌ Error: ${err.message}`; payBtn.disabled = false; payBtn.textContent = 'Pay & Book'; }
+        });
+        window.addEventListener('load', () => { initSquare(); payBtn.disabled = true; });
+        document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+        }));
+    </script>
+</body>
+</html>
