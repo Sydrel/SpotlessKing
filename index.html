@@ -51,7 +51,6 @@
             gap: 0.8rem;
         }
 
-        /* LOGO AREA - Replace with your actual logo image */
         .logo {
             display: flex;
             align-items: center;
@@ -78,7 +77,7 @@
 
         .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             align-items: center;
             flex-wrap: wrap;
             justify-content: flex-end;
@@ -87,10 +86,13 @@
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #2f2e2a;
             transition: 0.2s;
-            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #c89d3c;
         }
 
         .btn-ghost {
@@ -98,10 +100,10 @@
             color: white !important;
             padding: 0.4rem 1rem;
             border-radius: 40px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
         }
 
-        /* HERO SECTION - ALL IMAGE DIMENSIONS SPECIFIED */
+        /* HERO SECTION */
         .hero-full {
             width: 100%;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1815 100%);
@@ -138,6 +140,10 @@
             margin-bottom: 1rem;
         }
 
+        .hero-highlight {
+            color: #c89d3c;
+        }
+
         .hero-desc {
             font-size: 1rem;
             opacity: 0.9;
@@ -157,7 +163,6 @@
             font-size: 0.95rem;
         }
 
-        /* Hero Media - IMAGE SIZES: Main video/GIF 800x450, Thumbnails 400x250 */
         .hero-media-stack {
             display: flex;
             flex-direction: column;
@@ -171,7 +176,6 @@
             overflow: hidden;
             background: #000;
         }
-        /* MAIN VIDEO/GIF DIMENSION: 800x450 (16:9) */
         .hero-main-video video,
         .hero-main-video img {
             width: 100%;
@@ -185,7 +189,6 @@
             display: flex;
             gap: 0.8rem;
         }
-        /* THUMBNAIL IMAGES DIMENSION: 400x250 */
         .hero-img-small {
             flex: 1;
             border-radius: 20px;
@@ -197,7 +200,6 @@
             object-fit: cover;
             display: block;
         }
-        /* On tablet+ we increase height */
         @media (min-width: 600px) {
             .hero-img-small img { height: 130px; }
         }
@@ -243,6 +245,11 @@
             border-radius: 40px;
             cursor: pointer;
             white-space: nowrap;
+        }
+
+        .tab-btn i {
+            margin-right: 6px;
+            color: #c89d3c;
         }
 
         .tab-btn.active {
@@ -334,6 +341,32 @@
             padding: 0.5rem;
             border-radius: 20px;
             text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* INDIVIDUAL BOOK BUTTON ON EACH PACKAGE */
+        .book-package-btn {
+            display: inline-block;
+            background: #1e1b1a;
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: 0.2s;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        .book-package-btn i {
+            margin-right: 6px;
+        }
+        .book-package-btn:hover {
+            background: #c89d3c;
+            color: #1e1b1a;
         }
 
         .carousel-controls {
@@ -374,7 +407,7 @@
             border-radius: 10px;
         }
 
-        /* Booking Section */
+        /* Booking Section - kept for Square payment */
         .booking {
             padding: 3rem 0;
             background: white;
@@ -443,7 +476,6 @@
             cursor: pointer;
         }
 
-        /* Testimonials */
         .testimonials {
             padding: 3rem 0;
             background: #fefcf5;
@@ -467,7 +499,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Footer */
         .footer {
             background: #1c1917;
             color: #cdc6bb;
@@ -566,17 +597,6 @@
             background: #c89d3c;
             color: #1e1b1a;
         }
-
-        /* Helper class for image placeholders - REPLACE WITH YOUR OWN IMAGES */
-        .img-placeholder {
-            background: #2c2b26;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #c89d3c;
-            font-size: 0.8rem;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -603,14 +623,12 @@
     <nav class="navbar">
         <div class="container nav-container">
             <div class="logo">
-                <!-- LOGO IMAGE: Replace with your actual logo file. Recommended size: 200x200px or 400x400px (square) -->
                 <img class="logo-img" src="https://placehold.co/200x200/1e1b1a/c89d3c?text=Logo&font=montserrat" alt="Spotless King Logo">
                 <div class="logo-text">SPOTLESS <span>KING</span> 👑</div>
             </div>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#packages">Packages</a>
-                <a href="#square-booking">Book</a>
                 <a href="#contact">Contact</a>
                 <a href="#" class="btn-ghost">(888) 789-1234</a>
             </div>
@@ -618,7 +636,7 @@
     </nav>
 
     <main>
-        <!-- HERO SECTION - ALL IMAGE DIMENSIONS DOCUMENTED -->
+        <!-- HERO SECTION -->
         <section id="home" class="hero-full">
             <div class="hero-content-wrapper">
                 <div class="hero-text">
@@ -628,21 +646,16 @@
                     <a href="#square-booking" class="btn-primary">Book Now <i class="fab fa-square"></i></a>
                 </div>
                 <div class="hero-media-stack">
-                    <!-- MAIN VIDEO/GIF - Recommended size: 1920x1080 or 1280x720 (16:9) 
-                         Replace 'src' with your actual video file or GIF -->
                     <div class="hero-main-video">
                         <video autoplay loop muted playsinline poster="https://placehold.co/1280x720/2c2b26/c89d3c?text=Detailing+Video">
                             <source src="https://placehold.co/1280x720/2c2b26/c89d3c?text=Detailing+GIF" type="video/mp4">
-                            <!-- FALLBACK IMAGE - Recommended size: 1280x720px -->
                             <img src="https://placehold.co/1280x720/2c2b26/c89d3c?text=Spotless+King+Detailing" alt="Car detailing showcase">
                         </video>
                     </div>
                     <div class="hero-img-row">
-                        <!-- THUMBNAIL IMAGE 1 - Recommended size: 800x500px or 400x250px -->
                         <div class="hero-img-small">
                             <img src="https://placehold.co/800x500/2c2b26/c89d3c?text=Interior+Deep+Clean" alt="Interior detailing">
                         </div>
-                        <!-- THUMBNAIL IMAGE 2 - Recommended size: 800x500px or 400x250px -->
                         <div class="hero-img-small">
                             <img src="https://placehold.co/800x500/2c2b26/c89d3c?text=Ceramic+Gloss" alt="Ceramic coating finish">
                         </div>
@@ -651,7 +664,7 @@
             </div>
         </section>
 
-        <!-- PACKAGES SECTION (Carousels) -->
+        <!-- PACKAGES SECTION with INDIVIDUAL BOOK BUTTONS -->
         <section id="packages" class="packages-tab-section">
             <div class="container">
                 <h2 class="section-title">Our Packages</h2>
@@ -662,40 +675,148 @@
                     <button class="tab-btn" data-tab="tab3"><i class="fas fa-water"></i> Exterior Only</button>
                 </div>
 
-                <!-- Tab 1 -->
+                <!-- Tab 1: Interior-Exterior with individual book buttons -->
                 <div id="tab1" class="tab-pane active-pane">
                     <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
                     <div class="carousel-container" id="carousel1">
                         <div class="carousel-track" id="track1">
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Essential Refresh</div><div class="inner-package-price">$95 - $110</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Wash & Vacuum</li><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows</li><li><i class="fas fa-check-circle"></i> Exterior hand wash</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li></ul><div class="price-note">Great for regular maintenance</div></div></div>
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Premium Inside-Out</div><div class="inner-package-price">$165 - $220</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash + wheels detailed</li><li><i class="fas fa-check-circle"></i> Paint sealant (3-4 months)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk detailed</li><li><i class="fas fa-check-circle"></i> Air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior vacuum + vents</li><li><i class="fas fa-check-circle"></i> Door panels conditioned</li></ul><div class="price-note">Showroom finish</div></div></div>
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Supreme Inside-Out</div><div class="inner-package-price">$250 - $350</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Bug removal + foam wash</li><li><i class="fas fa-check-circle"></i> Paint sealant + trim restore</li><li><i class="fas fa-check-circle"></i> Steam cleaned vents</li><li><i class="fas fa-check-circle"></i> Seat shampoo / leather steam</li><li><i class="fas fa-check-circle"></i> Floor mats shampooed</li><li><i class="fas fa-check-circle"></i> Full windows & jambs</li></ul><div class="price-note">Ultimate restoration</div></div></div>
+                            <!-- Package 1 - Essential Refresh -->
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Essential Refresh</div>
+                                    <div class="inner-package-price">$95 - $110</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Wash & Vacuum</li>
+                                        <li><i class="fas fa-check-circle"></i> Interior vacuum</li>
+                                        <li><i class="fas fa-check-circle"></i> Dashboard wiped down</li>
+                                        <li><i class="fas fa-check-circle"></i> Door jambs cleaned</li>
+                                        <li><i class="fas fa-check-circle"></i> Interior windows</li>
+                                        <li><i class="fas fa-check-circle"></i> Exterior hand wash</li>
+                                        <li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li>
+                                    </ul>
+                                    <div class="price-note">Great for regular maintenance</div>
+                                    <button class="book-package-btn" data-package="Essential Refresh - $95/$110"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
+                            <!-- Package 2 - Premium Inside-Out -->
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Premium Inside-Out</div>
+                                    <div class="inner-package-price">$165 - $220</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Foam wash + wheels detailed</li>
+                                        <li><i class="fas fa-check-circle"></i> Paint sealant (3-4 months)</li>
+                                        <li><i class="fas fa-check-circle"></i> Door jambs/trunk detailed</li>
+                                        <li><i class="fas fa-check-circle"></i> Air compressed crevices</li>
+                                        <li><i class="fas fa-check-circle"></i> Interior vacuum + vents</li>
+                                        <li><i class="fas fa-check-circle"></i> Door panels conditioned</li>
+                                    </ul>
+                                    <div class="price-note">Showroom finish</div>
+                                    <button class="book-package-btn" data-package="Premium Inside-Out - $165/$220"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
+                            <!-- Package 3 - Supreme Inside-Out -->
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Supreme Inside-Out</div>
+                                    <div class="inner-package-price">$250 - $350</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Bug removal + foam wash</li>
+                                        <li><i class="fas fa-check-circle"></i> Paint sealant + trim restore</li>
+                                        <li><i class="fas fa-check-circle"></i> Steam cleaned vents</li>
+                                        <li><i class="fas fa-check-circle"></i> Seat shampoo / leather steam</li>
+                                        <li><i class="fas fa-check-circle"></i> Floor mats shampooed</li>
+                                        <li><i class="fas fa-check-circle"></i> Full windows & jambs</li>
+                                    </ul>
+                                    <div class="price-note">Ultimate restoration</div>
+                                    <button class="book-package-btn" data-package="Supreme Inside-Out - $250/$350"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-controls"><button class="carousel-btn prev1"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next1"><i class="fas fa-chevron-right"></i></button></div>
                         <div class="carousel-dots" id="dots1"></div>
                     </div>
                 </div>
 
-                <!-- Tab 2 -->
+                <!-- Tab 2: Interior Only with individual book buttons -->
                 <div id="tab2" class="tab-pane">
                     <div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div>
                     <div class="carousel-container" id="carousel2">
                         <div class="carousel-track" id="track2">
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Interior Basic</div><div class="inner-package-price">$100 - $130</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel</li><li><i class="fas fa-check-circle"></i> Cupholders & doors</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows</li></ul><div class="price-note">No shampooing — quick refresh</div></div></div>
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Interior Supreme</div><div class="inner-package-price">$200 - $275</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks & crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo floor mats</li><li><i class="fas fa-check-circle"></i> Arm rest & vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="price-note">Deep cleansing & sanitization</div></div></div>
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Interior Basic</div>
+                                    <div class="inner-package-price">$100 - $130</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Interior vacuum</li>
+                                        <li><i class="fas fa-check-circle"></i> Dashboard & steering wheel</li>
+                                        <li><i class="fas fa-check-circle"></i> Cupholders & doors</li>
+                                        <li><i class="fas fa-check-circle"></i> Door jambs detailed</li>
+                                        <li><i class="fas fa-check-circle"></i> Interior windows</li>
+                                    </ul>
+                                    <div class="price-note">No shampooing — quick refresh</div>
+                                    <button class="book-package-btn" data-package="Interior Basic - $100/$130"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Interior Supreme</div>
+                                    <div class="inner-package-price">$200 - $275</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Vacuum including trunk</li>
+                                        <li><i class="fas fa-check-circle"></i> Blow cracks & crevices</li>
+                                        <li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li>
+                                        <li><i class="fas fa-check-circle"></i> Shampoo floor mats</li>
+                                        <li><i class="fas fa-check-circle"></i> Arm rest & vents steamed</li>
+                                        <li><i class="fas fa-check-circle"></i> Interior windows detailed</li>
+                                    </ul>
+                                    <div class="price-note">Deep cleansing & sanitization</div>
+                                    <button class="book-package-btn" data-package="Interior Supreme - $200/$275"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-controls"><button class="carousel-btn prev2"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next2"><i class="fas fa-chevron-right"></i></button></div>
                         <div class="carousel-dots" id="dots2"></div>
                     </div>
                 </div>
 
-                <!-- Tab 3 -->
+                <!-- Tab 3: Exterior Only with individual book buttons -->
                 <div id="tab3" class="tab-pane">
                     <div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div>
                     <div class="carousel-container" id="carousel3">
                         <div class="carousel-track" id="track3">
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Exterior Basic</div><div class="inner-package-price">$60 - $75</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows + gas cap</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="price-note">Quick exterior refresh</div></div></div>
-                            <div class="carousel-slide"><div class="inner-package-card"><div class="inner-package-title">Exterior Premium</div><div class="inner-package-price">$85 - $110</div><ul class="service-list"><li><i class="fas fa-check-circle"></i> Foam wash + bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels & wheel wells</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine + door jambs</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="price-note">Long-lasting protection</div></div></div>
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Exterior Basic</div>
+                                    <div class="inner-package-price">$60 - $75</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Foam wash</li>
+                                        <li><i class="fas fa-check-circle"></i> Tire/rims detailed</li>
+                                        <li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li>
+                                        <li><i class="fas fa-check-circle"></i> Door jambs detailed</li>
+                                        <li><i class="fas fa-check-circle"></i> Exterior windows + gas cap</li>
+                                        <li><i class="fas fa-check-circle"></i> Plastic trims restored</li>
+                                    </ul>
+                                    <div class="price-note">Quick exterior refresh</div>
+                                    <button class="book-package-btn" data-package="Exterior Basic - $60/$75"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="inner-package-card">
+                                    <div class="inner-package-title">Exterior Premium</div>
+                                    <div class="inner-package-price">$85 - $110</div>
+                                    <ul class="service-list">
+                                        <li><i class="fas fa-check-circle"></i> Foam wash + bug removal</li>
+                                        <li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li>
+                                        <li><i class="fas fa-check-circle"></i> Wheels & wheel wells</li>
+                                        <li><i class="fas fa-check-circle"></i> Rain X windshield</li>
+                                        <li><i class="fas fa-check-circle"></i> Tire shine + door jambs</li>
+                                        <li><i class="fas fa-check-circle"></i> Exterior windows</li>
+                                    </ul>
+                                    <div class="price-note">Long-lasting protection</div>
+                                    <button class="book-package-btn" data-package="Exterior Premium - $85/$110"><i class="fab fa-square"></i> Book This Package</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="carousel-controls"><button class="carousel-btn prev3"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next3"><i class="fas fa-chevron-right"></i></button></div>
                         <div class="carousel-dots" id="dots3"></div>
@@ -704,23 +825,41 @@
             </div>
         </section>
 
-        <!-- BOOKING SECTION -->
+        <!-- SQUARE BOOKING SECTION (kept for payment) -->
         <section id="square-booking" class="booking">
             <div class="container">
                 <div class="booking-inner">
                     <div class="booking-text">
-                        <h2><i class="fab fa-square"></i> Secure booking</h2>
-                        <p>Pay with credit card via Square. 100% encrypted.</p>
+                        <h2><i class="fab fa-square"></i> Complete Your Booking</h2>
+                        <p>Fill out the form below to secure your appointment. Pay with credit card via Square — 100% encrypted.</p>
                         <ul style="margin-top:0.8rem; list-style:none;"><li><i class="fas fa-check-circle"></i> Instant confirmation</li><li><i class="fas fa-shield-alt"></i> PCI compliant</li></ul>
                         <div style="margin-top:1rem;"><i class="fas fa-phone-alt"></i> (888) 789-1234</div>
                     </div>
                     <div class="square-booking-box">
-                        <h3 style="margin-bottom:1rem;">Complete order</h3>
+                        <h3 style="margin-bottom:1rem;">Booking Details</h3>
                         <form id="square-payment-form">
                             <div class="form-group"><input type="text" id="customerName" placeholder="Full name" required></div>
                             <div class="form-group"><input type="email" id="customerEmail" placeholder="Email" required></div>
                             <div class="form-group"><input type="tel" id="customerPhone" placeholder="Phone" required></div>
-                            <div class="form-group"><select id="selectedPackage" required><option value="">Select package</option><option value="Essential Refresh|95">Essential Refresh (Sedan) $95</option><option value="Essential Refresh|110">Essential Refresh (SUV) $110</option><option value="Premium Inside-Out Package|165">Premium Inside-Out (Sedan) $165</option><option value="Premium Inside-Out Package|220">Premium Inside-Out (SUV) $220</option><option value="Supreme Inside-Out Package|250">Supreme Inside-Out (Sedan) $250</option><option value="Supreme Inside-Out Package|350">Supreme Inside-Out (SUV) $350</option><option value="Interior Basic|100">Interior Basic (Sedan) $100</option><option value="Interior Basic|130">Interior Basic (SUV) $130</option><option value="Interior Supreme|200">Interior Supreme (Sedan) $200</option><option value="Interior Supreme|275">Interior Supreme (SUV) $275</option><option value="Exterior Basic|60">Exterior Basic (Sedan) $60</option><option value="Exterior Basic|75">Exterior Basic (SUV) $75</option><option value="Exterior Premium|85">Exterior Premium (Sedan) $85</option><option value="Exterior Premium|110">Exterior Premium (SUV) $110</option></select></div>
+                            <div class="form-group">
+                                <select id="selectedPackage" required>
+                                    <option value="">Select a package</option>
+                                    <option value="Essential Refresh|95">Essential Refresh (Sedan) $95</option>
+                                    <option value="Essential Refresh|110">Essential Refresh (SUV) $110</option>
+                                    <option value="Premium Inside-Out|165">Premium Inside-Out (Sedan) $165</option>
+                                    <option value="Premium Inside-Out|220">Premium Inside-Out (SUV) $220</option>
+                                    <option value="Supreme Inside-Out|250">Supreme Inside-Out (Sedan) $250</option>
+                                    <option value="Supreme Inside-Out|350">Supreme Inside-Out (SUV) $350</option>
+                                    <option value="Interior Basic|100">Interior Basic (Sedan) $100</option>
+                                    <option value="Interior Basic|130">Interior Basic (SUV) $130</option>
+                                    <option value="Interior Supreme|200">Interior Supreme (Sedan) $200</option>
+                                    <option value="Interior Supreme|275">Interior Supreme (SUV) $275</option>
+                                    <option value="Exterior Basic|60">Exterior Basic (Sedan) $60</option>
+                                    <option value="Exterior Basic|75">Exterior Basic (SUV) $75</option>
+                                    <option value="Exterior Premium|85">Exterior Premium (Sedan) $85</option>
+                                    <option value="Exterior Premium|110">Exterior Premium (SUV) $110</option>
+                                </select>
+                            </div>
                             <div class="form-group"><input type="text" id="appointmentDate" placeholder="Preferred date" required></div>
                             <div class="form-group"><textarea rows="2" placeholder="Address / special requests"></textarea></div>
                             <div class="square-payment-element"><div id="card-container"></div></div>
@@ -751,7 +890,7 @@
                 <img class="logo-img" src="https://placehold.co/200x200/1e1b1a/c89d3c?text=Logo" alt="Logo" style="width:35px; height:35px;">
                 <span style="color:#c89d3c; font-weight:800;">SPOTLESS KING DETAILING 👑</span>
             </div>
-            <div class="footer-links"><a href="#home">Home</a><a href="#packages">Packages</a><a href="#square-booking">Book</a><a href="#">Privacy</a></div>
+            <div class="footer-links"><a href="#home">Home</a><a href="#packages">Packages</a><a href="#">Privacy</a></div>
             <p>&copy; 2026 Spotless King — Mobile detailing</p>
         </div>
     </footer>
@@ -805,6 +944,35 @@
         initCarousel('track1', '.prev1', '.next1', 'dots1');
         initCarousel('track2', '.prev2', '.next2', 'dots2');
         initCarousel('track3', '.prev3', '.next3', 'dots3');
+
+        // Individual Book Buttons - scroll to booking form and pre-fill package
+        const bookBtns = document.querySelectorAll('.book-package-btn');
+        const packageSelect = document.getElementById('selectedPackage');
+        
+        bookBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const packageName = btn.getAttribute('data-package');
+                // Scroll to booking section
+                document.getElementById('square-booking').scrollIntoView({ behavior: 'smooth' });
+                // Try to match and select the package in dropdown
+                if (packageSelect) {
+                    const options = packageSelect.options;
+                    for (let i = 0; i < options.length; i++) {
+                        if (options[i].text.toLowerCase().includes(packageName.toLowerCase().split(' - ')[0].toLowerCase())) {
+                            packageSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                // Show a small reminder
+                const statusDiv = document.getElementById('payment-status');
+                if (statusDiv) {
+                    statusDiv.innerHTML = `📋 ${packageName} selected. Complete the form and proceed to payment.`;
+                    statusDiv.style.color = '#c89d3c';
+                    setTimeout(() => { if (statusDiv.innerHTML.includes('selected')) statusDiv.innerHTML = ''; }, 4000);
+                }
+            });
+        });
 
         // Modal
         const modal = document.getElementById('promoModal');
