@@ -491,19 +491,18 @@
             border-radius: 10px;
         }
 
-        /* Testimonials Section with Elfsight Widget */
+        /* Testimonials Section with Elfsight Widget - No extra header */
         .testimonials-section {
-            padding: 3rem 0;
+            padding: 2rem 0 3rem 0;
             background: #fefcf5;
         }
         .reviews-widget-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 0 1rem;
             background: transparent;
             border-radius: 32px;
         }
-        /* Ensure Elfsight widget looks good on mobile */
         .elfsight-app-1232881c-212a-436c-9c99-b7f8d18e1746 {
             width: 100%;
             overflow-x: hidden;
@@ -697,15 +696,11 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION WITH ELFSIGHT GOOGLE REVIEWS WIDGET -->
+    <!-- TESTIMONIALS SECTION - Only Elfsight Widget, no duplicate header -->
     <section id="reviews" class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title">What our customers say</h2>
-            <p class="section-sub">Real reviews from Google — trusted by car owners</p>
-            <div class="reviews-widget-container">
-                <!-- Elfsight Google Reviews Widget -->
-                <div class="elfsight-app-1232881c-212a-436c-9c99-b7f8d18e1746" data-elfsight-app-lazy></div>
-            </div>
+        <div class="reviews-widget-container">
+            <!-- Elfsight Google Reviews Widget -->
+            <div class="elfsight-app-1232881c-212a-436c-9c99-b7f8d18e1746" data-elfsight-app-lazy></div>
         </div>
     </section>
 </main>
