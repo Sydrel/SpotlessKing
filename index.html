@@ -109,18 +109,16 @@
             .logo-img { width: 35px; height: 35px; }
         }
 
-        /* ===== HERO BANNER - OPTIMIZED TO FIT FULL VIDEO ===== */
+        /* ===== RESPONSIVE HERO BANNER ===== */
         .hero-wrapper {
             position: relative;
             width: 100%;
-            /* Smaller height to fit full video without cropping */
-            height: 65vh;
-            min-height: 450px;
-            max-height: 700px;
+            aspect-ratio: 16 / 9;
+            height: auto;
             overflow: hidden;
+            background-color: #000;
         }
         
-        /* YouTube iframe as background - fits full video */
         .hero-youtube-bg {
             position: absolute;
             top: 0;
@@ -137,8 +135,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            /* This ensures the full video is visible without cropping */
-            object-fit: contain;
+            object-fit: cover;
         }
         
         .hero-overlay {
@@ -184,7 +181,9 @@
             font-size: 0.75rem;
             font-weight: 600;
             color: #c89d3c;
-            margin-bottom: 1.2rem;
+            /* MOVED DOWN - added margin-top */
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         .hero-content h1 {
@@ -281,20 +280,122 @@
             letter-spacing: 0.5px;
         }
         
+        /* MOBILE RESPONSIVE FIXES */
         @media (max-width: 768px) {
-            .hero-wrapper { height: 70vh; min-height: 500px; max-height: 600px; }
-            .hero-content h1 { font-size: 2rem; }
-            .hero-desc { font-size: 0.9rem; }
-            .hero-stats { gap: 1.2rem; }
-            .stat-number { font-size: 1.1rem; }
+            .hero-wrapper {
+                aspect-ratio: 4 / 3;
+            }
+            .hero-badge {
+                margin-top: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+            .hero-content h1 { 
+                font-size: 2rem; 
+                margin-bottom: 0.8rem;
+            }
+            .hero-desc { 
+                font-size: 0.85rem; 
+                margin-bottom: 1.2rem;
+                padding: 0 0.5rem;
+            }
+            .hero-badge { 
+                font-size: 0.65rem;
+            }
             .hero-buttons .btn-primary, 
-            .hero-buttons .btn-secondary { padding: 0.6rem 1.2rem; font-size: 0.8rem; }
+            .hero-buttons .btn-secondary { 
+                padding: 0.6rem 1.2rem; 
+                font-size: 0.8rem; 
+            }
+            .hero-stats { 
+                gap: 1.2rem; 
+                margin-top: 0.3rem;
+            }
+            .stat-number { 
+                font-size: 1.1rem; 
+            }
+            .stat-label { 
+                font-size: 0.55rem; 
+            }
+            .hero-new {
+                padding: 1rem;
+            }
         }
         
+        /* SMALL MOBILE DEVICES */
         @media (max-width: 480px) {
-            .hero-wrapper { height: 75vh; min-height: 550px; }
-            .hero-content h1 { font-size: 1.6rem; }
-            .hero-badge { font-size: 0.6rem; }
+            .hero-wrapper {
+                aspect-ratio: 3 / 4;
+                min-height: auto;
+            }
+            .hero-badge {
+                margin-top: 0.5rem;
+                margin-bottom: 0.6rem;
+                font-size: 0.55rem;
+                padding: 0.3rem 1rem;
+            }
+            .hero-content h1 { 
+                font-size: 1.6rem; 
+                margin-bottom: 0.6rem;
+            }
+            .hero-desc { 
+                font-size: 0.8rem; 
+                margin-bottom: 1rem;
+            }
+            .hero-buttons {
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+            }
+            .hero-buttons .btn-primary, 
+            .hero-buttons .btn-secondary { 
+                padding: 0.5rem 1rem; 
+                font-size: 0.75rem; 
+            }
+            .hero-stats { 
+                gap: 1rem; 
+            }
+            .stat-number { 
+                font-size: 1rem; 
+            }
+            .stat-label { 
+                font-size: 0.5rem; 
+            }
+            .hero-new {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* LANDSCAPE MODE ON MOBILE */
+        @media (max-width: 850px) and (orientation: landscape) {
+            .hero-wrapper {
+                aspect-ratio: 16 / 9;
+            }
+            .hero-badge {
+                margin-top: 0.3rem;
+                margin-bottom: 0.4rem;
+                font-size: 0.5rem;
+            }
+            .hero-content h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0.4rem;
+            }
+            .hero-desc {
+                font-size: 0.7rem;
+                margin-bottom: 0.6rem;
+            }
+            .hero-buttons {
+                margin-bottom: 0.6rem;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+            .hero-stats {
+                gap: 0.8rem;
+            }
+            .stat-number {
+                font-size: 0.9rem;
+            }
         }
 
         /* ===== PACKAGES SECTION ===== */
@@ -657,10 +758,9 @@
 
 <main>
     <!-- =============================================== -->
-    <!-- 3. HERO BANNER - OPTIMIZED TO FIT FULL VIDEO -->
+    <!-- 3. RESPONSIVE HERO BANNER - BADGE MOVED DOWN -->
     <!-- =============================================== -->
     <div class="hero-wrapper">
-        <!-- YouTube Video Background - Full video visible without cropping -->
         <div class="hero-youtube-bg">
             <iframe 
                 src="https://www.youtube.com/embed/jYmqmzSZrPk?autoplay=1&loop=1&playlist=jYmqmzSZrPk&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3" 
@@ -673,6 +773,7 @@
         
         <div class="hero-new">
             <div class="hero-content">
+                <!-- BADGE NOW HAS MARGIN-TOP TO MOVE IT DOWN -->
                 <div class="hero-badge"><i class="fas fa-crown"></i> Since 2020 • 1,200+ Cars Detailed</div>
                 <h1>Your car deserves the <span class="hero-highlight">spotless</span> royalty experience.</h1>
                 <p class="hero-desc">Premium mobile detailing at your doorstep. Ceramic coatings, interior rejuvenation, and showroom shine — all with secure Square booking.</p>
@@ -707,7 +808,6 @@
             <div id="tab1" class="tab-pane active-pane">
                 <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
                 <div class="packages-grid">
-                    <!-- Package: Essential Refresh -->
                     <div class="package-card">
                         <div class="package-title">Essential Refresh</div>
                         <div class="package-price">$95 - $110</div>
@@ -723,7 +823,6 @@
                         <div class="package-note">Great for regular maintenance</div>
                         <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP" target="_blank" class="book-btn">Book Now →</a>
                     </div>
-                    <!-- Package: Premium Inside-Out -->
                     <div class="package-card">
                         <div class="package-title">Premium Inside-Out</div>
                         <div class="package-price">$165 - $220</div>
@@ -738,7 +837,6 @@
                         <div class="package-note">Showroom finish</div>
                         <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO" target="_blank" class="book-btn">Book Now →</a>
                     </div>
-                    <!-- Package: Supreme Inside-Out -->
                     <div class="package-card">
                         <div class="package-title">Supreme Inside-Out</div>
                         <div class="package-price">$250 - $350</div>
@@ -754,7 +852,6 @@
                         <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2" target="_blank" class="book-btn">Book Now →</a>
                     </div>
                 </div>
-                <!-- Mobile Carousel for Tab1 -->
                 <div class="mobile-carousel-container" id="mobileCarousel1">
                     <div class="mobile-carousel-track" id="mobileTrack1">
                         <div class="mobile-carousel-slide"><div class="package-card"><div class="package-title">Essential Refresh</div><div class="package-price">$95 - $110</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Wash & Vacuum</li><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows</li><li><i class="fas fa-check-circle"></i> Exterior hand wash</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li></ul><div class="package-note">Great for regular maintenance</div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP" target="_blank" class="book-btn">Book Now →</a></div></div>
