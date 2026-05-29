@@ -11,10 +11,9 @@
     <script src="https://elfsightcdn.com/platform.js" async></script>
     <style>
         /* =============================================== */
-        /* ==========  GLOBAL VARIABLES (EASY EDIT) ========== */
+        /* ==========  GLOBAL VARIABLES ========== */
         /* =============================================== */
         :root {
-            /* COLORS */
             --primary-gold: #ffdf00;
             --primary-gold-hover: #ffe44d;
             --dark-bg: #1e1b1a;
@@ -26,28 +25,31 @@
             --text-muted: #6b655b;
             --border-light: #e9decd;
             
-            /* TYPOGRAPHY - HERO SECTION */
+            /* TYPOGRAPHY - HERO */
             --hero-title-size: 3.8rem;
             --hero-title-size-tablet: 3.2rem;
             --hero-title-size-mobile: 2.5rem;
             --hero-title-size-small: 1.8rem;
             --hero-desc-size: 1.2rem;
             --hero-desc-size-mobile: 0.95rem;
-            --hero-badge-size: 0.9rem;
             
-            /* SPACING */
-            --section-padding: 4rem 0;
-            --card-padding: 1.5rem;
-            --border-radius-card: 28px;
+            /* PACKAGE CARD SPACING - REDUCED BLANK SPACE */
+            --card-padding: 1.2rem;
+            --card-gap: 1.2rem;
+            --border-radius-card: 24px;
             --border-radius-btn: 50px;
             
             /* MODAL */
             --modal-max-width: 420px;
             --modal-max-width-tablet: 380px;
             --modal-max-width-mobile: 340px;
+            
+            /* BADGE SIZE - 3x3 inches */
+            --badge-size: 260px;
+            --badge-size-mobile: 200px;
+            --badge-size-small-mobile: 160px;
         }
 
-        /* RESET & BASE */
         * {
             margin: 0;
             padding: 0;
@@ -55,7 +57,6 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* Hide scrollbar for all browsers */
         body::-webkit-scrollbar { display: none; }
         html::-webkit-scrollbar { display: none; }
         body {
@@ -79,7 +80,7 @@
             margin: 0 auto;
         }
 
-        /* ===== HEADER / NAVIGATION ===== */
+        /* ===== HEADER ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -127,7 +128,7 @@
             .logo-img { width: 35px; height: 35px; }
         }
 
-        /* ===== HERO BANNER SECTION - CONTENT PUSHED DOWN ===== */
+        /* ===== HERO BANNER ===== */
         .hero-wrapper {
             position: relative;
             width: 100%;
@@ -158,7 +159,6 @@
             object-fit: cover;
             transform: translate(-50%, -50%);
         }
-        /* Zoom effects for mobile */
         @media (max-width: 768px) { .hero-youtube-bg iframe { width: 140%; height: 140%; transform: translate(-50%, -50%) scale(1.15); } }
         @media (max-width: 640px) { .hero-youtube-bg iframe { width: 160%; height: 160%; transform: translate(-50%, -50%) scale(1.25); } }
         @media (max-width: 480px) { .hero-youtube-bg iframe { width: 180%; height: 180%; transform: translate(-50%, -50%) scale(1.35); } }
@@ -193,11 +193,8 @@
             margin: 0 auto;
             text-align: center;
             color: var(--text-light);
-            /* PUSHED CONTENT FURTHER DOWN - increased from 8% to 15% */
             transform: translateY(15%);
         }
-        
-        /* HERO TYPOGRAPHY */
         .hero-content h1 {
             font-size: var(--hero-title-size);
             font-weight: 800;
@@ -211,7 +208,7 @@
             font-size: var(--hero-desc-size);
             line-height: 1.5;
             opacity: 0.95;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -222,12 +219,12 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         .btn-primary {
             background: var(--primary-gold);
             color: var(--text-dark);
-            padding: 0.9rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: var(--border-radius-btn);
             text-decoration: none;
             font-weight: 700;
@@ -242,7 +239,7 @@
         .btn-secondary {
             background: transparent;
             color: white;
-            padding: 0.9rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: var(--border-radius-btn);
             text-decoration: none;
             font-weight: 600;
@@ -254,23 +251,22 @@
             transition: all 0.3s ease;
         }
         .btn-secondary:hover { border-color: var(--primary-gold); background: rgba(255, 223, 0, 0.1); transform: translateY(-2px); }
-        
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .stat-item { text-align: center; }
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--primary-gold);
             display: block;
         }
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             opacity: 0.9;
             letter-spacing: 0.5px;
             font-weight: 500;
@@ -280,69 +276,46 @@
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 223, 0, 0.3);
             display: inline-block;
-            padding: 0.5rem 1.5rem;
+            padding: 0.4rem 1.2rem;
             border-radius: 60px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--primary-gold);
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
         }
-        
-        /* Hero Responsive - adjusted downward shift for each breakpoint */
         @media (max-width: 1024px) {
             .hero-content { transform: translateY(12%); }
             .hero-content h1 { font-size: var(--hero-title-size-tablet); }
-            .hero-desc { font-size: 1.1rem; max-width: 550px; }
-            .btn-primary, .btn-secondary { padding: 0.8rem 1.8rem; font-size: 0.95rem; }
+            .hero-desc { font-size: 1rem; }
         }
         @media (max-width: 768px) {
             .hero-wrapper { aspect-ratio: 4 / 3; }
-            .hero-content { transform: translateY(10%); }
-            .hero-content h1 { font-size: var(--hero-title-size-mobile); margin-bottom: 0.8rem; }
-            .hero-desc { font-size: var(--hero-desc-size-mobile); margin-bottom: 1.2rem; padding: 0 0.5rem; }
-            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
-            .hero-stats { gap: 1.5rem; margin-bottom: 1rem; }
-            .stat-number { font-size: 1.25rem; }
-            .hero-bottom-badge { font-size: 0.7rem; padding: 0.4rem 1.2rem; }
-        }
-        @media (max-width: 550px) {
             .hero-content { transform: translateY(8%); }
+            .hero-content h1 { font-size: var(--hero-title-size-mobile); }
+            .hero-desc { font-size: var(--hero-desc-size-mobile); margin-bottom: 1rem; }
+            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+            .hero-stats { gap: 1.2rem; }
+            .stat-number { font-size: 1.2rem; }
+            .hero-bottom-badge { font-size: 0.7rem; padding: 0.3rem 1rem; }
         }
         @media (max-width: 480px) {
             .hero-wrapper { aspect-ratio: 3 / 4; }
-            .hero-content { transform: translateY(6%); }
-            .hero-content h1 { font-size: var(--hero-title-size-small); }
-            .hero-desc { font-size: 0.8rem; }
-            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.5rem 1rem; font-size: 0.75rem; }
-            .hero-stats { gap: 1.2rem; margin-bottom: 0.8rem; }
-            .stat-number { font-size: 1rem; }
-            .hero-bottom-badge { font-size: 0.6rem; padding: 0.3rem 0.9rem; }
-        }
-        @media (max-width: 380px) {
-            .hero-content { transform: translateY(4%); }
-        }
-        @media (max-width: 850px) and (orientation: landscape) {
             .hero-content { transform: translateY(5%); }
-            .hero-wrapper { aspect-ratio: 16 / 9; }
-            .hero-content h1 { font-size: 1.6rem; margin-bottom: 0.4rem; }
-            .hero-desc { font-size: 0.75rem; margin-bottom: 0.6rem; }
-            .hero-buttons { margin-bottom: 0.6rem; }
-            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.45rem 0.9rem; font-size: 0.7rem; }
-            .hero-stats { gap: 1rem; margin-bottom: 0.6rem; }
-            .stat-number { font-size: 0.9rem; }
-            .hero-bottom-badge { font-size: 0.6rem; padding: 0.3rem 0.9rem; }
+            .hero-content h1 { font-size: var(--hero-title-size-small); }
+            .hero-desc { font-size: 0.75rem; }
+            .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
         }
 
-        /* ===== PACKAGES SECTION ===== */
-        .packages-tab-section { padding: var(--section-padding); background: white; }
+        /* ===== PACKAGES SECTION - COMPACT & READABLE ===== */
+        .packages-tab-section { padding: 3rem 0; background: white; }
         .section-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             text-align: center;
             margin-bottom: 0.5rem;
         }
         .section-sub {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-muted);
             text-align: center;
             margin-bottom: 2rem;
@@ -359,7 +332,7 @@
         .tab-btn {
             background: var(--light-bg);
             border: 1.5px solid #e8ddcd;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             font-size: 0.9rem;
             font-weight: 700;
             border-radius: 40px;
@@ -379,17 +352,17 @@
         .tab-pane.active-pane { display: block; }
         .package-description {
             background: #f5efe3;
-            padding: 0.8rem 1rem;
-            border-radius: 24px;
-            font-size: 0.85rem;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
         
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: var(--card-gap);
         }
         .package-card {
             background: var(--card-bg);
@@ -402,64 +375,100 @@
             display: flex;
             flex-direction: column;
         }
-        .package-card:hover { transform: translateY(-5px); }
+        .package-card:hover { transform: translateY(-3px); }
         .package-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             border-left: 4px solid var(--primary-gold);
-            padding-left: 12px;
-            margin-bottom: 0.5rem;
+            padding-left: 10px;
+            margin-bottom: 0.3rem;
+        }
+        
+        /* COMPACT PRICE SECTION */
+        .price-section {
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+            text-align: center;
         }
         .package-price {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary-gold);
-            margin: 0.8rem 0;
+            display: inline-block;
         }
+        .starting-price {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin: 0.1rem 0 0.3rem 0;
+            letter-spacing: 0.5px;
+        }
+        
+        /* LARGER, MORE READABLE SERVICE LIST */
         .package-services {
             list-style: none;
-            margin: 0.8rem 0;
+            margin: 0.5rem 0;
+            width: 100%;
         }
         .package-services li {
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            margin-bottom: 0.4rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            line-height: 1.3;
         }
-        .package-services li i { color: var(--primary-gold); width: 18px; }
+        .package-services li i { color: var(--primary-gold); width: 18px; font-size: 0.8rem; }
+        
         .package-note {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             background: #faf5ea;
-            padding: 0.5rem;
-            border-radius: 20px;
+            padding: 0.4rem;
+            border-radius: 16px;
             text-align: center;
-            margin-bottom: 1rem;
+            margin: 0.5rem 0 0.3rem 0;
+            width: 100%;
+            font-weight: 500;
+            line-height: 1.3;
         }
         .book-btn {
             display: inline-block;
             background: var(--primary-gold);
             color: var(--text-dark);
             text-align: center;
-            padding: 0.7rem 1rem;
+            padding: 0.6rem 0.8rem;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-decoration: none;
             width: 100%;
             transition: 0.2s;
-            margin-top: auto;
+            margin-top: 0.3rem;
         }
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         
+        /* BADGE SIZE - using the new image */
         .package-badge {
             display: block;
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            margin: 0.5rem auto 0.8rem auto;
+            width: var(--badge-size);
+            height: var(--badge-size);
+            max-width: 100%;
             object-fit: contain;
+            margin: 0.3rem auto 0.5rem auto;
+            border-radius: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .package-badge { width: var(--badge-size-mobile); height: var(--badge-size-mobile); }
+            .package-title { font-size: 1.2rem; }
+            .package-price { font-size: 1.3rem; }
+            .package-services li { font-size: 0.8rem; }
+            .package-note { font-size: 0.7rem; }
+        }
+        @media (max-width: 550px) {
+            .package-badge { width: var(--badge-size-small-mobile); height: var(--badge-size-small-mobile); }
+            .package-title { font-size: 1.1rem; }
         }
         
         .mobile-carousel-container {
@@ -478,14 +487,14 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1.2rem;
+            margin-top: 1rem;
         }
         .carousel-btn {
             background: var(--dark-bg);
             color: white;
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -493,7 +502,7 @@
             display: flex;
             justify-content: center;
             gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
         }
         .dot {
             width: 8px;
@@ -502,14 +511,18 @@
             background: #ddd2c0;
             cursor: pointer;
         }
-        .dot.active { background: var(--primary-gold); width: 24px; border-radius: 10px; }
+        .dot.active { background: var(--primary-gold); width: 20px; border-radius: 10px; }
         
         @media (max-width: 768px) {
             .packages-grid { display: none; }
             .mobile-carousel-container { display: block; }
+            .mobile-carousel-slide .package-badge {
+                width: var(--badge-size-mobile);
+                height: var(--badge-size-mobile);
+            }
         }
 
-        /* ===== REVIEWS SECTION ===== */
+        /* ===== REVIEWS & FOOTER ===== */
         .testimonials-section {
             padding: 2rem 0 3rem 0;
             background: #fefcf5;
@@ -521,16 +534,10 @@
             background: transparent;
             border-radius: 32px;
         }
-        .elfsight-app-1232881c-212a-436c-9c99-b7f8d18e1746 {
-            width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* ===== FOOTER ===== */
         .footer {
             background: #1c1917;
             color: #cdc6bb;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
         }
         .footer-links {
@@ -538,11 +545,11 @@
             justify-content: center;
             gap: 1.5rem;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
         }
         .footer a { color: var(--primary-gold); }
 
-        /* ===== PROMO MODAL ===== */
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -574,45 +581,45 @@
         .modal-overlay.active .modal-container { transform: scale(1); }
         .modal-header {
             background: var(--dark-bg);
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: center;
         }
         .modal-header .icon-circle {
             background: rgba(255, 223, 0, 0.15);
-            width: 56px;
-            height: 56px;
-            border-radius: 28px;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 0.8rem;
+            margin: 0 auto 0.6rem;
             border: 1px solid rgba(255, 223, 0, 0.3);
         }
-        .modal-header i { font-size: 1.8rem; color: var(--primary-gold); }
-        .modal-header h2 { font-size: 1.3rem; font-weight: 700; color: white; }
-        .modal-body { padding: 1.5rem 1.5rem 1.2rem; text-align: center; }
+        .modal-header i { font-size: 1.6rem; color: var(--primary-gold); }
+        .modal-header h2 { font-size: 1.2rem; font-weight: 700; color: white; }
+        .modal-body { padding: 1.2rem 1.2rem 1rem; text-align: center; }
         .discount-badge {
             background: var(--primary-gold);
             color: var(--text-dark);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.4rem 1rem;
+            gap: 6px;
+            padding: 0.3rem 0.8rem;
             border-radius: 40px;
             font-weight: 800;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-        }
-        .modal-body p {
             font-size: 0.9rem;
-            line-height: 1.5;
-            color: #2c2a28;
             margin-bottom: 0.6rem;
         }
+        .modal-body p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #2c2a28;
+            margin-bottom: 0.5rem;
+        }
         .modal-footer {
-            padding: 0 1.5rem 1.5rem 1.5rem;
+            padding: 0 1.2rem 1.2rem 1.2rem;
             display: flex;
-            gap: 0.8rem;
+            gap: 0.7rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -620,20 +627,17 @@
             background: var(--dark-bg);
             color: white;
             border: none;
-            padding: 0.65rem 1.2rem;
+            padding: 0.55rem 1rem;
             border-radius: 60px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             flex: 1;
             text-align: center;
         }
         .modal-btn-primary {
             background: var(--primary-gold);
             color: var(--text-dark);
-        }
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .modal-container { max-width: var(--modal-max-width-tablet); width: 85%; }
         }
         @media (max-width: 480px) {
             .modal-container { max-width: var(--modal-max-width-mobile); width: 92%; border-radius: 24px; }
@@ -655,7 +659,7 @@
             <div class="discount-badge"><i class="fas fa-percent"></i> 5% OFF <i class="fas fa-gift"></i></div>
             <p><strong>First Time Clients Receive 5% Off All Packages!</strong></p>
             <p>Start the year off right and let us make your car spotless.</p>
-            <p style="font-size: 0.75rem; color: #6b655b;">Simply mention you're a first-time client when booking.</p>
+            <p style="font-size: 0.7rem; color: #6b655b;">Simply mention you're a first-time client when booking.</p>
         </div>
         <div class="modal-footer">
             <button class="modal-btn modal-btn-primary" id="claimOfferBtn">Claim My 5% Off →</button>
@@ -664,7 +668,7 @@
     </div>
 </div>
 
-<!-- HEADER / NAVIGATION -->
+<!-- HEADER -->
 <nav class="navbar" id="navbar">
     <div class="container nav-container">
         <div class="logo">
@@ -680,7 +684,7 @@
 </nav>
 
 <main>
-    <!-- HERO BANNER - Content pushed further down -->
+    <!-- HERO BANNER -->
     <div class="hero-wrapper">
         <div class="hero-youtube-bg">
             <iframe src="https://www.youtube.com/embed/EDAdLzGVfPw?autoplay=1&loop=1&playlist=EDAdLzGVfPw&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -704,7 +708,7 @@
         </div>
     </div>
 
-    <!-- PACKAGES SECTION -->
+    <!-- PACKAGES SECTION - All badges now use the new image -->
     <section id="packages" class="packages-tab-section">
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
@@ -720,69 +724,31 @@
             <div id="tab1" class="tab-pane active-pane">
                 <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
                 <div class="packages-grid">
-                    <div class="package-card">
-                        <img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=ESSENTIAL" alt="Essential Badge" style="background:#f5efe3; border-radius:20px;">
-                        <div class="package-title">Essential Refresh</div>
-                        <div class="package-price">$95 - $110</div>
-                        <ul class="package-services">
-                            <li><i class="fas fa-check-circle"></i> Wash & Vacuum</li>
-                            <li><i class="fas fa-check-circle"></i> Interior vacuum</li>
-                            <li><i class="fas fa-check-circle"></i> Dashboard wiped down</li>
-                            <li><i class="fas fa-check-circle"></i> Door jambs cleaned</li>
-                            <li><i class="fas fa-check-circle"></i> Interior windows</li>
-                            <li><i class="fas fa-check-circle"></i> Exterior hand wash</li>
-                            <li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li>
-                        </ul>
-                        <div class="package-note">Great for regular maintenance</div>
-                        <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP" target="_blank" class="book-btn">Book Now →</a>
-                    </div>
-                    <div class="package-card">
-                        <img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=PREMIUM" alt="Premium Badge" style="background:#f5efe3; border-radius:20px;">
-                        <div class="package-title">Premium Inside-Out</div>
-                        <div class="package-price">$165 - $220</div>
-                        <ul class="package-services">
-                            <li><i class="fas fa-check-circle"></i> Foam wash + wheels detailed</li>
-                            <li><i class="fas fa-check-circle"></i> Paint sealant (3-4 months)</li>
-                            <li><i class="fas fa-check-circle"></i> Door jambs/trunk detailed</li>
-                            <li><i class="fas fa-check-circle"></i> Air compressed crevices</li>
-                            <li><i class="fas fa-check-circle"></i> Interior vacuum + vents</li>
-                            <li><i class="fas fa-check-circle"></i> Door panels conditioned</li>
-                        </ul>
-                        <div class="package-note">Showroom finish</div>
-                        <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO" target="_blank" class="book-btn">Book Now →</a>
-                    </div>
-                    <div class="package-card">
-                        <img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=SUPREME" alt="Supreme Badge" style="background:#f5efe3; border-radius:20px;">
-                        <div class="package-title">Supreme Inside-Out</div>
-                        <div class="package-price">$250 - $350</div>
-                        <ul class="package-services">
-                            <li><i class="fas fa-check-circle"></i> Bug removal + foam wash</li>
-                            <li><i class="fas fa-check-circle"></i> Paint sealant + trim restore</li>
-                            <li><i class="fas fa-check-circle"></i> Steam cleaned vents</li>
-                            <li><i class="fas fa-check-circle"></i> Seat shampoo / leather steam</li>
-                            <li><i class="fas fa-check-circle"></i> Floor mats shampooed</li>
-                            <li><i class="fas fa-check-circle"></i> Full windows & jambs</li>
-                        </ul>
-                        <div class="package-note">Ultimate restoration</div>
-                        <a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2" target="_blank" class="book-btn">Book Now →</a>
-                    </div>
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Essential Refresh</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & Steering wheel wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows cleaned</li><li><i class="fas fa-check-circle"></i> Exterior wash</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="package-note">🔄 For well-maintained cars detailed regularly</div><div class="price-section"><div class="package-price">$95 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Premium Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents detailed</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li></ul><div class="package-note">🏆 Showroom finish - great for regular detailers</div><div class="price-section"><div class="package-price">$165 - $220</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Supreme Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Front bumper bug removal</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents steam cleaned</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Seat shampoo'd / leather steamed</li><li><i class="fas fa-check-circle"></i> Removable floor mats shampooed</li></ul><div class="package-note">✨ Makes your car look newer than when you bought it!</div><div class="price-section"><div class="package-price">$250 - $350</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
                 </div>
-                <!-- Mobile Carousel -->
-                <div class="mobile-carousel-container" id="mobileCarousel1"><div class="mobile-carousel-track" id="mobileTrack1"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=ESSENTIAL" alt="Badge"><div class="package-title">Essential Refresh</div><div class="package-price">$95 - $110</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Wash & Vacuum</li><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows</li><li><i class="fas fa-check-circle"></i> Exterior hand wash</li><li><i class="fas fa-check-circle"></i> Spray wax & tire shine</li></ul><div class="package-note">Great for regular maintenance</div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=PREMIUM" alt="Badge"><div class="package-title">Premium Inside-Out</div><div class="package-price">$165 - $220</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash + wheels detailed</li><li><i class="fas fa-check-circle"></i> Paint sealant (3-4 months)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk detailed</li><li><i class="fas fa-check-circle"></i> Air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior vacuum + vents</li><li><i class="fas fa-check-circle"></i> Door panels conditioned</li></ul><div class="package-note">Showroom finish</div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=SUPREME" alt="Badge"><div class="package-title">Supreme Inside-Out</div><div class="package-price">$250 - $350</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Bug removal + foam wash</li><li><i class="fas fa-check-circle"></i> Paint sealant + trim restore</li><li><i class="fas fa-check-circle"></i> Steam cleaned vents</li><li><i class="fas fa-check-circle"></i> Seat shampoo / leather steam</li><li><i class="fas fa-check-circle"></i> Floor mats shampooed</li><li><i class="fas fa-check-circle"></i> Full windows & jambs</li></ul><div class="package-note">Ultimate restoration</div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev1"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next1"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots1"></div></div>
+                <div class="mobile-carousel-container" id="mobileCarousel1"><div class="mobile-carousel-track" id="mobileTrack1"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Essential Refresh</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & Steering wheel wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows cleaned</li><li><i class="fas fa-check-circle"></i> Exterior wash</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="package-note">🔄 For well-maintained cars detailed regularly</div><div class="price-section"><div class="package-price">$95 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Premium Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents detailed</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li></ul><div class="package-note">🏆 Showroom finish - great for regular detailers</div><div class="price-section"><div class="package-price">$165 - $220</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Supreme Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Front bumper bug removal</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents steam cleaned</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Seat shampoo'd / leather steamed</li><li><i class="fas fa-check-circle"></i> Removable floor mats shampooed</li></ul><div class="package-note">✨ Makes your car look newer than when you bought it!</div><div class="price-section"><div class="package-price">$250 - $350</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev1"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next1"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots1"></div></div>
             </div>
 
             <!-- TAB 2: Interior Only -->
             <div id="tab2" class="tab-pane">
                 <div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div>
-                <div class="packages-grid"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=INTERIOR+BASIC" alt="Badge"><div class="package-title">Interior Basic</div><div class="package-price">$100 - $130</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel</li><li><i class="fas fa-check-circle"></i> Cupholders & doors</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows</li></ul><div class="package-note">No shampooing — quick refresh</div><a href="#" class="book-btn">Book Now →</a></div><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=INTERIOR+SUPREME" alt="Badge"><div class="package-title">Interior Supreme</div><div class="package-price">$200 - $275</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks & crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo floor mats</li><li><i class="fas fa-check-circle"></i> Arm rest & vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><a href="#" class="book-btn">Book Now →</a></div></div>
-                <div class="mobile-carousel-container" id="mobileCarousel2"><div class="mobile-carousel-track" id="mobileTrack2"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=INTERIOR+BASIC" alt="Badge"><div class="package-title">Interior Basic</div><div class="package-price">$100 - $130</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel</li><li><i class="fas fa-check-circle"></i> Cupholders & doors</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows</li></ul><div class="package-note">No shampooing — quick refresh</div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=INTERIOR+SUPREME" alt="Badge"><div class="package-title">Interior Supreme</div><div class="package-price">$200 - $275</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks & crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo floor mats</li><li><i class="fas fa-check-circle"></i> Arm rest & vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev2"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next2"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots2"></div></div>
+                <div class="packages-grid">
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">(no interior shampooing)</div><div class="price-section"><div class="package-price">$100 - $130</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Supreme</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks and crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo removable floor mats</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Arm rest detailed</li><li><i class="fas fa-check-circle"></i> Vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><div class="price-section"><div class="package-price">$200 - $275</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                </div>
+                <div class="mobile-carousel-container" id="mobileCarousel2"><div class="mobile-carousel-track" id="mobileTrack2"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">(no interior shampooing)</div><div class="price-section"><div class="package-price">$100 - $130</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Supreme</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks and crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo removable floor mats</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Arm rest detailed</li><li><i class="fas fa-check-circle"></i> Vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><div class="price-section"><div class="package-price">$200 - $275</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev2"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next2"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots2"></div></div>
             </div>
 
             <!-- TAB 3: Exterior Only -->
             <div id="tab3" class="tab-pane">
                 <div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div>
-                <div class="packages-grid"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=EXTERIOR+BASIC" alt="Badge"><div class="package-title">Exterior Basic</div><div class="package-price">$60 - $75</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="package-note">Quick exterior refresh</div><a href="#" class="book-btn">Book Now →</a></div><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=EXTERIOR+PREMIUM" alt="Badge"><div class="package-title">Exterior Premium</div><div class="package-price">$85 - $110</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash + bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels & wheel wells</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows & door jambs</li></ul><div class="package-note">Long-lasting protection</div><a href="#" class="book-btn">Book Now →</a></div></div>
-                <div class="mobile-carousel-container" id="mobileCarousel3"><div class="mobile-carousel-track" id="mobileTrack3"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=EXTERIOR+BASIC" alt="Badge"><div class="package-title">Exterior Basic</div><div class="package-price">$60 - $75</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="package-note">Quick exterior refresh</div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://placehold.co/400x400/ffdf00/1e1b1a?text=EXTERIOR+PREMIUM" alt="Badge"><div class="package-title">Exterior Premium</div><div class="package-price">$85 - $110</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash + bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels & wheel wells</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows & door jambs</li></ul><div class="package-note">Long-lasting protection</div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev3"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next3"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots3"></div></div>
+                <div class="packages-grid">
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Exterior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored (if necessary)</li></ul><div class="package-note">Quick exterior refresh</div><div class="price-section"><div class="package-price">$60 - $75</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Exterior Premium</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Wheel wells detailed</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li><li><i class="fas fa-check-circle"></i> Door jambs</li></ul><div class="package-note">Long-lasting protection</div><div class="price-section"><div class="package-price">$85 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div>
+                </div>
+                <div class="mobile-carousel-container" id="mobileCarousel3"><div class="mobile-carousel-track" id="mobileTrack3"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Exterior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored (if necessary)</li></ul><div class="package-note">Quick exterior refresh</div><div class="price-section"><div class="package-price">$60 - $75</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Exterior Premium</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Wheel wells detailed</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li><li><i class="fas fa-check-circle"></i> Door jambs</li></ul><div class="package-note">Long-lasting protection</div><div class="price-section"><div class="package-price">$85 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev3"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next3"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots3"></div></div>
             </div>
         </div>
     </section>
@@ -798,9 +764,9 @@
 <!-- FOOTER -->
 <footer id="contact" class="footer">
     <div class="container">
-        <div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:1rem;">
-            <img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:35px; height:35px;">
-            <span style="color:var(--primary-gold); font-weight:800;">SPOTLESS KING DETAILING</span>
+        <div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;">
+            <img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:30px; height:30px;">
+            <span style="color:var(--primary-gold); font-weight:800; font-size:0.9rem;">SPOTLESS KING DETAILING</span>
         </div>
         <div class="footer-links">
             <a href="#home">Home</a>
@@ -808,12 +774,11 @@
             <a href="#reviews">Reviews</a>
             <a href="#">Privacy Policy</a>
         </div>
-        <p>&copy; 2026 Spotless King Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p>
+        <p style="font-size:0.75rem;">&copy; 2026 Spotless King Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p>
     </div>
 </footer>
 
 <script>
-    // Auto Hide/Show Header on Scroll
     let lastScrollPosition = 0;
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', function() {
@@ -827,7 +792,6 @@
         lastScrollPosition = currentScrollPosition;
     });
 
-    // Mobile Carousel Initialization
     function initMobileCarousel(trackId, prevClass, nextClass, dotsId) {
         const track = document.getElementById(trackId);
         if (!track) return;
@@ -868,7 +832,6 @@
     initMobileCarousel('mobileTrack2', '.prev2', '.next2', 'dots2');
     initMobileCarousel('mobileTrack3', '.prev3', '.next3', 'dots3');
 
-    // Modal Logic
     const modal = document.getElementById('promoModal');
     const claim = document.getElementById('claimOfferBtn');
     const closeModal = document.getElementById('closeModalBtn');
@@ -877,7 +840,6 @@
     closeModal.onclick = () => modal.classList.remove('active');
     modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
-    // Tab Logic
     const btns = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
     btns.forEach(btn => btn.addEventListener('click', () => {
@@ -888,7 +850,6 @@
         btn.classList.add('active');
     }));
 
-    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         const href = a.getAttribute('href');
         if (href && href !== '#' && !href.includes('squareup.com')) {
