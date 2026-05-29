@@ -25,7 +25,6 @@
             --text-muted: #6b655b;
             --border-light: #e9decd;
             
-            /* TYPOGRAPHY - HERO */
             --hero-title-size: 3.8rem;
             --hero-title-size-tablet: 3.2rem;
             --hero-title-size-mobile: 2.5rem;
@@ -33,18 +32,15 @@
             --hero-desc-size: 1.2rem;
             --hero-desc-size-mobile: 0.95rem;
             
-            /* PACKAGE CARD SPACING - REDUCED BLANK SPACE */
             --card-padding: 1.2rem;
             --card-gap: 1.2rem;
             --border-radius-card: 24px;
             --border-radius-btn: 50px;
             
-            /* MODAL */
             --modal-max-width: 420px;
             --modal-max-width-tablet: 380px;
             --modal-max-width-mobile: 340px;
             
-            /* BADGE SIZE - 3x3 inches */
             --badge-size: 260px;
             --badge-size-mobile: 200px;
             --badge-size-small-mobile: 160px;
@@ -306,7 +302,7 @@
             .hero-buttons .btn-primary, .hero-buttons .btn-secondary { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
         }
 
-        /* ===== PACKAGES SECTION - COMPACT & READABLE ===== */
+        /* ===== PACKAGES SECTION ===== */
         .packages-tab-section { padding: 3rem 0; background: white; }
         .section-title {
             font-size: 2rem;
@@ -384,7 +380,6 @@
             margin-bottom: 0.3rem;
         }
         
-        /* COMPACT PRICE SECTION */
         .price-section {
             width: 100%;
             margin-top: 0.5rem;
@@ -405,7 +400,6 @@
             letter-spacing: 0.5px;
         }
         
-        /* LARGER, MORE READABLE SERVICE LIST */
         .package-services {
             list-style: none;
             margin: 0.5rem 0;
@@ -448,7 +442,6 @@
         }
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         
-        /* BADGE SIZE - using the new image */
         .package-badge {
             display: block;
             width: var(--badge-size);
@@ -471,18 +464,29 @@
             .package-title { font-size: 1.1rem; }
         }
         
+        /* MOBILE CAROUSEL WITH TOUCH SWIPE SUPPORT */
         .mobile-carousel-container {
             display: none;
             position: relative;
             overflow: hidden;
             border-radius: var(--border-radius-card);
+            touch-action: pan-y pinch-zoom;
         }
         .mobile-carousel-track {
             display: flex;
-            transition: transform 0.4s ease-out;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             gap: 1rem;
+            cursor: grab;
+            user-select: none;
         }
-        .mobile-carousel-slide { flex: 0 0 100%; min-width: 0; }
+        .mobile-carousel-track:active {
+            cursor: grabbing;
+        }
+        .mobile-carousel-slide { 
+            flex: 0 0 100%; 
+            min-width: 0;
+            pointer-events: auto;
+        }
         .carousel-controls {
             display: flex;
             justify-content: center;
@@ -497,6 +501,12 @@
             height: 36px;
             border-radius: 50%;
             cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .carousel-btn:hover {
+            background: var(--primary-gold);
+            color: var(--text-dark);
+            transform: scale(1.05);
         }
         .carousel-dots {
             display: flex;
@@ -510,6 +520,7 @@
             border-radius: 50%;
             background: #ddd2c0;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
         .dot.active { background: var(--primary-gold); width: 20px; border-radius: 10px; }
         
@@ -521,8 +532,13 @@
                 height: var(--badge-size-mobile);
             }
         }
+        @media (max-width: 550px) {
+            .mobile-carousel-slide .package-badge {
+                width: var(--badge-size-small-mobile);
+                height: var(--badge-size-small-mobile);
+            }
+        }
 
-        /* ===== REVIEWS & FOOTER ===== */
         .testimonials-section {
             padding: 2rem 0 3rem 0;
             background: #fefcf5;
@@ -549,7 +565,6 @@
         }
         .footer a { color: var(--primary-gold); }
 
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -648,7 +663,6 @@
 </head>
 <body>
 
-<!-- PROMO MODAL -->
 <div id="promoModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -668,7 +682,6 @@
     </div>
 </div>
 
-<!-- HEADER -->
 <nav class="navbar" id="navbar">
     <div class="container nav-container">
         <div class="logo">
@@ -684,7 +697,6 @@
 </nav>
 
 <main>
-    <!-- HERO BANNER -->
     <div class="hero-wrapper">
         <div class="hero-youtube-bg">
             <iframe src="https://www.youtube.com/embed/EDAdLzGVfPw?autoplay=1&loop=1&playlist=EDAdLzGVfPw&mute=1&controls=0&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -708,7 +720,6 @@
         </div>
     </div>
 
-    <!-- PACKAGES SECTION - All badges now use the new image -->
     <section id="packages" class="packages-tab-section">
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
@@ -720,7 +731,7 @@
                 <button class="tab-btn" data-tab="tab3"><i class="fas fa-water"></i> Exterior Only</button>
             </div>
 
-            <!-- TAB 1: Inside+Out Packages -->
+            <!-- TAB 1 -->
             <div id="tab1" class="tab-pane active-pane">
                 <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
                 <div class="packages-grid">
@@ -731,7 +742,7 @@
                 <div class="mobile-carousel-container" id="mobileCarousel1"><div class="mobile-carousel-track" id="mobileTrack1"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Essential Refresh</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & Steering wheel wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows cleaned</li><li><i class="fas fa-check-circle"></i> Exterior wash</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="package-note">🔄 For well-maintained cars detailed regularly</div><div class="price-section"><div class="package-price">$95 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Premium Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents detailed</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li></ul><div class="package-note">🏆 Showroom finish - great for regular detailers</div><div class="price-section"><div class="package-price">$165 - $220</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Supreme Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant (3-4 mo)</li><li><i class="fas fa-check-circle"></i> Front bumper bug removal</li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents steam cleaned</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Seat shampoo'd / leather steamed</li><li><i class="fas fa-check-circle"></i> Removable floor mats shampooed</li></ul><div class="package-note">✨ Makes your car look newer than when you bought it!</div><div class="price-section"><div class="package-price">$250 - $350</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev1"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next1"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots1"></div></div>
             </div>
 
-            <!-- TAB 2: Interior Only -->
+            <!-- TAB 2 -->
             <div id="tab2" class="tab-pane">
                 <div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div>
                 <div class="packages-grid">
@@ -741,7 +752,7 @@
                 <div class="mobile-carousel-container" id="mobileCarousel2"><div class="mobile-carousel-track" id="mobileTrack2"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">(no interior shampooing)</div><div class="price-section"><div class="package-price">$100 - $130</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="package-title">Interior Supreme</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks and crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo removable floor mats</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Arm rest detailed</li><li><i class="fas fa-check-circle"></i> Vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><div class="price-section"><div class="package-price">$200 - $275</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-controls"><button class="carousel-btn prev2"><i class="fas fa-chevron-left"></i></button><button class="carousel-btn next2"><i class="fas fa-chevron-right"></i></button></div><div class="carousel-dots" id="dots2"></div></div>
             </div>
 
-            <!-- TAB 3: Exterior Only -->
+            <!-- TAB 3 -->
             <div id="tab3" class="tab-pane">
                 <div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div>
                 <div class="packages-grid">
@@ -753,7 +764,6 @@
         </div>
     </section>
 
-    <!-- GOOGLE REVIEWS WIDGET -->
     <section id="reviews" class="testimonials-section">
         <div class="reviews-widget-container">
             <div class="elfsight-app-1232881c-212a-436c-9c99-b7f8d18e1746" data-elfsight-app-lazy></div>
@@ -761,7 +771,6 @@
     </section>
 </main>
 
-<!-- FOOTER -->
 <footer id="contact" class="footer">
     <div class="container">
         <div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;">
@@ -779,6 +788,7 @@
 </footer>
 
 <script>
+    // Auto Hide/Show Header
     let lastScrollPosition = 0;
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', function() {
@@ -792,28 +802,144 @@
         lastScrollPosition = currentScrollPosition;
     });
 
+    // Mobile Carousel with Touch Swipe Support
     function initMobileCarousel(trackId, prevClass, nextClass, dotsId) {
         const track = document.getElementById(trackId);
         if (!track) return;
         const slides = Array.from(track.children);
         if (slides.length <= 1) return;
-        let current = 0;
-        const update = () => {
+        
+        let currentIndex = 0;
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        let startTime = 0;
+        
+        const updateCarousel = () => {
             const width = slides[0].offsetWidth;
-            track.style.transform = `translateX(-${current * width}px)`;
+            track.style.transform = `translateX(-${currentIndex * width}px)`;
+            
             const dotsDiv = document.getElementById(dotsId);
             if (dotsDiv) {
                 const dots = dotsDiv.querySelectorAll('.dot');
-                dots.forEach((d, i) => i === current ? d.classList.add('active') : d.classList.remove('active'));
+                dots.forEach((d, i) => i === currentIndex ? d.classList.add('active') : d.classList.remove('active'));
             }
         };
-        const goTo = (i) => { current = (i + slides.length) % slides.length; update(); };
-        const next = () => goTo(current + 1);
-        const prev = () => goTo(current - 1);
+        
+        const goTo = (index) => {
+            currentIndex = (index + slides.length) % slides.length;
+            updateCarousel();
+        };
+        
+        const next = () => goTo(currentIndex + 1);
+        const prev = () => goTo(currentIndex - 1);
+        
+        // Touch events for swipe
+        const handleTouchStart = (e) => {
+            startX = e.touches[0].clientX;
+            startTime = Date.now();
+            isDragging = true;
+            track.style.transition = 'none';
+        };
+        
+        const handleTouchMove = (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const deltaX = currentX - startX;
+            const width = slides[0].offsetWidth;
+            const translateX = -currentIndex * width + deltaX;
+            track.style.transform = `translateX(${translateX}px)`;
+        };
+        
+        const handleTouchEnd = (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            
+            const deltaX = currentX - startX;
+            const width = slides[0].offsetWidth;
+            const threshold = width * 0.2;
+            const timeElapsed = Date.now() - startTime;
+            const velocity = Math.abs(deltaX) / timeElapsed;
+            
+            if (Math.abs(deltaX) > threshold || velocity > 0.5) {
+                if (deltaX > 0) {
+                    prev();
+                } else if (deltaX < 0) {
+                    next();
+                } else {
+                    updateCarousel();
+                }
+            } else {
+                updateCarousel();
+            }
+            
+            startX = 0;
+            currentX = 0;
+        };
+        
+        // Mouse events for desktop swipe simulation
+        const handleMouseDown = (e) => {
+            startX = e.clientX;
+            startTime = Date.now();
+            isDragging = true;
+            track.style.transition = 'none';
+            track.style.cursor = 'grabbing';
+            e.preventDefault();
+        };
+        
+        const handleMouseMove = (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX;
+            const deltaX = currentX - startX;
+            const width = slides[0].offsetWidth;
+            const translateX = -currentIndex * width + deltaX;
+            track.style.transform = `translateX(${translateX}px)`;
+        };
+        
+        const handleMouseUp = (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            track.style.cursor = 'grab';
+            
+            const deltaX = currentX - startX;
+            const width = slides[0].offsetWidth;
+            const threshold = width * 0.2;
+            const timeElapsed = Date.now() - startTime;
+            const velocity = Math.abs(deltaX) / timeElapsed;
+            
+            if (Math.abs(deltaX) > threshold || velocity > 0.5) {
+                if (deltaX > 0) {
+                    prev();
+                } else if (deltaX < 0) {
+                    next();
+                } else {
+                    updateCarousel();
+                }
+            } else {
+                updateCarousel();
+            }
+            
+            startX = 0;
+            currentX = 0;
+        };
+        
+        // Attach touch events
+        track.addEventListener('touchstart', handleTouchStart, { passive: false });
+        track.addEventListener('touchmove', handleTouchMove, { passive: false });
+        track.addEventListener('touchend', handleTouchEnd);
+        track.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
+        
+        // Button events
         const prevBtn = document.querySelector(prevClass);
         const nextBtn = document.querySelector(nextClass);
         if (prevBtn) prevBtn.onclick = prev;
         if (nextBtn) nextBtn.onclick = next;
+        
+        // Dots
         const dotsContainer = document.getElementById(dotsId);
         if (dotsContainer) {
             dotsContainer.innerHTML = '';
@@ -825,13 +951,17 @@
                 dotsContainer.appendChild(dot);
             }
         }
-        window.addEventListener('resize', update);
-        update();
+        
+        track.style.cursor = 'grab';
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
     }
+    
     initMobileCarousel('mobileTrack1', '.prev1', '.next1', 'dots1');
     initMobileCarousel('mobileTrack2', '.prev2', '.next2', 'dots2');
     initMobileCarousel('mobileTrack3', '.prev3', '.next3', 'dots3');
 
+    // Modal
     const modal = document.getElementById('promoModal');
     const claim = document.getElementById('claimOfferBtn');
     const closeModal = document.getElementById('closeModalBtn');
@@ -840,6 +970,7 @@
     closeModal.onclick = () => modal.classList.remove('active');
     modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
+    // Tab Logic
     const btns = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
     btns.forEach(btn => btn.addEventListener('click', () => {
@@ -850,6 +981,7 @@
         btn.classList.add('active');
     }));
 
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         const href = a.getAttribute('href');
         if (href && href !== '#' && !href.includes('squareup.com')) {
