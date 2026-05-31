@@ -399,7 +399,7 @@
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         .service-badge-img { width: var(--badge-size); max-width: 100%; object-fit: contain; margin: 0.2rem auto; }
 
-        /* Mobile Swipe Carousel for Services - same gesture as reviews */
+        /* Mobile Swipe Carousel for Services - CENTER ALIGNED */
         .services-mobile-carousel {
             display: none;
             width: 100%;
@@ -416,12 +416,12 @@
             flex-direction: row;
             gap: 1rem;
             width: max-content;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem calc(50% - 140px); /* Center the first and last cards */
         }
         .services-mobile-slide {
             flex: 0 0 280px;
             width: 280px;
-            scroll-snap-align: start;
+            scroll-snap-align: center; /* Center align each card when swiping */
         }
         .services-mobile-slide .service-card {
             margin: 0;
@@ -453,6 +453,19 @@
             .services-grid { display: none; }
             .services-mobile-carousel { display: block; }
             .service-badge-img { width: var(--badge-size-mobile); }
+            .services-mobile-track {
+                padding: 0.2rem calc(50% - 140px);
+            }
+        }
+        /* Extra small devices - adjust centering padding */
+        @media (max-width: 480px) {
+            .services-mobile-track {
+                padding: 0.2rem calc(50% - 130px);
+            }
+            .services-mobile-slide {
+                flex: 0 0 260px;
+                width: 260px;
+            }
         }
 
         /* ===== REVIEWS SECTION ===== */
@@ -490,12 +503,12 @@
             flex-direction: row;
             gap: 1rem;
             width: max-content;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem calc(50% - 140px);
         }
         .reviews-mobile-slide {
             flex: 0 0 280px;
             width: 280px;
-            scroll-snap-align: start;
+            scroll-snap-align: center;
         }
         .reviews-mobile-slide .review-card { margin: 0; width: 100%; height: auto; padding: 1rem; }
         .reviews-mobile-dots {
@@ -520,6 +533,15 @@
         @media (max-width: 1024px) {
             .reviews-grid { display: none; }
             .reviews-mobile-carousel { display: block; }
+        }
+        @media (max-width: 480px) {
+            .reviews-mobile-track {
+                padding: 0.2rem calc(50% - 130px);
+            }
+            .reviews-mobile-slide {
+                flex: 0 0 260px;
+                width: 260px;
+            }
         }
 
         /* ===== FOOTER ===== */
@@ -714,18 +736,15 @@
         return `<div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"${r.text}"</p><div class="review-author"><div class="author-name"><i class="fas fa-user-circle"></i><span>${r.name}</span></div><div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Customer</div></div></div>`;
     }
 
-    // Build desktop grids and mobile carousel tracks
     document.getElementById('grid1').innerHTML = servicesData.insideOut.map(renderServiceCard).join('');
     document.getElementById('servicesTrack1').innerHTML = servicesData.insideOut.map(s => `<div class="services-mobile-slide">${renderServiceCard(s)}</div>`).join('');
     document.getElementById('grid2').innerHTML = servicesData.interior.map(renderServiceCard).join('');
     document.getElementById('servicesTrack2').innerHTML = servicesData.interior.map(s => `<div class="services-mobile-slide">${renderServiceCard(s)}</div>`).join('');
     document.getElementById('grid3').innerHTML = servicesData.exterior.map(renderServiceCard).join('');
     document.getElementById('servicesTrack3').innerHTML = servicesData.exterior.map(s => `<div class="services-mobile-slide">${renderServiceCard(s)}</div>`).join('');
-
     document.getElementById('reviewsGrid').innerHTML = reviewsData.map(renderReviewCard).join('');
     document.getElementById('reviewsMobileTrack').innerHTML = reviewsData.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
 
-    // Initialize Services Mobile Carousel (same gesture as reviews)
     function initServicesMobileCarousel(containerId, trackId, dotsId) {
         const container = document.getElementById(containerId);
         const track = document.getElementById(trackId);
@@ -804,7 +823,6 @@
         if (window.innerWidth <= 1024) initReviewsMobileCarousel();
     });
 
-    // Before/After Slider
     document.querySelectorAll('.ba-slider-container').forEach(container => {
         const input = container.querySelector('.ba-range-input');
         const resizeContainer = container.querySelector('.ba-resize-container');
@@ -820,7 +838,6 @@
         syncImageSize();
     });
 
-    // Tab switching
     const btns = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
     btns.forEach(btn => btn.addEventListener('click', () => {
@@ -829,7 +846,6 @@
         btns.forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.add('active-pane');
         btn.classList.add('active');
-        // Re-init carousels after tab change on mobile
         if (window.innerWidth <= 768) {
             setTimeout(() => {
                 initServicesMobileCarousel('servicesCarousel1', 'servicesTrack1', 'servicesDots1');
@@ -839,14 +855,12 @@
         }
     }));
 
-    // Modal
     const modal = document.getElementById('promoModal');
     document.getElementById('claimOfferBtn').onclick = () => { modal.classList.remove('active'); document.getElementById('services').scrollIntoView({ behavior: 'smooth' }); };
     document.getElementById('closeModalBtn').onclick = () => modal.classList.remove('active');
     modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
     setTimeout(() => modal.classList.add('active'), 500);
 
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         const href = a.getAttribute('href');
         if (href && href !== '#' && !href.includes('squareup.com')) {
@@ -857,7 +871,6 @@
         }
     });
 
-    // Navbar hide on scroll
     let lastScroll = 0;
     const navbarEl = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
