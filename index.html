@@ -111,39 +111,77 @@
             .logo-img { width: 35px; height: 35px; }
         }
 
-        /* ===== HERO SECTION - FULLY RESPONSIVE ===== */
+        /* ===== HERO SECTION WITH VIDEO THAT FILLS EXACTLY LIKE BANNER ===== */
         .hero-wrapper {
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 600px;
             overflow: hidden;
             background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .yt-embed-holder {
+        
+        /* Video background container - fills entire hero area */
+        .hero-video-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            pointer-events: none;
             z-index: 0;
         }
-        .yt-embed-holder iframe {
+        
+        /* Zoom animation container */
+        .zoom-video {
+            width: 100%;
+            height: 100%;
+            animation: slowZoomIn 25s ease-in-out infinite alternate;
+            transform-origin: center center;
+            will-change: transform;
+        }
+        
+        @keyframes slowZoomIn {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.15);
+            }
+        }
+        
+        /* YouTube iframe wrapper - ensures video covers entire area */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .video-embed iframe {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 300%;
+            width: 100%;
             height: 100%;
+            min-width: 177.77777778vh; /* 16:9 ratio based on height */
+            min-height: 56.25vw; /* 16:9 ratio based on width */
             transform: translate(-50%, -50%);
             pointer-events: none;
+            object-fit: cover;
         }
-        @media (max-width: 1024px) { .yt-embed-holder iframe { width: 350%; } }
-        @media (max-width: 768px) { .yt-embed-holder iframe { width: 400%; } }
-        @media (max-width: 550px) { .yt-embed-holder iframe { width: 450%; } }
+        
+        /* Fallback for older browsers */
+        @supports (object-fit: cover) {
+            .video-embed iframe {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
 
         .hero-overlay {
             position: absolute;
@@ -151,14 +189,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 100%);
             z-index: 1;
         }
         .hero-new {
             position: relative;
             width: 100%;
             height: 100%;
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -232,8 +269,11 @@
             .stat-number { font-size: 1rem; }
             .hero-bottom-badge { font-size: 0.65rem; padding: 0.3rem 0.8rem; white-space: nowrap; }
         }
+        @media (max-width: 480px) {
+            .hero-wrapper { min-height: 550px; height: 100vh; }
+        }
 
-        /* ===== PACKAGES SECTION - UPDATED SUPREME CARD WITHOUT SCROLLING ===== */
+        /* ===== PACKAGES SECTION ===== */
         .packages-tab-section { padding: 3rem 0; background: white; }
         .section-title { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; }
         .section-sub { font-size: 1rem; color: var(--text-muted); text-align: center; margin-bottom: 2rem; }
@@ -245,7 +285,6 @@
         .tab-pane.active-pane { display: block; }
         .package-description { background: #f5efe3; padding: 0.6rem 1rem; border-radius: 12px; font-size: 0.9rem; text-align: center; margin-bottom: 1.2rem; }
         
-        /* Desktop grid - cards will auto-adjust height, no scroll */
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -272,8 +311,6 @@
         .price-section { margin: 0.5rem 0 0.3rem; }
         .package-price { font-size: 1.65rem; font-weight: 800; color: var(--primary-gold); }
         .starting-price { font-size: 0.75rem; color: var(--text-muted); }
-        
-        /* Services list - no scroll, full display */
         .package-services {
             list-style: none;
             margin: 0.5rem 0;
@@ -292,29 +329,18 @@
             text-align: left;
             width: 100%;
         }
-        .package-services li i { 
-            color: var(--primary-gold); 
-            width: 18px; 
-            flex-shrink: 0; 
-            font-size: 0.8rem;
-        }
+        .package-services li i { color: var(--primary-gold); width: 18px; flex-shrink: 0; font-size: 0.8rem; }
         .feature-highlight { background: var(--primary-gold); color: var(--dark-bg); font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 15px; margin-left: 6px; white-space: nowrap; }
         .package-note { font-size: 0.75rem; background: #faf5ea; padding: 0.45rem; border-radius: 10px; margin: 0.5rem 0; width: 100%; font-weight: 500; }
         .book-btn { background: var(--primary-gold); color: var(--text-dark); padding: 0.65rem 1.3rem; border-radius: 60px; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-block; min-width: 130px; transition: 0.2s; cursor: pointer; margin-top: 0.3rem; }
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         .package-badge { width: var(--badge-size); max-width: 100%; object-fit: contain; margin: 0.2rem auto; }
 
-        /* Mobile carousel - cards also full height no scroll */
         .mobile-carousel-container { display: none; position: relative; width: 100%; overflow: hidden; touch-action: pan-y pinch-zoom; }
         .mobile-carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); gap: 1rem; cursor: grab; }
         .mobile-carousel-track:active { cursor: grabbing; }
         .mobile-carousel-slide { flex-shrink: 0; width: 280px; }
-        .mobile-carousel-slide .package-card {
-            height: auto;
-            overflow: visible;
-            margin: 0;
-            width: 100%;
-        }
+        .mobile-carousel-slide .package-card { height: auto; overflow: visible; margin: 0; width: 100%; }
         .carousel-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1rem; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd2c0; cursor: pointer; transition: all 0.2s; }
         .dot.active { background: var(--primary-gold); width: 22px; border-radius: 10px; }
@@ -409,10 +435,15 @@
 </nav>
 
 <main>
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH VIDEO THAT FILLS ENTIRE BANNER AREA -->
     <div class="hero-wrapper">
-        <div class="yt-embed-holder">
-            <iframe src="https://www.youtube.com/embed/7NVANNmSXHU?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playinline=1&playlist=7NVANNmSXHU" title="Spotless kings mobile detailing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- Video background with zoom in only -->
+        <div class="hero-video-bg">
+            <div class="zoom-video">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/7NVANNmSXHU?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playinline=1&playlist=7NVANNmSXHU" title="Spotless kings mobile detailing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-new">
@@ -466,7 +497,7 @@
 <footer class="footer"><div class="container"><div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;"><img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:30px; height:30px;"><span style="color:var(--primary-gold); font-weight:800;">SPOTLESS KINGS DETAILING</span></div><div class="social-icons"><a href="https://www.instagram.com/spotlesskings" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a><a href="https://www.facebook.com/@spotlesskingsdetailing" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="https://m.youtube.com/@spotlesskings" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a></div><div class="footer-links"><a href="#packages">Packages</a><a href="#reviews">Reviews</a></div><p style="font-size:0.75rem;">&copy; 2026 Spotless Kings Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p><div class="artist-credit"><i class="fas fa-palette"></i> Website designed & developed with <i class="fas fa-heart" style="color: #ff4444;"></i> by <a href="https://www.instagram.com/sydreless_na/" target="_blank">Jean (Sydrel) Santiago</a></div></div></footer>
 
 <script>
-    // Updated Supreme Inside-Out services with full list (no scroll)
+    // Updated Supreme Inside-Out services with full list
     const supremeServices = [
         "Exterior foam wash",
         "Wheels/rims detailed",
@@ -480,8 +511,8 @@
         "Steering wheel/cupholders detailed",
         "Door Panels cleaned & conditioned",
         "Interior/exterior windows detailed",
-        "Seat shampoo’d/leather steamed & conditioned",
-        "Removable floor mats shampoo’d"
+        "Seat shampoo'd/leather steamed & conditioned",
+        "Removable floor mats shampoo'd"
     ];
 
     const packagesData = {
