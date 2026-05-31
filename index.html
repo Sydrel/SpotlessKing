@@ -111,7 +111,7 @@
             .logo-img { width: 35px; height: 35px; }
         }
 
-        /* ===== HERO SECTION WITH VIDEO THAT FILLS EXACTLY LIKE BANNER ===== */
+        /* ===== HERO SECTION WITH VIDEO FILL ===== */
         .hero-wrapper {
             position: relative;
             width: 100%;
@@ -124,7 +124,6 @@
             justify-content: center;
         }
         
-        /* Video background container - fills entire hero area */
         .hero-video-bg {
             position: absolute;
             top: 0;
@@ -135,7 +134,6 @@
             z-index: 0;
         }
         
-        /* Zoom animation container */
         .zoom-video {
             width: 100%;
             height: 100%;
@@ -145,15 +143,10 @@
         }
         
         @keyframes slowZoomIn {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.15);
-            }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
         }
         
-        /* YouTube iframe wrapper - ensures video covers entire area */
         .video-embed {
             position: relative;
             width: 100%;
@@ -167,20 +160,11 @@
             left: 50%;
             width: 100%;
             height: 100%;
-            min-width: 177.77777778vh; /* 16:9 ratio based on height */
-            min-height: 56.25vw; /* 16:9 ratio based on width */
+            min-width: 177.77777778vh;
+            min-height: 56.25vw;
             transform: translate(-50%, -50%);
             pointer-events: none;
             object-fit: cover;
-        }
-        
-        /* Fallback for older browsers */
-        @supports (object-fit: cover) {
-            .video-embed iframe {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
         }
 
         .hero-overlay {
@@ -273,6 +257,103 @@
             .hero-wrapper { min-height: 550px; height: 100vh; }
         }
 
+        /* ===== BEFORE/AFTER SLIDER ===== */
+        .before-after-section {
+            padding: 2rem 1rem;
+            background: var(--light-bg);
+        }
+        .before-after-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .before-after-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        .ba-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            overflow: hidden;
+            user-select: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--primary-gold);
+        }
+        .ba-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .ba-resize-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .ba-resize-container .ba-before {
+            width: 900px;
+            max-width: none;
+        }
+        .ba-slider-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: var(--primary-gold);
+            pointer-events: none;
+            z-index: 10;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .ba-slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s;
+        }
+        .ba-slider-button svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .ba-range-input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: col-resize;
+            z-index: 20;
+            margin: 0;
+        }
+        @media (max-width: 900px) {
+            .ba-slider-container { max-width: 100%; }
+            .ba-resize-container .ba-before { width: 100vw; }
+        }
+
         /* ===== PACKAGES SECTION ===== */
         .packages-tab-section { padding: 3rem 0; background: white; }
         .section-title { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; }
@@ -331,7 +412,16 @@
         }
         .package-services li i { color: var(--primary-gold); width: 18px; flex-shrink: 0; font-size: 0.8rem; }
         .feature-highlight { background: var(--primary-gold); color: var(--dark-bg); font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 15px; margin-left: 6px; white-space: nowrap; }
-        .package-note { font-size: 0.75rem; background: #faf5ea; padding: 0.45rem; border-radius: 10px; margin: 0.5rem 0; width: 100%; font-weight: 500; }
+        .package-note { 
+            font-size: 0.75rem; 
+            background: #faf5ea; 
+            padding: 0.45rem; 
+            border-radius: 10px; 
+            margin: 0.5rem 0; 
+            width: 100%; 
+            font-weight: 500; 
+            line-height: 1.4;
+        }
         .book-btn { background: var(--primary-gold); color: var(--text-dark); padding: 0.65rem 1.3rem; border-radius: 60px; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-block; min-width: 130px; transition: 0.2s; cursor: pointer; margin-top: 0.3rem; }
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         .package-badge { width: var(--badge-size); max-width: 100%; object-fit: contain; margin: 0.2rem auto; }
@@ -360,10 +450,14 @@
         .rating-summary { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
         .stars { color: var(--primary-gold); font-size: 1.2rem; }
         .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .review-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e9decd; transition: transform 0.2s; display: flex; flex-direction: column; }
-        .review-stars { color: var(--primary-gold); margin-bottom: 0.8rem; }
+        .review-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e9decd; transition: transform 0.2s; display: flex; flex-direction: column; height: 100%; }
+        .review-card:hover { transform: translateY(-3px); }
+        .review-stars { color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 0.9rem; }
         .review-text { font-size: 0.9rem; line-height: 1.5; color: #2c2a28; margin-bottom: 1rem; font-style: italic; flex-grow: 1; }
-        .review-author { font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-top: auto; }
+        .review-author { display: flex; align-items: center; justify-content: space-between; margin-top: auto; font-size: 0.8rem; font-weight: 600; color: var(--text-dark); flex-wrap: wrap; gap: 8px; }
+        .author-name { display: flex; align-items: center; gap: 8px; }
+        .verified-badge { background: var(--primary-gold); color: var(--dark-bg); font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; }
+        .verified-badge i { font-size: 0.6rem; }
         .google-badge { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2rem; padding: 1rem; background: rgba(255, 223, 0, 0.1); border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto; }
         .reviews-mobile-carousel { display: none; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
         .reviews-mobile-carousel::-webkit-scrollbar { display: none; }
@@ -435,9 +529,8 @@
 </nav>
 
 <main>
-    <!-- HERO SECTION WITH VIDEO THAT FILLS ENTIRE BANNER AREA -->
+    <!-- HERO SECTION -->
     <div class="hero-wrapper">
-        <!-- Video background with zoom in only -->
         <div class="hero-video-bg">
             <div class="zoom-video">
                 <div class="video-embed">
@@ -462,6 +555,28 @@
                     <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">BOOKING</span></div>
                 </div>
                 <div class="hero-bottom-badge"><i class="fas fa-crown"></i> Since 2020 • 1,200+ Cars Detailed</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEFORE/AFTER SLIDER SECTION -->
+    <div class="before-after-section">
+        <div class="container">
+            <h2 class="before-after-title">See The Difference</h2>
+            <p class="before-after-sub">Slide to reveal the transformation — from dirty to spotless</p>
+            <div class="ba-slider-container">
+                <img class="ba-image ba-after" src="https://i.imgur.com/3qOnVZ0.png" alt="After Image">
+                <div class="ba-resize-container">
+                    <img class="ba-image ba-before" src="https://i.imgur.com/yoxOkdp.png" alt="Before Image">
+                </div>
+                <div class="ba-slider-line">
+                    <div class="ba-slider-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M8.5 17.5l-5.5-5.5 5.5-5.5v11zm7-11l5.5 5.5-5.5 5.5v-11z"/>
+                        </svg>
+                    </div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="ba-range-input" aria-label="Image comparison slider">
             </div>
         </div>
     </div>
@@ -497,7 +612,21 @@
 <footer class="footer"><div class="container"><div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;"><img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:30px; height:30px;"><span style="color:var(--primary-gold); font-weight:800;">SPOTLESS KINGS DETAILING</span></div><div class="social-icons"><a href="https://www.instagram.com/spotlesskings" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a><a href="https://www.facebook.com/@spotlesskingsdetailing" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="https://m.youtube.com/@spotlesskings" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a></div><div class="footer-links"><a href="#packages">Packages</a><a href="#reviews">Reviews</a></div><p style="font-size:0.75rem;">&copy; 2026 Spotless Kings Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p><div class="artist-credit"><i class="fas fa-palette"></i> Website designed & developed with <i class="fas fa-heart" style="color: #ff4444;"></i> by <a href="https://www.instagram.com/sydreless_na/" target="_blank">Jean (Sydrel) Santiago</a></div></div></footer>
 
 <script>
-    // Updated Supreme Inside-Out services with full list
+    // Updated Premium Inside-Out services
+    const premiumServices = [
+        "Exterior foam wash",
+        "Wheels/rims detailed",
+        "Tire shine",
+        "Exterior paint sealant (3-4 month protection)",
+        "Door jambs/trunk jamb detailed",
+        "Interior air compressed to remove heavy dirt in crevices",
+        "Interior/ trunk vacuumed",
+        "Air vents detailed",
+        "Steering wheel/cupholders detailed",
+        "Door Panels cleaned & conditioned",
+        "Interior/exterior windows detailed"
+    ];
+
     const supremeServices = [
         "Exterior foam wash",
         "Wheels/rims detailed",
@@ -517,9 +646,9 @@
 
     const packagesData = {
         insideOut: [
-            { title: "Essential Refresh", badge: "BEST VALUE", icon: "fa-star", price: "$95 - $110", note: "🔄 Great for regular maintenance", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP", services: ["Interior vacuum", "Dashboard & Steering wheel wipedown", "Door jambs cleaned", "Interior windows cleaned", "Exterior wash", "Spray wax", "Tire shine", "Exterior windows"] },
-            { title: "Premium Inside-Out", badge: "MOST POPULAR", icon: "fa-fire", price: "$165 - $220", note: "🏆 Showroom finish", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO", services: ["Exterior foam wash", "Wheels/rims detailed", "Tire shine", "Exterior paint sealant +PROTECTION", "Door jambs/trunk jamb detailed", "Interior air compressed crevices", "Interior/trunk vacuumed", "Air vents detailed", "Steering wheel/cupholders detailed", "Door Panels cleaned & conditioned", "Interior/exterior windows detailed"] },
-            { title: "Supreme Inside-Out", badge: "ULTIMATE", icon: "fa-crown", price: "$250 - $350", note: "✨ Makes your car look brand new!", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2", services: supremeServices }
+            { title: "Essential Refresh", badge: "BEST VALUE", icon: "fa-star", price: "$95 - $110", note: "This package is for cars that are well maintained and detailed regularly throughout the year!", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP", services: ["Interior vacuum", "Dashboard & Steering wheel wipedown", "Door jambs cleaned", "Interior windows cleaned", "Exterior wash", "Spray wax", "Tire shine", "Exterior windows"] },
+            { title: "Premium Inside-Out", badge: "MOST POPULAR", icon: "fa-fire", price: "$165 - $220", note: "This package will give your car a show room finish (recommended if you detail your car a few times a year)!", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO", services: premiumServices },
+            { title: "Supreme Inside-Out", badge: "ULTIMATE", icon: "fa-crown", price: "$250 - $350", note: "This package will make your car look newer than when you bought it!", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2", services: supremeServices }
         ],
         interior: [
             { title: "Interior Basic", badge: "QUICK REFRESH", icon: "fa-broom", price: "$100 - $130", note: "(no interior shampooing)", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/I7TKNGWNJJU3SVTDX3IYXZBB", services: ["Interior vacuum", "Dashboard & steering wheel detailed", "Cupholders detailed", "Doors detailed", "Door jambs detailed", "Interior windows detailed"] },
@@ -530,6 +659,16 @@
             { title: "Exterior Premium", badge: "LONG-LASTING", icon: "fa-shield-haltered", price: "$85 - $110", note: "Long-lasting protection", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/XII3M4D56SNYQXZYYHR537S3", services: ["Exterior foam wash", "Bug removal", "Wax (90 day protection)", "Wheels detailed", "Wheel wells detailed", "Rain X windshield", "Tire shine", "Exterior windows", "Door jambs"] }
         ]
     };
+
+    const reviewsData = [
+        { name: "Brad Jones", text: "Man what can I say, I'm impressed, came on time and had great communication. I've used other detailers in the area that didn't come close to what Spotless Kings did today. Also came in at a way better price point than the competition. Definitely would recommend, can't go wrong. 10/10", verified: true },
+        { name: "Jerry Cook", text: "Great detailer. Had some really bad spots on my upholstery and he removed all of it. Now my truck looks brand new. Thank you Spotless Kings for your Professionalism and great work. If you need your vehicle looking good use Spotless Kings I will never use anyone else.", verified: true },
+        { name: "Dustyn Shrooff", text: "Spotless Kings does their thing! Communicative, on time, reliable, and a great overall service. I'm on a monthly maintenance plan for my truck and look forward to getting it washed like clockwork!", verified: true }
+    ];
+
+    function renderReviewCard(r) {
+        return `<div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"${r.text}"</p><div class="review-author"><div class="author-name"><i class="fas fa-user-circle"></i><span>${r.name}</span></div><div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Customer</div></div></div>`;
+    }
 
     function renderPackageCard(pkg) {
         return `<div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas ${pkg.icon}"></i> ${pkg.badge}</div><div class="package-title">${pkg.title}</div><ul class="package-services">${pkg.services.map(s => `<li><i class="fas fa-check-circle"></i> ${s}</li>`).join('')}</ul><div class="package-note">${pkg.note}</div><div class="price-section"><div class="package-price">${pkg.price}</div><div class="starting-price">Starting price</div></div><a href="${pkg.link}" target="_blank" class="book-btn">Book Now →</a></div>`;
@@ -544,15 +683,26 @@
         document.getElementById('mobileTrack3').innerHTML = packagesData.exterior.map(p => `<div class="mobile-carousel-slide">${renderPackageCard(p)}</div>`).join('');
     }
 
-    const reviews = [
-        { name: "Michael R.", text: "Absolutely amazing service! My car looks better than the day I bought it. The team was professional, punctual, and paid attention to every detail. Highly recommend Spotless Kings!" },
-        { name: "Sarah J.", text: "Best detailing experience I've ever had. They removed years of dirt and stains from my interior. The ceramic coating made my paint shine like glass. Worth every penny!" },
-        { name: "David T.", text: "Professional, thorough, and great communication. They came to my house and made my SUV look showroom ready. The paint sealant is still holding up after 3 months!" }
-    ];
-    function renderReviewCard(r) { return `<div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"${r.text}"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>${r.name}</span></div></div>`; }
-    document.getElementById('reviewsGrid').innerHTML = reviews.map(renderReviewCard).join('');
-    document.getElementById('reviewsMobileTrack').innerHTML = reviews.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
+    document.getElementById('reviewsGrid').innerHTML = reviewsData.map(renderReviewCard).join('');
+    document.getElementById('reviewsMobileTrack').innerHTML = reviewsData.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
     buildPackageUI();
+
+    // Before/After Slider Initialization
+    document.querySelectorAll('.ba-slider-container').forEach(container => {
+        const input = container.querySelector('.ba-range-input');
+        const resizeContainer = container.querySelector('.ba-resize-container');
+        const sliderLine = container.querySelector('.ba-slider-line');
+        const beforeImage = container.querySelector('.ba-before');
+
+        const syncImageSize = () => { beforeImage.style.width = `${container.offsetWidth}px`; };
+        input.addEventListener('input', (e) => {
+            const value = e.target.value;
+            resizeContainer.style.width = `${value}%`;
+            sliderLine.style.left = `${value}%`;
+        });
+        window.addEventListener('resize', syncImageSize);
+        syncImageSize();
+    });
 
     function initCarousel(trackId, dotsId) {
         const track = document.getElementById(trackId);
