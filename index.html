@@ -118,7 +118,7 @@
         }
 
         /* =============================================== */
-        /* ==========  HERO BANNER - BIG TEXT ON ALL DEVICES ========== */
+        /* ==========  HERO BANNER - CONTENT PUSHED DOWN ========== */
         /* =============================================== */
         .hero-wrapper {
             position: relative;
@@ -184,6 +184,7 @@
             padding: 2rem;
         }
         
+        /* CONTENT SHIFTED FURTHER DOWN - increased transform percentage */
         .hero-content {
             position: relative;
             z-index: 3;
@@ -196,7 +197,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transform: translateY(8%);
+            transform: translateY(18%);
         }
         
         /* DESKTOP BASE SIZE */
@@ -309,9 +310,9 @@
             margin-top: 0.5rem;
         }
         
-        /* ===== TABLET (768px - 1024px) - BIG TEXT ===== */
+        /* ===== TABLET - adjust downward shift ===== */
         @media (max-width: 1024px) {
-            .hero-content { transform: translateY(6%); max-width: 90%; }
+            .hero-content { transform: translateY(16%); max-width: 90%; }
             .hero-main-title { font-size: 5.2rem; }
             .hero-subtitle { font-size: 1.8rem; }
             .hero-welcome { font-size: 1.4rem; }
@@ -322,9 +323,9 @@
             .hero-bottom-badge { font-size: 0.9rem; padding: 0.5rem 1.5rem; }
         }
         
-        /* ===== IPAD/MOBILE LANDSCAPE - STILL BIG ===== */
+        /* ===== IPAD/MOBILE LANDSCAPE ===== */
         @media (max-width: 850px) {
-            .hero-content { transform: translateY(5%); }
+            .hero-content { transform: translateY(14%); }
             .hero-main-title { font-size: 4.5rem; text-shadow: 3px 3px 0 var(--primary-gold), -3px 3px 0 var(--primary-gold), 3px -3px 0 var(--primary-gold), -3px -3px 0 var(--primary-gold); }
             .hero-subtitle { font-size: 1.6rem; letter-spacing: 2px; }
             .hero-welcome { font-size: 1.3rem; }
@@ -336,10 +337,10 @@
             .hero-bottom-badge { font-size: 0.85rem; padding: 0.45rem 1.3rem; }
         }
         
-        /* ===== MOBILE PORTRAIT (550px - 768px) - LARGE & BOLD ===== */
+        /* ===== MOBILE PORTRAIT (550px - 768px) ===== */
         @media (max-width: 768px) {
             .hero-wrapper { aspect-ratio: 4 / 3; }
-            .hero-content { transform: translateY(4%); max-width: 92%; }
+            .hero-content { transform: translateY(12%); max-width: 92%; }
             .hero-main-title { font-size: 3.8rem; text-shadow: 3px 3px 0 var(--primary-gold), -3px 3px 0 var(--primary-gold), 3px -3px 0 var(--primary-gold), -3px -3px 0 var(--primary-gold); }
             .hero-subtitle { font-size: 1.4rem; margin-bottom: 1rem; }
             .hero-welcome { font-size: 1.2rem; margin-bottom: 0.5rem; }
@@ -351,10 +352,10 @@
             .hero-bottom-badge { font-size: 0.75rem; padding: 0.35rem 1.1rem; }
         }
         
-        /* ===== SMALL MOBILE (400px - 550px) - STILL PROMINENT ===== */
+        /* ===== SMALL MOBILE (400px - 550px) ===== */
         @media (max-width: 550px) {
             .hero-wrapper { aspect-ratio: 3 / 4; }
-            .hero-content { transform: translateY(3%); }
+            .hero-content { transform: translateY(10%); }
             .hero-main-title { font-size: 3rem; }
             .hero-subtitle { font-size: 1.2rem; }
             .hero-welcome { font-size: 1rem; }
@@ -368,6 +369,7 @@
         
         /* ===== EXTRA SMALL (under 400px) ===== */
         @media (max-width: 400px) {
+            .hero-content { transform: translateY(8%); }
             .hero-main-title { font-size: 2.5rem; }
             .hero-subtitle { font-size: 1rem; }
             .hero-welcome { font-size: 0.9rem; }
@@ -380,7 +382,7 @@
         /* ===== LANDSCAPE MODE ON MOBILE ===== */
         @media (max-width: 850px) and (orientation: landscape) {
             .hero-wrapper { aspect-ratio: 16 / 9; }
-            .hero-content { transform: translateY(2%); }
+            .hero-content { transform: translateY(6%); }
             .hero-main-title { font-size: 2.8rem; }
             .hero-subtitle { font-size: 1.1rem; margin-bottom: 0.6rem; }
             .hero-welcome { font-size: 0.9rem; }
@@ -868,7 +870,7 @@
 </nav>
 
 <main>
-    <!-- HERO BANNER - BIG TEXT ON ALL DEVICES -->
+    <!-- HERO BANNER - CONTENT PUSHED FURTHER DOWN -->
     <div class="hero-wrapper">
         <div class="yt-embed-holder">
             <iframe src="https://www.youtube.com/embed/7NVANNmSXHU?autoplay=1&mute=1&loop=1&controls=0&color=white&modestbranding=1&playinline=1&enablejsapi=1&playlist=7NVANNmSXHU" title="Spotless kings mobile detailing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -894,7 +896,7 @@
         </div>
     </div>
 
-    <!-- PACKAGES SECTION -->
+    <!-- PACKAGES SECTION (condensed for brevity) -->
     <section id="packages" class="packages-tab-section">
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
