@@ -8,9 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* =============================================== */
-        /* ==========  GLOBAL VARIABLES ========== */
-        /* =============================================== */
+        /* ========== GLOBAL VARIABLES ========== */
         :root {
             --primary-gold: #ffdf00;
             --primary-gold-hover: #ffe44d;
@@ -22,16 +20,12 @@
             --text-light: #ffffff;
             --text-muted: #6b655b;
             --border-light: #e9decd;
-            
             --card-padding: 1rem;
             --card-gap: 1rem;
             --border-radius-card: 16px;
             --border-radius-btn: 50px;
-            
             --modal-max-width: 420px;
-            --modal-max-width-tablet: 380px;
             --modal-max-width-mobile: 340px;
-            
             --badge-size: 180px;
             --badge-size-mobile: 130px;
             --badge-size-small-mobile: 110px;
@@ -43,28 +37,30 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
-        body::-webkit-scrollbar { display: none; }
-        html::-webkit-scrollbar { display: none; }
-        body {
+
+        /* Hide scrollbars globally */
+        body, html {
             scrollbar-width: none;
             -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar, html::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-bg);
             color: var(--text-dark);
             scroll-behavior: smooth;
             overflow-x: hidden;
-        }
-        html {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            width: 100%;
         }
 
         .container {
             width: 100%;
-            max-width: 100%;
-            padding: 0 20px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* ===== HEADER ===== */
@@ -79,7 +75,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0.8rem 0;
             transition: transform 0.3s ease-in-out;
-            transform: translateY(0);
         }
         .navbar.navbar-hidden { transform: translateY(-100%); }
         .nav-container {
@@ -92,7 +87,7 @@
         .logo { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .logo-img { width: 40px; height: 40px; object-fit: contain; border-radius: 50%; }
         .logo-image-text { height: 40px; width: auto; object-fit: contain; }
-        .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
@@ -108,6 +103,7 @@
             border-radius: 40px;
             font-size: 0.75rem;
         }
+
         @media (max-width: 768px) {
             .nav-links { gap: 0.8rem; }
             .btn-ghost { padding: 0.4rem 0.9rem; font-size: 0.7rem; }
@@ -115,19 +111,17 @@
             .logo-img { width: 35px; height: 35px; }
         }
 
-        /* ===== HERO BANNER ===== */
+        /* ===== HERO SECTION - FULLY RESPONSIVE ===== */
         .hero-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
-            height: auto;
+            min-height: 100vh;
             overflow: hidden;
-            background-color: #000;
+            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
         .yt-embed-holder {
             position: absolute;
             top: 0;
@@ -138,7 +132,6 @@
             pointer-events: none;
             z-index: 0;
         }
-        
         .yt-embed-holder iframe {
             position: absolute;
             top: 50%;
@@ -147,313 +140,118 @@
             height: 100%;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            object-fit: cover;
         }
-        
         @media (max-width: 1024px) { .yt-embed-holder iframe { width: 350%; } }
         @media (max-width: 768px) { .yt-embed-holder iframe { width: 400%; } }
         @media (max-width: 550px) { .yt-embed-holder iframe { width: 450%; } }
-        @media (max-width: 480px) { .yt-embed-holder iframe { width: 500%; } }
-        @media (max-width: 380px) { .yt-embed-holder iframe { width: 550%; } }
-        @media (max-width: 850px) and (orientation: landscape) { .yt-embed-holder iframe { width: 250%; height: 120%; } }
-        
+
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
             z-index: 1;
         }
-        
         .hero-new {
             position: relative;
             width: 100%;
-            max-width: 1280px;
-            margin: 0 auto;
             height: 100%;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2;
-            padding: 2rem;
+            padding: 100px 20px 60px;
         }
-        
         .hero-content {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
             text-align: center;
             color: var(--text-light);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform: translateY(12%);
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
         }
-        
-        /* FIXED: Welcome to text size and position */
-        .hero-welcome {
-            font-size: 1.6rem;
-            font-weight: 500;
-            letter-spacing: 4px;
-            margin-bottom: 0.6rem;
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
+        .hero-welcome { font-size: 1.6rem; font-weight: 500; letter-spacing: 4px; margin-bottom: 0.6rem; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
         .hero-main-title {
             font-size: 6rem;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 0.4rem;
             color: #000000;
-            text-shadow: 
-                4px 4px 0 var(--primary-gold),
-                -4px 4px 0 var(--primary-gold),
-                4px -4px 0 var(--primary-gold),
-                -4px -4px 0 var(--primary-gold),
-                0px 4px 0 var(--primary-gold),
-                0px -4px 0 var(--primary-gold),
-                4px 0px 0 var(--primary-gold),
-                -4px 0px 0 var(--primary-gold);
+            text-shadow: 4px 4px 0 var(--primary-gold), -4px 4px 0 var(--primary-gold), 4px -4px 0 var(--primary-gold), -4px -4px 0 var(--primary-gold);
+            letter-spacing: 2px;
         }
-        .hero-subtitle {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary-gold);
-            margin-bottom: 1.2rem;
-            letter-spacing: 3px;
-        }
-        .hero-location {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: white;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-        .btn-primary {
-            background: var(--primary-gold);
-            color: var(--text-dark);
-            padding: 1rem 2.2rem;
+        .hero-subtitle { font-size: 2rem; font-weight: 600; color: var(--primary-gold); margin-bottom: 1rem; letter-spacing: 3px; }
+        .hero-location { font-size: 1.4rem; font-weight: 500; margin-bottom: 1.5rem; opacity: 0.95; padding: 0 10px; }
+        .hero-buttons { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .btn-primary, .btn-secondary {
+            padding: 0.9rem 2rem;
             border-radius: var(--border-radius-btn);
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 223, 0, 0.3);
+            white-space: nowrap;
         }
+        @media (max-width: 480px) {
+            .btn-primary, .btn-secondary { padding: 0.7rem 1.3rem; font-size: 0.9rem; white-space: nowrap; }
+        }
+        .btn-primary { background: var(--primary-gold); color: var(--text-dark); box-shadow: 0 4px 15px rgba(255, 223, 0, 0.3); }
         .btn-primary:hover { background: var(--primary-gold-hover); transform: translateY(-2px); }
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 1rem 2.2rem;
-            border-radius: var(--border-radius-btn);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            border: 1.5px solid rgba(255,255,255,0.4);
-            transition: all 0.3s ease;
-        }
+        .btn-secondary { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
         .btn-secondary:hover { border-color: var(--primary-gold); background: rgba(255, 223, 0, 0.1); transform: translateY(-2px); }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.8rem;
-        }
-        .stat-item {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 110px;
-        }
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            display: block;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-            display: block;
-            line-height: 1.3;
-        }
-        
-        .hero-bottom-badge {
-            background: rgba(255, 223, 0, 0.15);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 223, 0, 0.3);
-            display: inline-block;
-            padding: 0.6rem 1.8rem;
-            border-radius: 60px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-gold);
-            margin-top: 0.3rem;
-        }
-        
-        /* Mobile responsive adjustments - ensure "Welcome to" is visible */
-        @media (max-width: 1024px) {
-            .hero-content { transform: translateY(10%); max-width: 90%; }
-            .hero-main-title { font-size: 5.2rem; }
-            .hero-subtitle { font-size: 1.8rem; }
-            .hero-welcome { font-size: 1.4rem; margin-bottom: 0.5rem; }
-            .hero-location { font-size: 1.2rem; margin-bottom: 1.2rem; }
-            .btn-primary, .btn-secondary { padding: 0.9rem 1.8rem; font-size: 1.1rem; }
-            .hero-stats { gap: 2rem; }
-            .stat-number { font-size: 1.6rem; }
-            .stat-label { font-size: 0.85rem; }
-        }
-        
+
+        .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+        .stat-item { text-align: center; min-width: 90px; background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); padding: 0.4rem 0.8rem; border-radius: 40px; }
+        .stat-number { font-size: 1.6rem; font-weight: 800; color: var(--primary-gold); display: block; line-height: 1.2; }
+        .stat-label { font-size: 0.75rem; opacity: 0.9; font-weight: 600; letter-spacing: 0.5px; }
+        .hero-bottom-badge { background: rgba(255, 223, 0, 0.15); backdrop-filter: blur(4px); border: 1px solid rgba(255, 223, 0, 0.3); display: inline-block; padding: 0.5rem 1.5rem; border-radius: 60px; font-size: 0.85rem; font-weight: 600; color: var(--primary-gold); margin-top: 0.3rem; white-space: nowrap; }
+
         @media (max-width: 850px) {
-            .hero-content { transform: translateY(8%); }
-            .hero-main-title { font-size: 4.5rem; text-shadow: 3px 3px 0 var(--primary-gold), -3px 3px 0 var(--primary-gold), 3px -3px 0 var(--primary-gold), -3px -3px 0 var(--primary-gold); }
-            .hero-subtitle { font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 1rem; }
-            .hero-welcome { font-size: 1.3rem; margin-bottom: 0.4rem; }
-            .hero-location { font-size: 1.1rem; margin-bottom: 1rem; }
-            .btn-primary, .btn-secondary { padding: 0.8rem 1.6rem; font-size: 1rem; }
-            .hero-stats { gap: 1.8rem; margin-bottom: 0.6rem; }
-            .stat-number { font-size: 1.5rem; }
-            .stat-label { font-size: 0.8rem; }
-            .hero-bottom-badge { font-size: 0.85rem; padding: 0.45rem 1.3rem; }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-wrapper { aspect-ratio: 4 / 3; }
-            .hero-content { transform: translateY(6%); max-width: 92%; }
-            .hero-main-title { font-size: 3.5rem; text-shadow: 3px 3px 0 var(--primary-gold), -3px 3px 0 var(--primary-gold), 3px -3px 0 var(--primary-gold), -3px -3px 0 var(--primary-gold); }
-            .hero-subtitle { font-size: 1.3rem; margin-bottom: 0.8rem; }
-            .hero-welcome { font-size: 1.1rem; margin-bottom: 0.3rem; }
-            .hero-location { font-size: 0.95rem; margin-bottom: 0.9rem; }
-            .btn-primary, .btn-secondary { padding: 0.65rem 1.3rem; font-size: 0.9rem; gap: 8px; }
-            .hero-stats { gap: 1.3rem; margin-bottom: 0.5rem; }
+            .hero-main-title { font-size: 4rem; text-shadow: 3px 3px 0 var(--primary-gold), -3px 3px 0 var(--primary-gold), 3px -3px 0 var(--primary-gold), -3px -3px 0 var(--primary-gold); }
+            .hero-subtitle { font-size: 1.5rem; }
+            .hero-welcome { font-size: 1.2rem; }
+            .hero-location { font-size: 1rem; }
             .stat-number { font-size: 1.2rem; }
-            .stat-label { font-size: 0.7rem; }
-            .hero-bottom-badge { font-size: 0.7rem; padding: 0.35rem 1rem; }
         }
-        
+        @media (max-width: 650px) {
+            .hero-main-title { font-size: 3.2rem; text-shadow: 2px 2px 0 var(--primary-gold), -2px 2px 0 var(--primary-gold), 2px -2px 0 var(--primary-gold), -2px -2px 0 var(--primary-gold); }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hero-welcome { font-size: 1rem; }
+            .hero-location { font-size: 0.85rem; }
+        }
         @media (max-width: 550px) {
-            .hero-wrapper { aspect-ratio: 3 / 4; }
-            .hero-content { transform: translateY(5%); }
-            .hero-main-title { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .hero-welcome { font-size: 0.95rem; margin-bottom: 0.25rem; }
-            .hero-location { font-size: 0.85rem; margin-bottom: 0.7rem; }
-            .btn-primary, .btn-secondary { padding: 0.55rem 1.1rem; font-size: 0.8rem; }
-            .hero-stats { gap: 1rem; }
-            .stat-number { font-size: 1rem; }
-            .stat-label { font-size: 0.6rem; }
-            .hero-bottom-badge { font-size: 0.65rem; padding: 0.25rem 0.8rem; }
-        }
-        
-        @media (max-width: 400px) {
-            .hero-content { transform: translateY(3%); }
-            .hero-main-title { font-size: 2.3rem; }
-            .hero-subtitle { font-size: 1rem; }
-            .hero-welcome { font-size: 0.85rem; margin-bottom: 0.2rem; }
-            .hero-location { font-size: 0.75rem; }
-            .btn-primary, .btn-secondary { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
-            .stat-number { font-size: 0.9rem; }
-        }
-        
-        @media (max-width: 850px) and (orientation: landscape) {
-            .hero-wrapper { aspect-ratio: 16 / 9; }
-            .hero-content { transform: translateY(3%); }
             .hero-main-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1rem; margin-bottom: 0.4rem; }
-            .hero-welcome { font-size: 0.85rem; margin-bottom: 0.2rem; }
-            .hero-location { font-size: 0.8rem; margin-bottom: 0.5rem; }
-            .btn-primary, .btn-secondary { padding: 0.45rem 0.9rem; font-size: 0.75rem; }
-            .hero-stats { gap: 1rem; }
-            .stat-number { font-size: 0.9rem; }
-            .hero-bottom-badge { font-size: 0.6rem; padding: 0.25rem 0.7rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-welcome { font-size: 0.85rem; }
+            .hero-location { font-size: 0.75rem; }
+            .stat-item { min-width: 70px; padding: 0.3rem 0.5rem; }
+            .stat-number { font-size: 1rem; }
+            .hero-bottom-badge { font-size: 0.65rem; padding: 0.3rem 0.8rem; white-space: nowrap; }
         }
 
-        /* ===== PACKAGES SECTION ===== */
+        /* ===== PACKAGES SECTION - UPDATED SUPREME CARD WITHOUT SCROLLING ===== */
         .packages-tab-section { padding: 3rem 0; background: white; }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        .section-sub {
-            font-size: 1rem;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            padding: 0 1rem;
-        }
-        .tab-btn {
-            background: var(--light-bg);
-            border: 1.5px solid #e8ddcd;
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+        .section-title { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; }
+        .section-sub { font-size: 1rem; color: var(--text-muted); text-align: center; margin-bottom: 2rem; }
+        .tab-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .tab-btn { background: var(--light-bg); border: 1.5px solid #e8ddcd; padding: 0.6rem 1.2rem; font-weight: 700; border-radius: 40px; cursor: pointer; transition: all 0.2s; }
         .tab-btn i { margin-right: 8px; color: var(--primary-gold); }
-        .tab-btn.active {
-            background: var(--dark-bg);
-            border-color: var(--dark-bg);
-            color: white;
-        }
-        .tab-btn.active i { color: var(--primary-gold); }
-        .tab-btn:hover:not(.active) { background: #f5efe3; border-color: var(--primary-gold); }
-        
+        .tab-btn.active { background: var(--dark-bg); border-color: var(--dark-bg); color: white; }
         .tab-pane { display: none; }
         .tab-pane.active-pane { display: block; }
-        .package-description {
-            background: #f5efe3;
-            padding: 0.6rem 1rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 1.2rem;
-        }
+        .package-description { background: #f5efe3; padding: 0.6rem 1rem; border-radius: 12px; font-size: 0.9rem; text-align: center; margin-bottom: 1.2rem; }
         
+        /* Desktop grid - cards will auto-adjust height, no scroll */
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--card-gap);
+            align-items: start;
         }
-        
         .package-card {
             background: var(--card-bg);
             border-radius: var(--border-radius-card);
@@ -461,584 +259,118 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             border: 1px solid var(--border-light);
             transition: transform 0.2s;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            width: 100%;
+            height: auto;
+            overflow: visible;
         }
         .package-card:hover { transform: translateY(-3px); }
+        .package-title { font-size: 1.45rem; font-weight: 800; border-bottom: 3px solid var(--primary-gold); display: inline-block; padding-bottom: 8px; margin-bottom: 0.6rem; }
+        .compare-badge { display: inline-block; background: linear-gradient(135deg, var(--primary-gold) 0%, #ffcc00 100%); color: var(--dark-bg); font-size: 0.7rem; font-weight: 800; padding: 0.25rem 0.8rem; border-radius: 20px; margin-bottom: 0.5rem; }
+        .price-section { margin: 0.5rem 0 0.3rem; }
+        .package-price { font-size: 1.65rem; font-weight: 800; color: var(--primary-gold); }
+        .starting-price { font-size: 0.75rem; color: var(--text-muted); }
         
-        .package-title {
-            font-size: 1.45rem;
-            font-weight: 800;
-            border-bottom: 3px solid var(--primary-gold);
-            display: inline-block;
-            padding-bottom: 8px;
-            margin-bottom: 0.6rem;
-            text-align: center;
-        }
-        
-        .compare-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-gold) 0%, #ffcc00 100%);
-            color: var(--dark-bg);
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 0.25rem 0.8rem;
-            border-radius: 20px;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .price-section {
-            width: 100%;
-            margin-top: 0.5rem;
-            margin-bottom: 0.3rem;
-            text-align: center;
-        }
-        .package-price {
-            font-size: 1.65rem;
-            font-weight: 800;
-            color: var(--primary-gold);
-            display: inline-block;
-        }
-        .starting-price {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-            margin: 0.1rem 0 0.3rem 0;
-            letter-spacing: 0.5px;
-        }
-        
+        /* Services list - no scroll, full display */
         .package-services {
             list-style: none;
             margin: 0.5rem 0;
             width: 100%;
-            text-align: center;
+            max-height: none;
+            overflow: visible;
         }
         .package-services li {
-            font-size: 0.9rem;
-            margin-bottom: 0.45rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             line-height: 1.35;
             text-align: left;
+            width: 100%;
         }
         .package-services li i { 
             color: var(--primary-gold); 
             width: 18px; 
-            font-size: 0.85rem; 
-            text-align: center; 
             flex-shrink: 0; 
+            font-size: 0.8rem;
         }
-        
-        .feature-highlight {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 0.2rem 0.5rem;
-            border-radius: 15px;
-            display: inline-block;
-            margin-left: 6px;
-        }
-        
-        .package-note {
-            font-size: 0.75rem;
-            background: #faf5ea;
-            padding: 0.45rem;
-            border-radius: 10px;
-            text-align: center;
-            margin: 0.5rem 0 0.3rem 0;
-            width: 100%;
-            font-weight: 500;
-            line-height: 1.35;
-        }
-        
-        .book-btn {
-            display: inline-block;
-            background: var(--primary-gold);
-            color: var(--text-dark);
-            text-align: center;
-            padding: 0.65rem 1.3rem;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-decoration: none;
-            width: auto;
-            min-width: 130px;
-            max-width: 85%;
-            transition: 0.2s;
-            margin-top: 0.4rem;
-            margin-left: auto;
-            margin-right: auto;
-            cursor: pointer;
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
-        }
+        .feature-highlight { background: var(--primary-gold); color: var(--dark-bg); font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 15px; margin-left: 6px; white-space: nowrap; }
+        .package-note { font-size: 0.75rem; background: #faf5ea; padding: 0.45rem; border-radius: 10px; margin: 0.5rem 0; width: 100%; font-weight: 500; }
+        .book-btn { background: var(--primary-gold); color: var(--text-dark); padding: 0.65rem 1.3rem; border-radius: 60px; font-weight: 700; font-size: 0.9rem; text-decoration: none; display: inline-block; min-width: 130px; transition: 0.2s; cursor: pointer; margin-top: 0.3rem; }
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
-        
-        .package-badge {
-            display: block;
-            width: var(--badge-size);
-            height: var(--badge-size);
-            max-width: 100%;
-            object-fit: contain;
-            margin: 0.2rem auto 0.3rem auto;
-            border-radius: 10px;
-        }
-        
-        .mobile-carousel-container {
-            display: none;
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            border-radius: var(--border-radius-card);
-            touch-action: pan-y pinch-zoom;
-        }
-        .mobile-carousel-track {
-            display: flex;
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            gap: 1rem;
-            width: 100%;
-            will-change: transform;
-            cursor: grab;
-        }
+        .package-badge { width: var(--badge-size); max-width: 100%; object-fit: contain; margin: 0.2rem auto; }
+
+        /* Mobile carousel - cards also full height no scroll */
+        .mobile-carousel-container { display: none; position: relative; width: 100%; overflow: hidden; touch-action: pan-y pinch-zoom; }
+        .mobile-carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); gap: 1rem; cursor: grab; }
         .mobile-carousel-track:active { cursor: grabbing; }
-        .mobile-carousel-slide { 
-            flex-shrink: 0;
-            width: 280px;
-            pointer-events: auto;
-        }
+        .mobile-carousel-slide { flex-shrink: 0; width: 280px; }
         .mobile-carousel-slide .package-card {
+            height: auto;
+            overflow: visible;
             margin: 0;
             width: 100%;
-            height: auto;
-            padding: 0.9rem;
         }
-        .mobile-carousel-slide .book-btn {
-            pointer-events: auto !important;
-            cursor: pointer !important;
-            z-index: 20;
-        }
-        
-        .carousel-controls { display: none !important; }
-        
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd2c0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+        .carousel-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 1rem; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd2c0; cursor: pointer; transition: all 0.2s; }
         .dot.active { background: var(--primary-gold); width: 22px; border-radius: 10px; }
-        
+
         @media (max-width: 768px) {
             .packages-grid { display: none; }
             .mobile-carousel-container { display: block; }
-            .package-badge { width: var(--badge-size-mobile); height: var(--badge-size-mobile); }
-            .package-title { font-size: 1.3rem; margin-bottom: 0.4rem; padding-bottom: 6px; }
-            .package-price { font-size: 1.45rem; }
-            .package-services li { font-size: 0.85rem; margin-bottom: 0.4rem; gap: 6px; }
-            .package-services li i { width: 16px; font-size: 0.75rem; }
-            .compare-badge { font-size: 0.65rem; }
-            .book-btn { padding: 0.55rem 1rem; font-size: 0.8rem; min-width: 110px; }
+            .package-badge { width: var(--badge-size-mobile); }
             .mobile-carousel-slide { width: 280px; }
-            .mobile-carousel-slide .package-card { padding: 0.8rem; }
-        }
-        
-        @media (max-width: 550px) {
-            .package-badge { width: var(--badge-size-small-mobile); height: var(--badge-size-small-mobile); }
-            .package-title { font-size: 1.2rem; }
-            .package-price { font-size: 1.35rem; }
-            .package-services li { font-size: 0.8rem; }
-            .mobile-carousel-slide { width: 260px; }
         }
 
-        /* ===== HORIZONTAL SCROLL REVIEWS SECTION (Swipeable on Mobile/iPad) ===== */
-        .testimonials-section {
-            padding: 3rem 0;
-            background: #fefcf5;
-        }
-        .reviews-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        .reviews-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .reviews-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-        .reviews-header .rating-summary {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        .reviews-header .stars {
-            color: var(--primary-gold);
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-        }
-        .reviews-header .rating-number {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        
-        /* Desktop - 3 columns grid */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-        .review-card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e9decd;
-            transition: transform 0.2s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .review-card:hover { transform: translateY(-3px); }
-        .review-stars {
-            color: var(--primary-gold);
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-        .review-text {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #2c2a28;
-            margin-bottom: 1rem;
-            font-style: italic;
-            flex-grow: 1;
-        }
-        .review-author {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: auto;
-        }
-        .review-author i { color: var(--primary-gold); }
-        .google-badge {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-            padding: 1rem;
-            background: rgba(255, 223, 0, 0.1);
-            border-radius: 50px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .google-badge span { font-size: 0.8rem; color: var(--text-muted); }
-        
-        /* Mobile & iPad - Horizontal swipeable carousel */
-        @media (max-width: 768px) {
-            .reviews-grid {
-                display: none;
-            }
-            .reviews-mobile-carousel {
-                display: block;
-                position: relative;
-                width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scroll-behavior: smooth;
-                scrollbar-width: none;
-                padding: 0.25rem 0;
-            }
-            .reviews-mobile-carousel::-webkit-scrollbar {
-                display: none;
-            }
-            .reviews-mobile-track {
-                display: flex;
-                flex-direction: row;
-                gap: 1rem;
-                width: max-content;
-                padding: 0.2rem 0.5rem;
-            }
-            .reviews-mobile-slide {
-                flex: 0 0 280px;
-                width: 280px;
-                scroll-snap-align: start;
-            }
-            .reviews-mobile-slide .review-card {
-                margin: 0;
-                width: 100%;
-                height: auto;
-                padding: 1rem;
-            }
-            .reviews-mobile-dots {
-                display: flex;
-                justify-content: center;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-            .review-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #ddd2c0;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .review-dot.active {
-                background: var(--primary-gold);
-                width: 20px;
-                border-radius: 10px;
-            }
-        }
-        
-        /* Tablet (769px - 1024px) - also use horizontal scroll for better experience */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .reviews-grid {
-                display: none;
-            }
-            .reviews-mobile-carousel {
-                display: block;
-                position: relative;
-                width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                scroll-behavior: smooth;
-                scrollbar-width: none;
-                padding: 0.25rem 0;
-            }
-            .reviews-mobile-carousel::-webkit-scrollbar {
-                display: none;
-            }
-            .reviews-mobile-track {
-                display: flex;
-                flex-direction: row;
-                gap: 1rem;
-                width: max-content;
-                padding: 0.2rem 0.5rem;
-            }
-            .reviews-mobile-slide {
-                flex: 0 0 300px;
-                width: 300px;
-                scroll-snap-align: start;
-            }
-            .reviews-mobile-slide .review-card {
-                margin: 0;
-                width: 100%;
-                height: auto;
-                padding: 1.2rem;
-            }
-            .reviews-mobile-dots {
-                display: flex;
-                justify-content: center;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-            .review-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #ddd2c0;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .review-dot.active {
-                background: var(--primary-gold);
-                width: 20px;
-                border-radius: 10px;
-            }
-        }
-        
-        /* Desktop - show grid, hide carousel */
-        @media (min-width: 1025px) {
-            .reviews-mobile-carousel {
-                display: none;
-            }
-        }
+        /* ===== REVIEWS SECTION ===== */
+        .testimonials-section { padding: 3rem 0; background: #fefcf5; }
+        .reviews-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .reviews-header { text-align: center; margin-bottom: 2rem; }
+        .reviews-header h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .rating-summary { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+        .stars { color: var(--primary-gold); font-size: 1.2rem; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .review-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e9decd; transition: transform 0.2s; display: flex; flex-direction: column; }
+        .review-stars { color: var(--primary-gold); margin-bottom: 0.8rem; }
+        .review-text { font-size: 0.9rem; line-height: 1.5; color: #2c2a28; margin-bottom: 1rem; font-style: italic; flex-grow: 1; }
+        .review-author { font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-top: auto; }
+        .google-badge { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2rem; padding: 1rem; background: rgba(255, 223, 0, 0.1); border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto; }
+        .reviews-mobile-carousel { display: none; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .reviews-mobile-carousel::-webkit-scrollbar { display: none; }
+        .reviews-mobile-track { display: flex; gap: 1rem; width: max-content; padding: 0.2rem 0.5rem; }
+        .reviews-mobile-slide { flex: 0 0 280px; scroll-snap-align: start; }
+        .reviews-mobile-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+        .review-dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd2c0; cursor: pointer; transition: all 0.2s; }
+        .review-dot.active { background: var(--primary-gold); width: 20px; border-radius: 10px; }
+        @media (max-width: 1024px) { .reviews-grid { display: none; } .reviews-mobile-carousel { display: block; } }
 
-        .footer {
-            background: #1c1917;
-            color: #cdc6bb;
-            padding: 1.5rem 1rem;
-            text-align: center;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin: 0.8rem 0;
-        }
-        .footer a { color: var(--primary-gold); text-decoration: none; transition: opacity 0.2s; }
-        .footer a:hover { opacity: 0.8; }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--primary-gold);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .social-icon:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            transform: translateY(-3px);
-            opacity: 1;
-        }
-        
-        .artist-credit {
-            margin-top: 1rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.7rem;
-            color: #888;
-            text-align: center;
-        }
-        .artist-credit i {
-            color: var(--primary-gold);
-            margin: 0 2px;
-        }
-        .artist-credit a {
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .artist-credit a:hover {
-            text-decoration: underline;
-        }
+        /* ===== FOOTER ===== */
+        .footer { background: #1c1917; color: #cdc6bb; padding: 1.5rem 1rem; text-align: center; }
+        .social-icons { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; }
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; color: var(--primary-gold); font-size: 1.3rem; transition: all 0.3s; text-decoration: none; }
+        .social-icon:hover { background: var(--primary-gold); color: var(--dark-bg); transform: translateY(-3px); }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 0.8rem 0; }
+        .footer a { color: var(--primary-gold); text-decoration: none; }
+        .artist-credit { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(4px);
-            z-index: 3000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.25s ease;
-            padding: 1rem;
-        }
+        /* ===== MODAL ===== */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.25s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-container {
-            background: #ffffff;
-            max-width: var(--modal-max-width);
-            width: 90%;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transform: scale(0.95);
-            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
+        .modal-container { background: white; max-width: var(--modal-max-width); width: 90%; border-radius: 20px; overflow: hidden; transform: scale(0.95); transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
         .modal-overlay.active .modal-container { transform: scale(1); }
-        .modal-header {
-            background: var(--dark-bg);
-            padding: 1rem;
-            text-align: center;
-        }
-        .modal-header .icon-circle {
-            background: rgba(255, 223, 0, 0.15);
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.6rem;
-            border: 1px solid rgba(255, 223, 0, 0.3);
-        }
+        .modal-header { background: var(--dark-bg); padding: 1rem; text-align: center; }
+        .modal-header .icon-circle { background: rgba(255, 223, 0, 0.15); width: 50px; height: 50px; border-radius: 25px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.6rem; }
         .modal-header i { font-size: 1.6rem; color: var(--primary-gold); }
         .modal-header h2 { font-size: 1.2rem; font-weight: 700; color: white; }
-        .modal-body { padding: 1.2rem 1.2rem 1rem; text-align: center; }
-        .discount-badge {
-            background: var(--primary-gold);
-            color: var(--text-dark);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 0.3rem 0.8rem;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            margin-bottom: 0.6rem;
-        }
-        .modal-body p { font-size: 0.85rem; line-height: 1.4; color: #2c2a28; margin-bottom: 0.5rem; }
-        .modal-footer {
-            padding: 0 1.2rem 1.2rem 1.2rem;
-            display: flex;
-            gap: 0.7rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .modal-btn {
-            background: var(--dark-bg);
-            color: white;
-            border: none;
-            padding: 0.55rem 1rem;
-            border-radius: 60px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.8rem;
-            flex: 1;
-            text-align: center;
-        }
-        .modal-btn-primary {
-            background: var(--primary-gold);
-            color: var(--text-dark);
-        }
-        @media (max-width: 480px) {
-            .modal-container { max-width: var(--modal-max-width-mobile); width: 92%; border-radius: 20px; }
-            .modal-footer { flex-direction: column; }
-            .modal-btn { width: 100%; }
-        }
+        .modal-body { padding: 1.2rem; text-align: center; }
+        .discount-badge { background: var(--primary-gold); color: var(--text-dark); display: inline-flex; align-items: center; gap: 6px; padding: 0.3rem 0.8rem; border-radius: 40px; font-weight: 800; margin-bottom: 0.6rem; }
+        .modal-footer { padding: 0 1.2rem 1.2rem; display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+        .modal-btn { background: var(--dark-bg); color: white; border: none; padding: 0.55rem 1rem; border-radius: 60px; font-weight: 600; cursor: pointer; flex: 1; text-align: center; }
+        .modal-btn-primary { background: var(--primary-gold); color: var(--text-dark); }
     </style>
 </head>
 <body>
@@ -1077,10 +409,10 @@
 </nav>
 
 <main>
-    <!-- HERO BANNER - FIXED "Welcome to" visibility -->
+    <!-- HERO SECTION -->
     <div class="hero-wrapper">
         <div class="yt-embed-holder">
-            <iframe src="https://www.youtube.com/embed/7NVANNmSXHU?autoplay=1&mute=1&loop=1&controls=0&color=white&modestbranding=1&playinline=1&enablejsapi=1&playlist=7NVANNmSXHU" title="Spotless kings mobile detailing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/7NVANNmSXHU?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playinline=1&playlist=7NVANNmSXHU" title="Spotless kings mobile detailing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-new">
@@ -1108,274 +440,127 @@
         <div class="container">
             <h2 class="section-title">Our Packages</h2>
             <p class="section-sub">Choose your perfect detailing plan</p>
-            
             <div class="tab-buttons">
                 <button class="tab-btn active" data-tab="tab1"><i class="fas fa-car-side"></i> Inside+Out</button>
                 <button class="tab-btn" data-tab="tab2"><i class="fas fa-couch"></i> Interior Only</button>
                 <button class="tab-btn" data-tab="tab3"><i class="fas fa-water"></i> Exterior Only</button>
             </div>
-
-            <!-- TAB 1 -->
-            <div id="tab1" class="tab-pane active-pane">
-                <div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div>
-                <div class="packages-grid">
-                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-star"></i> BEST VALUE</div><div class="package-title">Essential Refresh</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & Steering wheel wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows cleaned</li><li><i class="fas fa-check-circle"></i> Exterior wash</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="package-note">🔄 Great for regular maintenance</div><div class="price-section"><div class="package-price">$95 - $110</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP" target="_blank" class="book-btn">Book Now →</a></div>
-                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-fire"></i> MOST POPULAR</div><div class="package-title">Premium Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant <span class="feature-highlight">+PROTECTION</span></li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents detailed</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li></ul><div class="package-note">🏆 Showroom finish</div><div class="price-section"><div class="package-price">$165 - $220</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO" target="_blank" class="book-btn">Book Now →</a></div>
-                    <div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-crown"></i> ULTIMATE</div><div class="package-title">Supreme Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant</li><li><i class="fas fa-check-circle"></i> Front bumper bug removal <span class="feature-highlight">EXTRA</span></li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Air vents steam cleaned <span class="feature-highlight">STEAM</span></li><li><i class="fas fa-check-circle"></i> Seat shampoo'd / leather steamed</li><li><i class="fas fa-check-circle"></i> Floor mats shampooed</li></ul><div class="package-note">✨ Makes your car look brand new!</div><div class="price-section"><div class="package-price">$250 - $350</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2" target="_blank" class="book-btn">Book Now →</a></div>
-                </div>
-                <div class="mobile-carousel-container" id="mobileCarousel1"><div class="mobile-carousel-track" id="mobileTrack1"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-star"></i> BEST VALUE</div><div class="package-title">Essential Refresh</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & Steering wheel wiped down</li><li><i class="fas fa-check-circle"></i> Door jambs cleaned</li><li><i class="fas fa-check-circle"></i> Interior windows cleaned</li><li><i class="fas fa-check-circle"></i> Exterior wash</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li></ul><div class="package-note">🔄 Great for regular maintenance</div><div class="price-section"><div class="package-price">$95 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-fire"></i> MOST POPULAR</div><div class="package-title">Premium Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant <span class="feature-highlight">+PROTECTION</span></li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Interior air compressed crevices</li><li><i class="fas fa-check-circle"></i> Interior/trunk vacuumed</li><li><i class="fas fa-check-circle"></i> Air vents detailed</li><li><i class="fas fa-check-circle"></i> Steering wheel/cupholders detailed</li><li><i class="fas fa-check-circle"></i> Door Panels cleaned & conditioned</li><li><i class="fas fa-check-circle"></i> Interior/exterior windows detailed</li></ul><div class="package-note">🏆 Showroom finish</div><div class="price-section"><div class="package-price">$165 - $220</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-crown"></i> ULTIMATE</div><div class="package-title">Supreme Inside-Out</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Wheels/rims detailed</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior paint sealant</li><li><i class="fas fa-check-circle"></i> Front bumper bug removal <span class="feature-highlight">EXTRA</span></li><li><i class="fas fa-check-circle"></i> Door jambs/trunk jamb detailed</li><li><i class="fas fa-check-circle"></i> Air vents steam cleaned <span class="feature-highlight">STEAM</span></li><li><i class="fas fa-check-circle"></i> Seat shampoo'd / leather steamed</li><li><i class="fas fa-check-circle"></i> Floor mats shampooed</li></ul><div class="package-note">✨ Makes your car look brand new!</div><div class="price-section"><div class="package-price">$250 - $350</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-dots" id="dots1"></div></div>
-            </div>
-
-            <div id="tab2" class="tab-pane"><div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div><div class="packages-grid"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-broom"></i> QUICK REFRESH</div><div class="package-title">Interior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">(no interior shampooing)</div><div class="price-section"><div class="package-price">$100 - $130</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/I7TKNGWNJJU3SVTDX3IYXZBB" target="_blank" class="book-btn">Book Now →</a></div><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-spray-can-sparkles"></i> DEEP CLEAN</div><div class="package-title">Interior Supreme</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks and crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo removable floor mats</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Arm rest detailed</li><li><i class="fas fa-check-circle"></i> Vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><div class="price-section"><div class="package-price">$200 - $275</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/FYFUAMAKWPHAODE6NXBE2F26" target="_blank" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-container" id="mobileCarousel2"><div class="mobile-carousel-track" id="mobileTrack2"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-broom"></i> QUICK REFRESH</div><div class="package-title">Interior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">(no interior shampooing)</div><div class="price-section"><div class="package-price">$100 - $130</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-spray-can-sparkles"></i> DEEP CLEAN</div><div class="package-title">Interior Supreme</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Interior vacuum including trunk</li><li><i class="fas fa-check-circle"></i> Blow cracks and crevices</li><li><i class="fas fa-check-circle"></i> Steam/shampoo seats</li><li><i class="fas fa-check-circle"></i> Shampoo removable floor mats</li><li><i class="fas fa-check-circle"></i> Dashboard & steering wheel detailed</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Cupholders detailed</li><li><i class="fas fa-check-circle"></i> Doors detailed</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Arm rest detailed</li><li><i class="fas fa-check-circle"></i> Vents steamed</li><li><i class="fas fa-check-circle"></i> Interior windows detailed</li></ul><div class="package-note">Deep cleansing & sanitization</div><div class="price-section"><div class="package-price">$200 - $275</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-dots" id="dots2"></div></div></div>
-            <div id="tab3" class="tab-pane"><div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div><div class="packages-grid"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-water"></i> QUICK SHINE</div><div class="package-title">Exterior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="package-note">Quick exterior refresh</div><div class="price-section"><div class="package-price">$60 - $75</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/OJ7HTHJKYHIPDZ5AAXLHWZLL" target="_blank" class="book-btn">Book Now →</a></div><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-shield-haltered"></i> LONG-LASTING</div><div class="package-title">Exterior Premium</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Bug removal <span class="feature-highlight">EXTRA</span></li><li><i class="fas fa-check-circle"></i> Wax (90 day protection) <span class="feature-highlight">90 DAYS</span></li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Wheel wells detailed</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li><li><i class="fas fa-check-circle"></i> Door jambs</li></ul><div class="package-note">Long-lasting protection</div><div class="price-section"><div class="package-price">$85 - $110</div><div class="starting-price">Starting price</div></div><a href="https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/XII3M4D56SNYQXZYYHR537S3" target="_blank" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-container" id="mobileCarousel3"><div class="mobile-carousel-track" id="mobileTrack3"><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-water"></i> QUICK SHINE</div><div class="package-title">Exterior Basic</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Foam wash</li><li><i class="fas fa-check-circle"></i> Tire/rims detailed</li><li><i class="fas fa-check-circle"></i> Spray wax</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Door jambs detailed</li><li><i class="fas fa-check-circle"></i> Exterior windows detailed</li><li><i class="fas fa-check-circle"></i> Gas cap detailed</li><li><i class="fas fa-check-circle"></i> Plastic trims restored</li></ul><div class="package-note">Quick exterior refresh</div><div class="price-section"><div class="package-price">$60 - $75</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div><div class="mobile-carousel-slide"><div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas fa-shield-haltered"></i> LONG-LASTING</div><div class="package-title">Exterior Premium</div><ul class="package-services"><li><i class="fas fa-check-circle"></i> Exterior foam wash</li><li><i class="fas fa-check-circle"></i> Bug removal</li><li><i class="fas fa-check-circle"></i> Wax (90 day protection)</li><li><i class="fas fa-check-circle"></i> Wheels detailed</li><li><i class="fas fa-check-circle"></i> Wheel wells detailed</li><li><i class="fas fa-check-circle"></i> Rain X windshield</li><li><i class="fas fa-check-circle"></i> Tire shine</li><li><i class="fas fa-check-circle"></i> Exterior windows</li><li><i class="fas fa-check-circle"></i> Door jambs</li></ul><div class="package-note">Long-lasting protection</div><div class="price-section"><div class="package-price">$85 - $110</div><div class="starting-price">Starting price</div></div><a href="#" class="book-btn">Book Now →</a></div></div></div><div class="carousel-dots" id="dots3"></div></div></div>
+            <div id="tab1" class="tab-pane active-pane"><div class="package-description"><i class="fas fa-info-circle"></i> Complete interior & exterior care</div><div class="packages-grid" id="grid1"></div><div class="mobile-carousel-container" id="mobileCarousel1"><div class="mobile-carousel-track" id="mobileTrack1"></div><div class="carousel-dots" id="dots1"></div></div></div>
+            <div id="tab2" class="tab-pane"><div class="package-description"><i class="fas fa-tshirt"></i> Interior only — no exterior</div><div class="packages-grid" id="grid2"></div><div class="mobile-carousel-container" id="mobileCarousel2"><div class="mobile-carousel-track" id="mobileTrack2"></div><div class="carousel-dots" id="dots2"></div></div></div>
+            <div id="tab3" class="tab-pane"><div class="package-description"><i class="fas fa-sun"></i> Make your exterior shine</div><div class="packages-grid" id="grid3"></div><div class="mobile-carousel-container" id="mobileCarousel3"><div class="mobile-carousel-track" id="mobileTrack3"></div><div class="carousel-dots" id="dots3"></div></div></div>
         </div>
     </section>
 
-    <!-- REVIEWS SECTION - Horizontal swipe on mobile/iPad, Grid on desktop -->
+    <!-- REVIEWS SECTION -->
     <section id="reviews" class="testimonials-section">
         <div class="reviews-container">
-            <div class="reviews-header">
-                <h2>What Our Customers Say</h2>
-                <div class="rating-summary">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <span class="rating-number">5.0 out of 5</span>
-                </div>
-                <p style="color: var(--text-muted); margin-top: 0.3rem;">Based on 142 verified customer reviews</p>
-            </div>
-            
-            <!-- Desktop Grid (visible on desktop, hidden on mobile/tablet) -->
-            <div class="reviews-grid">
-                <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Absolutely amazing service! My car looks better than the day I bought it. The team was professional, punctual, and paid attention to every detail. Highly recommend Spotless Kings!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>Michael R.</span></div></div>
-                <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Best detailing experience I've ever had. They removed years of dirt and stains from my interior. The ceramic coating made my paint shine like glass. Worth every penny!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>Sarah J.</span></div></div>
-                <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Professional, thorough, and great communication. They came to my house and made my SUV look showroom ready. The paint sealant is still holding up after 3 months!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>David T.</span></div></div>
-            </div>
-            
-            <!-- Mobile & iPad Horizontal Swipe Carousel -->
-            <div class="reviews-mobile-carousel" id="reviewsMobileCarousel">
-                <div class="reviews-mobile-track" id="reviewsMobileTrack">
-                    <div class="reviews-mobile-slide"><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Absolutely amazing service! My car looks better than the day I bought it. The team was professional, punctual, and paid attention to every detail. Highly recommend Spotless Kings!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>Michael R.</span></div></div></div>
-                    <div class="reviews-mobile-slide"><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Best detailing experience I've ever had. They removed years of dirt and stains from my interior. The ceramic coating made my paint shine like glass. Worth every penny!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>Sarah J.</span></div></div></div>
-                    <div class="reviews-mobile-slide"><div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Professional, thorough, and great communication. They came to my house and made my SUV look showroom ready. The paint sealant is still holding up after 3 months!"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>David T.</span></div></div></div>
-                </div>
-            </div>
+            <div class="reviews-header"><h2>What Our Customers Say</h2><div class="rating-summary"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-number">5.0 out of 5</span></div><p style="color: var(--text-muted); margin-top: 0.3rem;">Based on 142 verified customer reviews</p></div>
+            <div class="reviews-grid" id="reviewsGrid"></div>
+            <div class="reviews-mobile-carousel" id="reviewsMobileCarousel"><div class="reviews-mobile-track" id="reviewsMobileTrack"></div></div>
             <div class="reviews-mobile-dots" id="reviewsMobileDots"></div>
-            
-            <div class="google-badge">
-                <i class="fab fa-google" style="color: #4285F4;"></i>
-                <span>Powered by Google Reviews</span>
-                <i class="fas fa-star" style="color: var(--primary-gold);"></i>
-            </div>
+            <div class="google-badge"><i class="fab fa-google" style="color: #4285F4;"></i><span>Powered by Google Reviews</span><i class="fas fa-star" style="color: var(--primary-gold);"></i></div>
         </div>
     </section>
 </main>
 
-<footer id="contact" class="footer">
-    <div class="container">
-        <div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;">
-            <img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:30px; height:30px;">
-            <span style="color:var(--primary-gold); font-weight:800; font-size:0.9rem;">SPOTLESS KINGS DETAILING</span>
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/spotlesskings?igsh=aXRtb3E5eDQ4dmps" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/@spotlesskingsdetailing/?hr=1&wtsid=rdr_0mwDSEGryXrA8wJOJ" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://m.youtube.com/@spotlesskings" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-youtube"></i></a>
-        </div>
-        <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#packages">Packages</a>
-            <a href="#reviews">Reviews</a>
-        </div>
-        <p style="font-size:0.75rem;">&copy; 2026 Spotless Kings Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p>
-        <div class="artist-credit">
-            <i class="fas fa-palette"></i> Website designed & developed with <i class="fas fa-heart" style="color: #ff4444;"></i> by <a href="https://www.instagram.com/sydreless_na/" target="_blank" rel="noopener noreferrer">Jean (Sydrel) Santiago</a>
-        </div>
-    </div>
-</footer>
+<footer class="footer"><div class="container"><div class="logo" style="display:flex; justify-content:center; gap:8px; margin-bottom:0.8rem;"><img class="logo-img" src="https://i.imgur.com/GqMhNqc.png" alt="Logo" style="width:30px; height:30px;"><span style="color:var(--primary-gold); font-weight:800;">SPOTLESS KINGS DETAILING</span></div><div class="social-icons"><a href="https://www.instagram.com/spotlesskings" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a><a href="https://www.facebook.com/@spotlesskingsdetailing" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a><a href="https://m.youtube.com/@spotlesskings" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a></div><div class="footer-links"><a href="#packages">Packages</a><a href="#reviews">Reviews</a></div><p style="font-size:0.75rem;">&copy; 2026 Spotless Kings Detailing — Premium Mobile Detailing | <a href="tel:+17723537678" style="color:var(--primary-gold);">(772)-353-7678</a></p><div class="artist-credit"><i class="fas fa-palette"></i> Website designed & developed with <i class="fas fa-heart" style="color: #ff4444;"></i> by <a href="https://www.instagram.com/sydreless_na/" target="_blank">Jean (Sydrel) Santiago</a></div></div></footer>
 
 <script>
-    let lastScrollPosition = 0;
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function() {
-        const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-        if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 80) {
-            navbar.classList.add('navbar-hidden');
-        } else if (currentScrollPosition < lastScrollPosition) {
-            navbar.classList.remove('navbar-hidden');
-        }
-        if (currentScrollPosition <= 10) navbar.classList.remove('navbar-hidden');
-        lastScrollPosition = currentScrollPosition;
-    });
+    // Updated Supreme Inside-Out services with full list (no scroll)
+    const supremeServices = [
+        "Exterior foam wash",
+        "Wheels/rims detailed",
+        "Tire shine",
+        "Exterior paint sealant (3-4 month protection)",
+        "Front bumper bug removal",
+        "Door jambs/trunk jamb detailed",
+        "Interior air compressed to remove heavy dirt in crevices",
+        "Interior/ trunk vacuumed",
+        "Air vents steam cleaned",
+        "Steering wheel/cupholders detailed",
+        "Door Panels cleaned & conditioned",
+        "Interior/exterior windows detailed",
+        "Seat shampoo’d/leather steamed & conditioned",
+        "Removable floor mats shampoo’d"
+    ];
 
-    // Package Carousel Init
-    function initMobileCarousel(trackId, dotsId) {
+    const packagesData = {
+        insideOut: [
+            { title: "Essential Refresh", badge: "BEST VALUE", icon: "fa-star", price: "$95 - $110", note: "🔄 Great for regular maintenance", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/EFIZV3H2GZ6TQ7AR6XMDEOBP", services: ["Interior vacuum", "Dashboard & Steering wheel wipedown", "Door jambs cleaned", "Interior windows cleaned", "Exterior wash", "Spray wax", "Tire shine", "Exterior windows"] },
+            { title: "Premium Inside-Out", badge: "MOST POPULAR", icon: "fa-fire", price: "$165 - $220", note: "🏆 Showroom finish", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/7IIWJ6LICUT6VAQSSXW3AVJO", services: ["Exterior foam wash", "Wheels/rims detailed", "Tire shine", "Exterior paint sealant +PROTECTION", "Door jambs/trunk jamb detailed", "Interior air compressed crevices", "Interior/trunk vacuumed", "Air vents detailed", "Steering wheel/cupholders detailed", "Door Panels cleaned & conditioned", "Interior/exterior windows detailed"] },
+            { title: "Supreme Inside-Out", badge: "ULTIMATE", icon: "fa-crown", price: "$250 - $350", note: "✨ Makes your car look brand new!", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/ICBV6Y3QN4GZJYUTD2ENOGV2", services: supremeServices }
+        ],
+        interior: [
+            { title: "Interior Basic", badge: "QUICK REFRESH", icon: "fa-broom", price: "$100 - $130", note: "(no interior shampooing)", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/I7TKNGWNJJU3SVTDX3IYXZBB", services: ["Interior vacuum", "Dashboard & steering wheel detailed", "Cupholders detailed", "Doors detailed", "Door jambs detailed", "Interior windows detailed"] },
+            { title: "Interior Supreme", badge: "DEEP CLEAN", icon: "fa-spray-can-sparkles", price: "$200 - $275", note: "Deep cleansing & sanitization", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/FYFUAMAKWPHAODE6NXBE2F26", services: ["Interior vacuum including trunk", "Blow cracks and crevices", "Steam/shampoo seats", "Shampoo removable floor mats", "Dashboard & steering wheel detailed", "Wheels detailed", "Cupholders detailed", "Doors detailed", "Door jambs detailed", "Arm rest detailed", "Vents steamed", "Interior windows detailed"] }
+        ],
+        exterior: [
+            { title: "Exterior Basic", badge: "QUICK SHINE", icon: "fa-water", price: "$60 - $75", note: "Quick exterior refresh", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/OJ7HTHJKYHIPDZ5AAXLHWZLL", services: ["Foam wash", "Tire/rims detailed", "Spray wax", "Tire shine", "Door jambs detailed", "Exterior windows detailed", "Gas cap detailed", "Plastic trims restored"] },
+            { title: "Exterior Premium", badge: "LONG-LASTING", icon: "fa-shield-haltered", price: "$85 - $110", note: "Long-lasting protection", link: "https://book.squareup.com/appointments/ssh0yt4tfv2rhj/location/LPNF6CQMXZ1NQ/services/XII3M4D56SNYQXZYYHR537S3", services: ["Exterior foam wash", "Bug removal", "Wax (90 day protection)", "Wheels detailed", "Wheel wells detailed", "Rain X windshield", "Tire shine", "Exterior windows", "Door jambs"] }
+        ]
+    };
+
+    function renderPackageCard(pkg) {
+        return `<div class="package-card"><img class="package-badge" src="https://i.imgur.com/bGVl90y.png" alt="Badge"><div class="compare-badge"><i class="fas ${pkg.icon}"></i> ${pkg.badge}</div><div class="package-title">${pkg.title}</div><ul class="package-services">${pkg.services.map(s => `<li><i class="fas fa-check-circle"></i> ${s}</li>`).join('')}</ul><div class="package-note">${pkg.note}</div><div class="price-section"><div class="package-price">${pkg.price}</div><div class="starting-price">Starting price</div></div><a href="${pkg.link}" target="_blank" class="book-btn">Book Now →</a></div>`;
+    }
+
+    function buildPackageUI() {
+        document.getElementById('grid1').innerHTML = packagesData.insideOut.map(renderPackageCard).join('');
+        document.getElementById('mobileTrack1').innerHTML = packagesData.insideOut.map(p => `<div class="mobile-carousel-slide">${renderPackageCard(p)}</div>`).join('');
+        document.getElementById('grid2').innerHTML = packagesData.interior.map(renderPackageCard).join('');
+        document.getElementById('mobileTrack2').innerHTML = packagesData.interior.map(p => `<div class="mobile-carousel-slide">${renderPackageCard(p)}</div>`).join('');
+        document.getElementById('grid3').innerHTML = packagesData.exterior.map(renderPackageCard).join('');
+        document.getElementById('mobileTrack3').innerHTML = packagesData.exterior.map(p => `<div class="mobile-carousel-slide">${renderPackageCard(p)}</div>`).join('');
+    }
+
+    const reviews = [
+        { name: "Michael R.", text: "Absolutely amazing service! My car looks better than the day I bought it. The team was professional, punctual, and paid attention to every detail. Highly recommend Spotless Kings!" },
+        { name: "Sarah J.", text: "Best detailing experience I've ever had. They removed years of dirt and stains from my interior. The ceramic coating made my paint shine like glass. Worth every penny!" },
+        { name: "David T.", text: "Professional, thorough, and great communication. They came to my house and made my SUV look showroom ready. The paint sealant is still holding up after 3 months!" }
+    ];
+    function renderReviewCard(r) { return `<div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"${r.text}"</p><div class="review-author"><i class="fas fa-user-circle"></i><span>${r.name}</span></div></div>`; }
+    document.getElementById('reviewsGrid').innerHTML = reviews.map(renderReviewCard).join('');
+    document.getElementById('reviewsMobileTrack').innerHTML = reviews.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
+    buildPackageUI();
+
+    function initCarousel(trackId, dotsId) {
         const track = document.getElementById(trackId);
-        if (!track) return;
+        if (!track || track.children.length <= 1) return;
+        let currentIndex = 0, startX = 0, currentX = 0, isDragging = false, startTime = 0;
         const slides = Array.from(track.children);
-        if (slides.length <= 1) return;
-        let currentIndex = 0;
-        let startX = 0, currentX = 0, isDragging = false, startTime = 0;
         const container = track.parentElement;
         const getSlideWidth = () => slides[0].offsetWidth;
-        const getGap = () => parseInt(window.getComputedStyle(track).gap) || 16;
+        const getGap = () => parseInt(getComputedStyle(track).gap) || 16;
         const getCenterOffset = () => (container.offsetWidth - getSlideWidth()) / 2;
-        const updateCarousel = () => {
-            const slideWidth = getSlideWidth();
-            const gap = getGap();
-            const centerOffset = getCenterOffset();
-            track.style.transform = `translateX(${centerOffset - currentIndex * (slideWidth + gap)}px)`;
-            const dotsDiv = document.getElementById(dotsId);
-            if (dotsDiv) {
-                const dots = dotsDiv.querySelectorAll('.dot');
-                dots.forEach((dot, idx) => idx === currentIndex ? dot.classList.add('active') : dot.classList.remove('active'));
-            }
-        };
-        const goTo = (index) => { currentIndex = Math.max(0, Math.min(index, slides.length - 1)); updateCarousel(); };
-        const next = () => goTo(currentIndex + 1 >= slides.length ? 0 : currentIndex + 1);
-        const prev = () => goTo(currentIndex - 1 < 0 ? slides.length - 1 : currentIndex - 1);
-        const handleTouchStart = (e) => { if (e.target.closest('.book-btn')) return; startX = e.touches[0].clientX; startTime = Date.now(); isDragging = true; track.style.transition = 'none'; };
-        const handleTouchMove = (e) => { if (!isDragging) return; currentX = e.touches[0].clientX; const deltaX = currentX - startX; const slideWidth = getSlideWidth(); const gap = getGap(); const centerOffset = getCenterOffset(); track.style.transform = `translateX(${centerOffset - currentIndex * (slideWidth + gap) + deltaX}px)`; };
-        const handleTouchEnd = (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-            const deltaX = currentX - startX;
-            const slideWidth = getSlideWidth();
-            const threshold = slideWidth * 0.2;
-            const timeElapsed = Date.now() - startTime;
-            const velocity = Math.abs(deltaX) / timeElapsed;
-            if (Math.abs(deltaX) > threshold || velocity > 0.5) deltaX > 0 ? prev() : deltaX < 0 ? next() : updateCarousel();
-            else updateCarousel();
-            startX = 0; currentX = 0;
-        };
-        const handleMouseDown = (e) => { if (e.target.closest('.book-btn')) return; startX = e.clientX; startTime = Date.now(); isDragging = true; track.style.transition = 'none'; e.preventDefault(); };
-        const handleMouseMove = (e) => { if (!isDragging) return; currentX = e.clientX; const deltaX = currentX - startX; const slideWidth = getSlideWidth(); const gap = getGap(); const centerOffset = getCenterOffset(); track.style.transform = `translateX(${centerOffset - currentIndex * (slideWidth + gap) + deltaX}px)`; };
-        const handleMouseUp = (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-            const deltaX = currentX - startX;
-            const slideWidth = getSlideWidth();
-            const threshold = slideWidth * 0.2;
-            const timeElapsed = Date.now() - startTime;
-            const velocity = Math.abs(deltaX) / timeElapsed;
-            if (Math.abs(deltaX) > threshold || velocity > 0.5) deltaX > 0 ? prev() : deltaX < 0 ? next() : updateCarousel();
-            else updateCarousel();
-            startX = 0; currentX = 0;
-        };
-        track.addEventListener('touchstart', handleTouchStart, { passive: false });
-        track.addEventListener('touchmove', handleTouchMove, { passive: false });
-        track.addEventListener('touchend', handleTouchEnd);
-        track.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
-        const dotsContainer = document.getElementById(dotsId);
-        if (dotsContainer) {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < slides.length; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === 0) dot.classList.add('active');
-                dot.onclick = () => goTo(i);
-                dotsContainer.appendChild(dot);
-            }
-        }
-        window.addEventListener('resize', () => setTimeout(updateCarousel, 100));
-        updateCarousel();
+        function update() { const sw = getSlideWidth(), gap = getGap(), offset = getCenterOffset(); track.style.transform = `translateX(${offset - currentIndex * (sw + gap)}px)`; const dotsDiv = document.getElementById(dotsId); if (dotsDiv) dotsDiv.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex)); }
+        function goTo(idx) { currentIndex = Math.max(0, Math.min(idx, slides.length - 1)); update(); }
+        function next() { goTo(currentIndex + 1 >= slides.length ? 0 : currentIndex + 1); }
+        function prev() { goTo(currentIndex - 1 < 0 ? slides.length - 1 : currentIndex - 1); }
+        const onStart = (e) => { if (e.target.closest('.book-btn')) return; startX = e.touches ? e.touches[0].clientX : e.clientX; startTime = Date.now(); isDragging = true; track.style.transition = 'none'; e.preventDefault?.(); };
+        const onMove = (e) => { if (!isDragging) return; currentX = e.touches ? e.touches[0].clientX : e.clientX; const delta = currentX - startX, sw = getSlideWidth(), gap = getGap(), offset = getCenterOffset(); track.style.transform = `translateX(${offset - currentIndex * (sw + gap) + delta}px)`; };
+        const onEnd = () => { if (!isDragging) return; isDragging = false; track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)'; const delta = currentX - startX, sw = getSlideWidth(), threshold = sw * 0.2, time = Date.now() - startTime; if (Math.abs(delta) > threshold || Math.abs(delta)/time > 0.5) delta > 0 ? prev() : next(); else update(); startX = currentX = 0; };
+        track.addEventListener('touchstart', onStart, { passive: false }); track.addEventListener('touchmove', onMove, { passive: false }); track.addEventListener('touchend', onEnd); track.addEventListener('mousedown', onStart); window.addEventListener('mousemove', onMove); window.addEventListener('mouseup', onEnd);
+        const dotsDiv = document.getElementById(dotsId); if (dotsDiv) { dotsDiv.innerHTML = ''; slides.forEach((_, i) => { const dot = document.createElement('div'); dot.classList.add('dot'); if (i === 0) dot.classList.add('active'); dot.onclick = () => goTo(i); dotsDiv.appendChild(dot); }); }
+        window.addEventListener('resize', () => setTimeout(update, 100)); update();
     }
-    
-    initMobileCarousel('mobileTrack1', 'dots1');
-    initMobileCarousel('mobileTrack2', 'dots2');
-    initMobileCarousel('mobileTrack3', 'dots3');
+    initCarousel('mobileTrack1', 'dots1'); initCarousel('mobileTrack2', 'dots2'); initCarousel('mobileTrack3', 'dots3');
 
-    // Reviews Mobile Carousel with scroll-snap and dots
-    function initReviewsMobileCarousel() {
-        const container = document.getElementById('reviewsMobileCarousel');
-        const track = document.getElementById('reviewsMobileTrack');
-        if (!container || !track) return;
-        const slides = Array.from(track.children);
-        if (slides.length <= 1) return;
-        
-        let currentIndex = 0;
-        const updateDots = () => {
-            const dotsDiv = document.getElementById('reviewsMobileDots');
-            if (dotsDiv) {
-                const dots = dotsDiv.querySelectorAll('.review-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentIndex) dot.classList.add('active');
-                    else dot.classList.remove('active');
-                });
-            }
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const index = slides.findIndex(slide => slide === entry.target);
-                    if (index !== -1) {
-                        currentIndex = index;
-                        updateDots();
-                    }
-                }
-            });
-        }, { threshold: 0.6, root: container });
-        
-        slides.forEach(slide => observer.observe(slide));
-        
-        const dotsContainer = document.getElementById('reviewsMobileDots');
-        if (dotsContainer) {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < slides.length; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('review-dot');
-                if (i === 0) dot.classList.add('active');
-                dot.onclick = () => {
-                    const slide = slides[i];
-                    if (slide) {
-                        slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-                    }
-                };
-                dotsContainer.appendChild(dot);
-            }
-        }
-    }
-    
-    // Initialize reviews carousel on mobile/tablet
-    if (window.innerWidth <= 1024) {
-        initReviewsMobileCarousel();
-    }
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 1024) {
-            initReviewsMobileCarousel();
-        }
-    });
+    function initReviewsCarousel() { const container = document.getElementById('reviewsMobileCarousel'); const track = document.getElementById('reviewsMobileTrack'); if (!container || !track || track.children.length <= 1) return; const slides = Array.from(track.children); const dotsContainer = document.getElementById('reviewsMobileDots'); if (dotsContainer) { dotsContainer.innerHTML = ''; slides.forEach((_, i) => { const dot = document.createElement('div'); dot.classList.add('review-dot'); if (i === 0) dot.classList.add('active'); dot.onclick = () => { slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' }); }; dotsContainer.appendChild(dot); }); } const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { const idx = slides.findIndex(s => s === entry.target); if (idx !== -1 && dotsContainer) { dotsContainer.querySelectorAll('.review-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx)); } } }); }, { threshold: 0.6, root: container }); slides.forEach(slide => observer.observe(slide)); }
+    if (window.innerWidth <= 1024) initReviewsCarousel(); window.addEventListener('resize', () => { if (window.innerWidth <= 1024) initReviewsCarousel(); });
 
     const modal = document.getElementById('promoModal');
-    const claim = document.getElementById('claimOfferBtn');
-    const closeModal = document.getElementById('closeModalBtn');
-    window.addEventListener('load', () => setTimeout(() => modal.classList.add('active'), 500));
-    claim.onclick = () => { modal.classList.remove('active'); document.getElementById('packages').scrollIntoView({ behavior: 'smooth' }); };
-    closeModal.onclick = () => modal.classList.remove('active');
+    document.getElementById('claimOfferBtn').onclick = () => { modal.classList.remove('active'); document.getElementById('packages').scrollIntoView({ behavior: 'smooth' }); };
+    document.getElementById('closeModalBtn').onclick = () => modal.classList.remove('active');
     modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+    setTimeout(() => modal.classList.add('active'), 500);
 
-    const btns = document.querySelectorAll('.tab-btn');
-    const panes = document.querySelectorAll('.tab-pane');
-    btns.forEach(btn => btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-tab');
-        panes.forEach(p => p.classList.remove('active-pane'));
-        btns.forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active-pane');
-        btn.classList.add('active');
-    }));
+    const btns = document.querySelectorAll('.tab-btn'); const panes = document.querySelectorAll('.tab-pane');
+    btns.forEach(btn => btn.addEventListener('click', () => { const id = btn.getAttribute('data-tab'); panes.forEach(p => p.classList.remove('active-pane')); btns.forEach(b => b.classList.remove('active')); document.getElementById(id).classList.add('active-pane'); btn.classList.add('active'); }));
 
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        const href = a.getAttribute('href');
-        if (href && href !== '#' && !href.includes('squareup.com')) {
-            a.addEventListener('click', function(e) {
-                const target = document.querySelector(href);
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-            });
-        }
-    });
+    document.querySelectorAll('a[href^="#"]').forEach(a => { const href = a.getAttribute('href'); if (href && href !== '#' && !href.includes('squareup.com')) { a.addEventListener('click', (e) => { const target = document.querySelector(href); if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); } }); } });
+
+    let lastScroll = 0; const navbarEl = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { const current = window.scrollY; if (current > lastScroll && current > 80) navbarEl.classList.add('navbar-hidden'); else if (current < lastScroll) navbarEl.classList.remove('navbar-hidden'); if (current <= 10) navbarEl.classList.remove('navbar-hidden'); lastScroll = current; });
 </script>
 </body>
 </html>
