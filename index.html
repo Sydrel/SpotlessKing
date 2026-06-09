@@ -399,7 +399,7 @@
         .book-btn:hover { background: var(--primary-gold-hover); transform: scale(0.98); }
         .service-badge-img { width: var(--badge-size); max-width: 100%; object-fit: contain; margin: 0.2rem auto; }
 
-        /* Mobile Swipe Carousel for Services - CENTER ALIGNED */
+        /* Mobile Swipe Carousel for Services */
         .services-mobile-carousel {
             display: none;
             width: 100%;
@@ -416,12 +416,12 @@
             flex-direction: row;
             gap: 1rem;
             width: max-content;
-            padding: 0.2rem calc(50% - 140px); /* Center the first and last cards */
+            padding: 0.2rem calc(50% - 140px);
         }
         .services-mobile-slide {
             flex: 0 0 280px;
             width: 280px;
-            scroll-snap-align: center; /* Center align each card when swiping */
+            scroll-snap-align: center;
         }
         .services-mobile-slide .service-card {
             margin: 0;
@@ -453,16 +453,150 @@
             .services-grid { display: none; }
             .services-mobile-carousel { display: block; }
             .service-badge-img { width: var(--badge-size-mobile); }
-            .services-mobile-track {
+            .services-mobile-track { padding: 0.2rem calc(50% - 140px); }
+        }
+        @media (max-width: 480px) {
+            .services-mobile-track { padding: 0.2rem calc(50% - 130px); }
+            .services-mobile-slide { flex: 0 0 260px; width: 260px; }
+        }
+
+        /* ===== 4-VIDEO GALLERY SECTION ===== */
+        .video-gallery-section {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #fefcf5 0%, #fff9ef 100%);
+        }
+        .video-gallery-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .video-gallery-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        /* DESKTOP: 2x2 Grid (visible on screens > 768px) */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        /* MOBILE/TABLET: Horizontal Carousel (hidden on desktop, visible below 768px) */
+        .videos-mobile-carousel {
+            display: none;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            padding: 0.25rem 0;
+        }
+        .videos-mobile-carousel::-webkit-scrollbar { display: none; }
+        .videos-mobile-track {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            width: max-content;
+            padding: 0.2rem calc(50% - 140px);
+        }
+        .videos-mobile-slide {
+            flex: 0 0 280px;
+            width: 280px;
+            scroll-snap-align: center;
+        }
+        .videos-mobile-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .video-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd2c0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .video-dot.active {
+            background: var(--primary-gold);
+            width: 20px;
+            border-radius: 10px;
+        }
+        
+        /* Video Card Styling (shared between grid and carousel) */
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,223,0,0.3);
+            height: 100%;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+            border-color: var(--primary-gold);
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-caption {
+            padding: 0.8rem 1rem;
+            text-align: center;
+            background: white;
+        }
+        .video-caption h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .video-caption h4 i {
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+        }
+        
+        /* On mobile/tablet (≤768px): hide desktop grid, show horizontal carousel */
+        @media (max-width: 768px) {
+            .video-grid {
+                display: none;
+            }
+            .videos-mobile-carousel {
+                display: block;
+            }
+            .videos-mobile-track {
                 padding: 0.2rem calc(50% - 140px);
             }
         }
-        /* Extra small devices - adjust centering padding */
         @media (max-width: 480px) {
-            .services-mobile-track {
+            .videos-mobile-track {
                 padding: 0.2rem calc(50% - 130px);
             }
-            .services-mobile-slide {
+            .videos-mobile-slide {
                 flex: 0 0 260px;
                 width: 260px;
             }
@@ -486,7 +620,6 @@
         .verified-badge i { font-size: 0.6rem; }
         .google-badge { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2rem; padding: 1rem; background: rgba(255, 223, 0, 0.1); border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto; }
         
-        /* Reviews mobile carousel */
         .reviews-mobile-carousel {
             display: none;
             width: 100%;
@@ -535,13 +668,8 @@
             .reviews-mobile-carousel { display: block; }
         }
         @media (max-width: 480px) {
-            .reviews-mobile-track {
-                padding: 0.2rem calc(50% - 130px);
-            }
-            .reviews-mobile-slide {
-                flex: 0 0 260px;
-                width: 260px;
-            }
+            .reviews-mobile-track { padding: 0.2rem calc(50% - 130px); }
+            .reviews-mobile-slide { flex: 0 0 260px; width: 260px; }
         }
 
         /* ===== FOOTER ===== */
@@ -634,25 +762,6 @@
         </div>
     </div>
 
-    <div class="before-after-section">
-        <div class="container">
-            <h2 class="before-after-title">See The Difference</h2>
-            <p class="before-after-sub">Slide to reveal the transformation — from dirty to spotless</p>
-            <div class="ba-slider-container">
-                <img class="ba-image ba-after" src="https://i.imgur.com/3qOnVZ0.png" alt="After Image">
-                <div class="ba-resize-container">
-                    <img class="ba-image ba-before" src="https://i.imgur.com/yoxOkdp.png" alt="Before Image">
-                </div>
-                <div class="ba-slider-line">
-                    <div class="ba-slider-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8.5 17.5l-5.5-5.5 5.5-5.5v11zm7-11l5.5 5.5-5.5 5.5v-11z"/></svg>
-                    </div>
-                </div>
-                <input type="range" min="0" max="100" value="50" class="ba-range-input" aria-label="Image comparison slider">
-            </div>
-        </div>
-    </div>
-
     <section id="services" class="services-tab-section">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
@@ -689,6 +798,42 @@
         </div>
     </section>
 
+    <div class="before-after-section">
+        <div class="container">
+            <h2 class="before-after-title">See The Difference</h2>
+            <p class="before-after-sub">Slide to reveal the transformation — from dirty to spotless</p>
+            <div class="ba-slider-container">
+                <img class="ba-image ba-after" src="https://i.imgur.com/3qOnVZ0.png" alt="After Image">
+                <div class="ba-resize-container">
+                    <img class="ba-image ba-before" src="https://i.imgur.com/yoxOkdp.png" alt="Before Image">
+                </div>
+                <div class="ba-slider-line">
+                    <div class="ba-slider-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8.5 17.5l-5.5-5.5 5.5-5.5v11zm7-11l5.5 5.5-5.5 5.5v-11z"/></svg>
+                    </div>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="ba-range-input" aria-label="Image comparison slider">
+            </div>
+        </div>
+    </div>
+
+    <!-- 4-VIDEO GALLERY: Desktop = 2x2 Grid, Mobile/Tablet = Horizontal Swipe Carousel with Dots -->
+    <div class="video-gallery-section">
+        <div class="container">
+            <h2 class="video-gallery-title">Watch Our Craft in Action</h2>
+            <p class="video-gallery-sub">Experience the transformation — premium detailing at its finest</p>
+            
+            <!-- Desktop Grid (2x2) -->
+            <div class="video-grid" id="videoGridDesktop"></div>
+            
+            <!-- Mobile/Tablet Horizontal Carousel -->
+            <div class="videos-mobile-carousel" id="videosMobileCarousel">
+                <div class="videos-mobile-track" id="videosMobileTrack"></div>
+            </div>
+            <div class="videos-mobile-dots" id="videosMobileDots"></div>
+        </div>
+    </div>
+
     <section id="reviews" class="testimonials-section">
         <div class="reviews-container">
             <div class="reviews-header"><h2>What Our Customers Say</h2><div class="rating-summary"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><span class="rating-number">5.0 out of 5</span></div><p style="color: var(--text-muted); margin-top: 0.3rem;">Based on 142 verified customer reviews</p></div>
@@ -705,6 +850,65 @@
 <script>
     const premiumServices = ["Exterior foam wash", "Wheels/rims detailed", "Tire shine", "Exterior paint sealant (3-4 month protection)", "Door jambs/trunk jamb detailed", "Interior air compressed to remove heavy dirt in crevices", "Interior/ trunk vacuumed", "Air vents detailed", "Steering wheel/cupholders detailed", "Door Panels cleaned & conditioned", "Interior/exterior windows detailed"];
     const supremeServices = ["Exterior foam wash", "Wheels/rims detailed", "Tire shine", "Exterior paint sealant (3-4 month protection)", "Front bumper bug removal", "Door jambs/trunk jamb detailed", "Interior air compressed to remove heavy dirt in crevices", "Interior/ trunk vacuumed", "Air vents steam cleaned", "Steering wheel/cupholders detailed", "Door Panels cleaned & conditioned", "Interior/exterior windows detailed", "Seat shampoo'd/leather steamed & conditioned", "Removable floor mats shampoo'd"];
+
+    // ============================================================
+    // 🎥 VIDEO GALLERY CONFIGURATION - EDIT YOUR VIDEOS HERE
+    // ============================================================
+    // To add/change videos:
+    // 1. Get the VIDEO ID from YouTube URL (e.g., from "youtube.com/watch?v=7NVANNmSXHU" the ID is "7NVANNmSXHU")
+    // 2. Change the title to whatever you want
+    // 3. The icon can be any Font Awesome icon name (fa-spray-can-sparkles, fa-water, fa-couch, fa-crown, etc.)
+    // 4. Add more objects to the array if you want more videos (max recommended 4-6)
+    // ============================================================
+    const videosData = [
+        { 
+            id: 1,
+            title: "Complete Makeover",           // 👈 Change video title here
+            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID (from the URL)
+            icon: "fa-spray-can-sparkles"         // 👈 Change icon if desired
+        },
+        { 
+            id: 2,
+            title: "Exterior Perfection",         // 👈 Change video title here
+            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
+            icon: "fa-water"                      // 👈 Change icon if desired
+        },
+        { 
+            id: 3,
+            title: "Interior Deep Clean",          // 👈 Change video title here
+            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
+            icon: "fa-couch"                      // 👈 Change icon if desired
+        },
+        { 
+            id: 4,
+            title: "Luxury Finish",                // 👈 Change video title here
+            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
+            icon: "fa-crown"                      // 👈 Change icon if desired
+        }
+        // 👇 To add a 5th video, uncomment below and add another object
+        // { 
+        //     id: 5,
+        //     title: "Ceramic Coating",
+        //     videoId: "YOUR_VIDEO_ID_HERE",
+        //     icon: "fa-shield-haltered"
+        // }
+    ];
+    // ============================================================
+    // END OF VIDEO CONFIGURATION
+    // ============================================================
+
+    function renderVideoCard(video) {
+        return `<div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${video.videoId}?modestbranding=1&rel=0" title="${video.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-caption"><h4><i class="fas ${video.icon}"></i> ${video.title}</h4></div>
+                </div>`;
+    }
+
+    // Render desktop grid and mobile carousel
+    document.getElementById('videoGridDesktop').innerHTML = videosData.map(renderVideoCard).join('');
+    document.getElementById('videosMobileTrack').innerHTML = videosData.map(v => `<div class="videos-mobile-slide">${renderVideoCard(v)}</div>`).join('');
 
     const servicesData = {
         insideOut: [
@@ -745,6 +949,36 @@
     document.getElementById('reviewsGrid').innerHTML = reviewsData.map(renderReviewCard).join('');
     document.getElementById('reviewsMobileTrack').innerHTML = reviewsData.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
 
+    // Initialize mobile carousels
+    function initVideosMobileCarousel() {
+        const container = document.getElementById('videosMobileCarousel');
+        const track = document.getElementById('videosMobileTrack');
+        if (!container || !track || track.children.length <= 1) return;
+        const slides = Array.from(track.children);
+        const dotsContainer = document.getElementById('videosMobileDots');
+        if (dotsContainer) {
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('video-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => { slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' }); };
+                dotsContainer.appendChild(dot);
+            });
+        }
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = slides.findIndex(s => s === entry.target);
+                    if (idx !== -1 && dotsContainer) {
+                        dotsContainer.querySelectorAll('.video-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
+                    }
+                }
+            });
+        }, { threshold: 0.6, root: container });
+        slides.forEach(slide => observer.observe(slide));
+    }
+
     function initServicesMobileCarousel(containerId, trackId, dotsId) {
         const container = document.getElementById(containerId);
         const track = document.getElementById(trackId);
@@ -761,14 +995,12 @@
                 dotsContainer.appendChild(dot);
             });
         }
-        let currentIndex = 0;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const idx = slides.findIndex(s => s === entry.target);
                     if (idx !== -1 && dotsContainer) {
-                        currentIndex = idx;
-                        dotsContainer.querySelectorAll('.service-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+                        dotsContainer.querySelectorAll('.service-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
                     }
                 }
             });
@@ -792,14 +1024,12 @@
                 dotsContainer.appendChild(dot);
             });
         }
-        let currentIndex = 0;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const idx = slides.findIndex(s => s === entry.target);
                     if (idx !== -1 && dotsContainer) {
-                        currentIndex = idx;
-                        dotsContainer.querySelectorAll('.review-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+                        dotsContainer.querySelectorAll('.review-dot').forEach((dot, i) => dot.classList.toggle('active', i === idx));
                     }
                 }
             });
@@ -807,21 +1037,20 @@
         slides.forEach(slide => observer.observe(slide));
     }
 
-    if (window.innerWidth <= 768) {
-        initServicesMobileCarousel('servicesCarousel1', 'servicesTrack1', 'servicesDots1');
-        initServicesMobileCarousel('servicesCarousel2', 'servicesTrack2', 'servicesDots2');
-        initServicesMobileCarousel('servicesCarousel3', 'servicesTrack3', 'servicesDots3');
-    }
-    if (window.innerWidth <= 1024) initReviewsMobileCarousel();
-
-    window.addEventListener('resize', () => {
+    function initAllCarousels() {
         if (window.innerWidth <= 768) {
             initServicesMobileCarousel('servicesCarousel1', 'servicesTrack1', 'servicesDots1');
             initServicesMobileCarousel('servicesCarousel2', 'servicesTrack2', 'servicesDots2');
             initServicesMobileCarousel('servicesCarousel3', 'servicesTrack3', 'servicesDots3');
+            initVideosMobileCarousel();
         }
-        if (window.innerWidth <= 1024) initReviewsMobileCarousel();
-    });
+        if (window.innerWidth <= 1024) {
+            initReviewsMobileCarousel();
+        }
+    }
+
+    initAllCarousels();
+    window.addEventListener('resize', initAllCarousels);
 
     document.querySelectorAll('.ba-slider-container').forEach(container => {
         const input = container.querySelector('.ba-range-input');
