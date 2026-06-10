@@ -487,7 +487,7 @@
             margin: 0 auto;
         }
         
-        /* MOBILE/TABLET: Horizontal Carousel (hidden on desktop, visible below 768px) */
+        /* MOBILE/TABLET: Horizontal Carousel - LARGER FRAMES */
         .videos-mobile-carousel {
             display: none;
             width: 100%;
@@ -504,11 +504,8 @@
             flex-direction: row;
             gap: 1rem;
             width: max-content;
-            padding: 0.2rem calc(50% - 140px);
         }
         .videos-mobile-slide {
-            flex: 0 0 280px;
-            width: 280px;
             scroll-snap-align: center;
         }
         .videos-mobile-dots {
@@ -574,13 +571,16 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            text-align: center;
+            line-height: 1.3;
         }
         .video-caption h4 i {
             color: var(--primary-gold);
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
         
-        /* On mobile/tablet (≤768px): hide desktop grid, show horizontal carousel */
+        /* On mobile/tablet (≤768px): hide desktop grid, show larger horizontal carousel */
         @media (max-width: 768px) {
             .video-grid {
                 display: none;
@@ -588,17 +588,43 @@
             .videos-mobile-carousel {
                 display: block;
             }
+            /* Larger video frames for tablet and mobile */
+            .videos-mobile-slide {
+                flex: 0 0 85vw;
+                width: 85vw;
+                max-width: 500px;
+            }
             .videos-mobile-track {
-                padding: 0.2rem calc(50% - 140px);
+                padding: 0.2rem calc((100vw - 85vw) / 2);
+                gap: 1.2rem;
+            }
+            .video-caption h4 {
+                font-size: 1rem;
             }
         }
-        @media (max-width: 480px) {
-            .videos-mobile-track {
-                padding: 0.2rem calc(50% - 130px);
-            }
+        /* For larger tablets (600px-768px) - make them even a bit bigger but comfortable */
+        @media (min-width: 601px) and (max-width: 768px) {
             .videos-mobile-slide {
-                flex: 0 0 260px;
-                width: 260px;
+                flex: 0 0 70vw;
+                width: 70vw;
+                max-width: 480px;
+            }
+            .videos-mobile-track {
+                padding: 0.2rem calc((100vw - 70vw) / 2);
+            }
+        }
+        /* For smaller phones (under 600px) - full width with padding */
+        @media (max-width: 600px) {
+            .videos-mobile-slide {
+                flex: 0 0 90vw;
+                width: 90vw;
+            }
+            .videos-mobile-track {
+                padding: 0.2rem calc((100vw - 90vw) / 2);
+                gap: 0.8rem;
+            }
+            .video-caption h4 {
+                font-size: 0.9rem;
             }
         }
 
@@ -817,7 +843,7 @@
         </div>
     </div>
 
-    <!-- 4-VIDEO GALLERY: Desktop = 2x2 Grid, Mobile/Tablet = Horizontal Swipe Carousel with Dots -->
+    <!-- 4-VIDEO GALLERY: Desktop = 2x2 Grid, Mobile/Tablet = Horizontal Swipe Carousel with LARGER FRAMES -->
     <div class="video-gallery-section">
         <div class="container">
             <h2 class="video-gallery-title">Watch Our Craft in Action</h2>
@@ -826,7 +852,7 @@
             <!-- Desktop Grid (2x2) -->
             <div class="video-grid" id="videoGridDesktop"></div>
             
-            <!-- Mobile/Tablet Horizontal Carousel -->
+            <!-- Mobile/Tablet Horizontal Carousel with larger frames -->
             <div class="videos-mobile-carousel" id="videosMobileCarousel">
                 <div class="videos-mobile-track" id="videosMobileTrack"></div>
             </div>
@@ -852,50 +878,37 @@
     const supremeServices = ["Exterior foam wash", "Wheels/rims detailed", "Tire shine", "Exterior paint sealant (3-4 month protection)", "Front bumper bug removal", "Door jambs/trunk jamb detailed", "Interior air compressed to remove heavy dirt in crevices", "Interior/ trunk vacuumed", "Air vents steam cleaned", "Steering wheel/cupholders detailed", "Door Panels cleaned & conditioned", "Interior/exterior windows detailed", "Seat shampoo'd/leather steamed & conditioned", "Removable floor mats shampoo'd"];
 
     // ============================================================
-    // 🎥 VIDEO GALLERY CONFIGURATION - EDIT YOUR VIDEOS HERE
+    // 🎥 VIDEO GALLERY CONFIGURATION - UPDATED TITLES
     // ============================================================
-    // To add/change videos:
-    // 1. Get the VIDEO ID from YouTube URL (e.g., from "youtube.com/watch?v=7NVANNmSXHU" the ID is "7NVANNmSXHU")
-    // 2. Change the title to whatever you want
-    // 3. The icon can be any Font Awesome icon name (fa-spray-can-sparkles, fa-water, fa-couch, fa-crown, etc.)
-    // 4. Add more objects to the array if you want more videos (max recommended 4-6)
+    // To change video URLs, update the "videoId" with the YouTube ID
+    // Example: from "youtube.com/watch?v=7NVANNmSXHU" the ID is "7NVANNmSXHU"
     // ============================================================
     const videosData = [
         { 
-            id: 1,
-            title: "Complete Makeover",           // 👈 Change video title here
-            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID (from the URL)
-            icon: "fa-spray-can-sparkles"         // 👈 Change icon if desired
+            id: 1, 
+            title: "Outside Cleaning & Shielding", 
+            videoId: "7NVANNmSXHU", 
+            icon: "fa-shield-haltered" 
         },
         { 
-            id: 2,
-            title: "Exterior Perfection",         // 👈 Change video title here
-            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
-            icon: "fa-water"                      // 👈 Change icon if desired
+            id: 2, 
+            title: "Grime & Pollution Stripping", 
+            videoId: "7NVANNmSXHU", 
+            icon: "fa-water" 
         },
         { 
-            id: 3,
-            title: "Interior Deep Clean",          // 👈 Change video title here
-            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
-            icon: "fa-couch"                      // 👈 Change icon if desired
+            id: 3, 
+            title: "Surface Perfection & Scratch Removal", 
+            videoId: "7NVANNmSXHU", 
+            icon: "fa-magic" 
         },
         { 
-            id: 4,
-            title: "Luxury Finish",                // 👈 Change video title here
-            videoId: "7NVANNmSXHU",               // 👈 CHANGE THIS: YouTube video ID
-            icon: "fa-crown"                      // 👈 Change icon if desired
+            id: 4, 
+            title: "Inside Deep-Clean & Guarding", 
+            videoId: "7NVANNmSXHU", 
+            icon: "fa-couch" 
         }
-        // 👇 To add a 5th video, uncomment below and add another object
-        // { 
-        //     id: 5,
-        //     title: "Ceramic Coating",
-        //     videoId: "YOUR_VIDEO_ID_HERE",
-        //     icon: "fa-shield-haltered"
-        // }
     ];
-    // ============================================================
-    // END OF VIDEO CONFIGURATION
-    // ============================================================
 
     function renderVideoCard(video) {
         return `<div class="video-card">
@@ -906,7 +919,6 @@
                 </div>`;
     }
 
-    // Render desktop grid and mobile carousel
     document.getElementById('videoGridDesktop').innerHTML = videosData.map(renderVideoCard).join('');
     document.getElementById('videosMobileTrack').innerHTML = videosData.map(v => `<div class="videos-mobile-slide">${renderVideoCard(v)}</div>`).join('');
 
@@ -949,7 +961,6 @@
     document.getElementById('reviewsGrid').innerHTML = reviewsData.map(renderReviewCard).join('');
     document.getElementById('reviewsMobileTrack').innerHTML = reviewsData.map(r => `<div class="reviews-mobile-slide">${renderReviewCard(r)}</div>`).join('');
 
-    // Initialize mobile carousels
     function initVideosMobileCarousel() {
         const container = document.getElementById('videosMobileCarousel');
         const track = document.getElementById('videosMobileTrack');
